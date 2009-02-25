@@ -2,7 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="D:/workspace/appcore/parlayxgateway/lib/spring-ws-1.5.6-all.jar"/>
-	<classpathentry kind="lib" path="D:/workspace/appcore/parlayxgateway/lib/spring.jar"/>
+	<classpathentry kind="lib" path="lib/spring-ws-1.5.6-all.jar"/>
+	<classpathentry kind="lib" path="lib/spring.jar"/>
+	<classpathentry kind="lib" path="lib/jaxb-api.jar"/>
+	<classpathentry kind="lib" path="lib/jaxb-impl.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
