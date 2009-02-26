@@ -11,5 +11,4 @@ public abstract class ServiceListener extends AbstractMarshallingPayloadEndpoint
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
