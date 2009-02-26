@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- January 5, 2006 -->
+<xsd:schema
+   targetNamespace="http://www.csapi.org/schema/parlayx/group/v2_1"
+   xmlns:group_xsd="http://www.csapi.org/schema/parlayx/group/v2_1"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+   <xsd:complexType name="AccessPermissions">
+      <xsd:sequence>
+         <xsd:element name="adminPermission" type="xsd:boolean"/>
+         <xsd:element name="addPermission" type="xsd:boolean"/>
+         <xsd:element name="deletePermission" type="xsd:boolean"/>
+         <xsd:element name="queryPermission" type="xsd:boolean"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="SimpleAttribute">
+      <xsd:sequence>
+         <xsd:element name="name" type="xsd:string"/>
+         <xsd:element name="type" type="xsd:string"/>
+         <xsd:element name="value" type="xsd:string"/>
+         <xsd:element name="status" type="group_xsd:AttributeStatus"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:simpleType name="AttributeStatus">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Valid"/>
+         <xsd:enumeration value="Unknown"/>
+         <xsd:enumeration value="Denied"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+</xsd:schema>

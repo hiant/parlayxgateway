@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- March 7, 2007 -->
+<xsd:schema
+   targetNamespace="http://www.csapi.org/schema/parlayx/call_notification/v3_1"
+   xmlns:parlayx_call_notification_xsd="http://www.csapi.org/schema/parlayx/call_notification/v3_1"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v3_1"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   
+   <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd">
+   </xsd:import>
+
+
+<!-- new -->
+
+   <xsd:complexType name="EventDescription">
+      <xsd:sequence>
+         <xsd:element name="callEvent" type="parlayx_call_notification_xsd:CallEvents"/>
+         <xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+<!-- new -->
+
+
+
+   <xsd:complexType name="Action">
+      <xsd:sequence>
+         <xsd:element name="actionToPerform" type="parlayx_call_notification_xsd:ActionValues"/>
+         <xsd:element name="routingAddress" type="xsd:anyURI" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="charging" type="parlayx_common_xsd:ChargingInformation" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="mediaInfo" type="parlayx_common_xsd:MediaInfo" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:simpleType name="ActionValues">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Route"/>
+         <xsd:enumeration value="Continue"/>
+         <xsd:enumeration value="EndCall"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="CallEvents">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Busy"/>
+         <xsd:enumeration value="NotReachable"/>
+         <xsd:enumeration value="NoAnswer"/>
+         <xsd:enumeration value="CalledNumber"/>
+         <xsd:enumeration value="Answer"/>
+ <!-- new -->   <xsd:enumeration value="Disconnected"/>  <!-- new -->
+      </xsd:restriction>
+   </xsd:simpleType>
+</xsd:schema>

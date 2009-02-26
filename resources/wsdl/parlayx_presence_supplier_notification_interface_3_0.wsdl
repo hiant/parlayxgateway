@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- March 13, 2007 -->
+<wsdl:definitions
+   name="presence_supplier_notification_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/presence_supplier/notification/v3_0/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:presence_supplier_notification="http://www.csapi.org/wsdl/parlayx/presence_supplier/notification/v3_0/interface"
+   xmlns:presence_xsd="http://www.csapi.org/schema/parlayx/presence/v3_2"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v3_1"
+   xmlns:presence_supplier_notification_local_xsd="http://www.csapi.org/schema/parlayx/presence_supplier/notification/v3_0/local">
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/presence_supplier/notification/v3_0/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/presence/v3_2" schemaLocation="parlayx_presence_types_3_2.xsd"/>
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+
+         <xsd:element name="notifyOpenSubscription" type="presence_supplier_notification_local_xsd:notifyOpenSubscription"/>
+         <xsd:complexType name="notifyOpenSubscription">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="presentity" type="xsd:anyURI"/>
+               <xsd:element name="subscriptionRequests" type="presence_xsd:SubscriptionRequest" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="notifyOpenSubscriptionResponse" type="presence_supplier_notification_local_xsd:notifyOpenSubscriptionResponse"/>
+         <xsd:complexType name="notifyOpenSubscriptionResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="notifyError" type="presence_supplier_notification_local_xsd:notifyError"/>
+         <xsd:complexType name="notifyError">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="presentity" type="xsd:anyURI" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="reason" type="parlayx_common_xsd:ServiceError"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="notifyErrorResponse" type="presence_supplier_notification_local_xsd:notifyErrorResponse"/>
+         <xsd:complexType name="notifyErrorResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="notifyEnd" type="presence_supplier_notification_local_xsd:notifyEnd"/>
+         <xsd:complexType name="notifyEnd">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="notifyEndResponse" type="presence_supplier_notification_local_xsd:notifyEndResponse"/>
+         <xsd:complexType name="notifyEndResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="PresenceSupplierNotification_notifyOpenSubscriptionRequest">
+      <wsdl:part name="parameters" element="presence_supplier_notification_local_xsd:notifyOpenSubscription"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplierNotification_notifyOpenSubscriptionResponse">
+      <wsdl:part name="result" element="presence_supplier_notification_local_xsd:notifyOpenSubscriptionResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplierNotification_notifyErrorRequest">
+      <wsdl:part name="parameters" element="presence_supplier_notification_local_xsd:notifyError"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplierNotification_notifyErrorResponse">
+      <wsdl:part name="result" element="presence_supplier_notification_local_xsd:notifyErrorResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplierNotification_notifyEndRequest">
+      <wsdl:part name="parameters" element="presence_supplier_notification_local_xsd:notifyEnd"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplierNotification_notifyEndResponse">
+      <wsdl:part name="result" element="presence_supplier_notification_local_xsd:notifyEndResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="PresenceSupplierNotification">
+      <wsdl:operation name="notifyOpenSubscription">
+         <wsdl:input message="presence_supplier_notification:PresenceSupplierNotification_notifyOpenSubscriptionRequest"/>
+         <wsdl:output message="presence_supplier_notification:PresenceSupplierNotification_notifyOpenSubscriptionResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifyError">
+         <wsdl:input message="presence_supplier_notification:PresenceSupplierNotification_notifyErrorRequest"/>
+         <wsdl:output message="presence_supplier_notification:PresenceSupplierNotification_notifyErrorResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifyEnd">
+         <wsdl:input message="presence_supplier_notification:PresenceSupplierNotification_notifyEndRequest"/>
+         <wsdl:output message="presence_supplier_notification:PresenceSupplierNotification_notifyEndResponse"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

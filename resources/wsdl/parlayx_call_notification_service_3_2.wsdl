@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- May 25, 2007 -->
+<wsdl:definitions
+   name="parlayx_call_notification_service"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/call_notification/v3_2/service"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:tns="http://www.csapi.org/wsdl/parlayx/call_notification/v3_2/service"
+   xmlns:interface="http://www.csapi.org/wsdl/parlayx/call_notification/v3_2/interface">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/call_notification/v3_2/interface" location="parlayx_call_notification_interface_3_2.wsdl"/>
+
+   <wsdl:binding name="CallNotificationBinding" type="interface:CallNotification">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+<!-- new -->
+      <wsdl:operation name="notifyCallEvent">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+      </wsdl:operation>
+<!-- new -->
+
+      <wsdl:operation name="notifyBusy">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifyNotReachable">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifyNoAnswer">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifyCalledNumber">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifyAnswer">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifyPlayAndCollectEvent">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifyPlayAndRecordEvent">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+
+   <wsdl:service name="CallNotificationService">
+      <wsdl:port name="CallNotification" binding="tns:CallNotificationBinding">
+         <soap:address location="http://localhost:9080/CallNotificationService/services/CallNotification"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

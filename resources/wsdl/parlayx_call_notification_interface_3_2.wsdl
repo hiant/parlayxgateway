@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- May 25, 2007 -->
+<wsdl:definitions
+   name="parlayx_call_notification_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/call_notification/v3_2/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:parlayx_call_notification="http://www.csapi.org/wsdl/parlayx/call_notification/v3_2/interface"
+   xmlns:parlayx_call_notification_local_xsd="http://www.csapi.org/schema/parlayx/call_notification/v3_2/local"
+   xmlns:parlayx_call_notification_xsd="http://www.csapi.org/schema/parlayx/call_notification/v3_1">
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/call_notification/v3_2/local">
+
+
+<!-- new -->
+	   <xsd:import namespace="http://www.csapi.org/schema/parlayx/call_notification/v3_1" schemaLocation="parlayx_call_notification_types_3_1.xsd"/>
+	   <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+
+         <xsd:element name="notifyCallEvent" type="parlayx_call_notification_local_xsd:notifyCallEvent"/>
+         <xsd:complexType name="notifyCallEvent">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="eventNotified" type="parlayx_call_notification_xsd:EventDescription"/>
+               <xsd:element name="callingParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callingParticipantName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="calledParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callSessionIdentifier" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="notifyCallEventResponse" type="parlayx_call_notification_local_xsd:notifyCallEventResponse"/>
+         <xsd:complexType name="notifyCallEventResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+<!-- new -->
+
+
+         <xsd:element name="notifyBusy" type="parlayx_call_notification_local_xsd:notifyBusy"/>
+         <xsd:complexType name="notifyBusy">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="callingParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callingParticipantName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="calledParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callSessionIdentifier" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="notifyBusyResponse" type="parlayx_call_notification_local_xsd:notifyBusyResponse"/>
+         <xsd:complexType name="notifyBusyResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="notifyNotReachable" type="parlayx_call_notification_local_xsd:notifyNotReachable"/>
+         <xsd:complexType name="notifyNotReachable">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="callingParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callingParticipantName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="calledParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callSessionIdentifier" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="notifyNotReachableResponse" type="parlayx_call_notification_local_xsd:notifyNotReachableResponse"/>
+         <xsd:complexType name="notifyNotReachableResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="notifyNoAnswer" type="parlayx_call_notification_local_xsd:notifyNoAnswer"/>
+         <xsd:complexType name="notifyNoAnswer">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="callingParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callingParticipantName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="calledParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callSessionIdentifier" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="notifyNoAnswerResponse" type="parlayx_call_notification_local_xsd:notifyNoAnswerResponse"/>
+         <xsd:complexType name="notifyNoAnswerResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="notifyCalledNumber" type="parlayx_call_notification_local_xsd:notifyCalledNumber"/>
+         <xsd:complexType name="notifyCalledNumber">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="callingParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callingParticipantName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="calledParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callSessionIdentifier" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="notifyCalledNumberResponse" type="parlayx_call_notification_local_xsd:notifyCalledNumberResponse"/>
+         <xsd:complexType name="notifyCalledNumberResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="notifyAnswer" type="parlayx_call_notification_local_xsd:notifyAnswer"/>
+         <xsd:complexType name="notifyAnswer">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="callingParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callingParticipantName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="calledParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callSessionIdentifier" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="notifyAnswerResponse" type="parlayx_call_notification_local_xsd:notifyAnswerResponse"/>
+         <xsd:complexType name="notifyAnswerResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="notifyPlayAndCollectEvent" type="parlayx_call_notification_local_xsd:notifyPlayAndCollectEvent"/>
+         <xsd:complexType name="notifyPlayAndCollectEvent">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="callParticipant" type="xsd:anyURI"/>
+               <xsd:element name="mediaInteraction" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="notifyPlayAndCollectEventResponse" type="parlayx_call_notification_local_xsd:notifyPlayAndCollectEventResponse"/>
+         <xsd:complexType name="notifyPlayAndCollectEventResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="notifyPlayAndRecordEvent" type="parlayx_call_notification_local_xsd:notifyPlayAndRecordEvent"/>
+         <xsd:complexType name="notifyPlayAndRecordEvent">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="callParticipant" type="xsd:anyURI"/>
+               <xsd:element name="mediaInteraction" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="notifyPlayAndRecordEventResponse" type="parlayx_call_notification_local_xsd:notifyPlayAndRecordEventResponse"/>
+         <xsd:complexType name="notifyPlayAndRecordEventResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+
+
+<!-- new -->
+   <wsdl:message name="CallNotification_notifyCallEventRequest">
+      <wsdl:part name="parameters" element="parlayx_call_notification_local_xsd:notifyCallEvent"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotification_notifyCallEventResponse">
+      <wsdl:part name="result" element="parlayx_call_notification_local_xsd:notifyCallEventResponse"/>
+   </wsdl:message>
+<!-- new -->
+
+
+   <wsdl:message name="CallNotification_notifyBusyRequest">
+      <wsdl:part name="parameters" element="parlayx_call_notification_local_xsd:notifyBusy"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotification_notifyBusyResponse">
+      <wsdl:part name="result" element="parlayx_call_notification_local_xsd:notifyBusyResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotification_notifyNotReachableRequest">
+      <wsdl:part name="parameters" element="parlayx_call_notification_local_xsd:notifyNotReachable"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotification_notifyNotReachableResponse">
+      <wsdl:part name="result" element="parlayx_call_notification_local_xsd:notifyNotReachableResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotification_notifyNoAnswerRequest">
+      <wsdl:part name="parameters" element="parlayx_call_notification_local_xsd:notifyNoAnswer"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotification_notifyNoAnswerResponse">
+      <wsdl:part name="result" element="parlayx_call_notification_local_xsd:notifyNoAnswerResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotification_notifyCalledNumberRequest">
+      <wsdl:part name="parameters" element="parlayx_call_notification_local_xsd:notifyCalledNumber"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotification_notifyCalledNumberResponse">
+      <wsdl:part name="result" element="parlayx_call_notification_local_xsd:notifyCalledNumberResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotification_notifyAnswerRequest">
+      <wsdl:part name="parameters" element="parlayx_call_notification_local_xsd:notifyAnswer"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotification_notifyAnswerResponse">
+      <wsdl:part name="result" element="parlayx_call_notification_local_xsd:notifyAnswerResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotification_notifyPlayAndCollectEventRequest">
+      <wsdl:part name="parameters" element="parlayx_call_notification_local_xsd:notifyPlayAndCollectEvent"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotification_notifyPlayAndCollectEventResponse">
+      <wsdl:part name="result" element="parlayx_call_notification_local_xsd:notifyPlayAndCollectEventResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotification_notifyPlayAndRecordEventRequest">
+      <wsdl:part name="parameters" element="parlayx_call_notification_local_xsd:notifyPlayAndRecordEvent"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotification_notifyPlayAndRecordEventResponse">
+      <wsdl:part name="result" element="parlayx_call_notification_local_xsd:notifyPlayAndRecordEventResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="CallNotification">
+
+<!-- new -->
+	 <wsdl:operation name="notifyCallEvent">
+         <wsdl:input message="parlayx_call_notification:CallNotification_notifyCallEventRequest"/>
+         <wsdl:output message="parlayx_call_notification:CallNotification_notifyCallEventResponse"/>
+      </wsdl:operation>
+<!-- new -->
+
+
+      <wsdl:operation name="notifyBusy">
+         <wsdl:input message="parlayx_call_notification:CallNotification_notifyBusyRequest"/>
+         <wsdl:output message="parlayx_call_notification:CallNotification_notifyBusyResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifyNotReachable">
+         <wsdl:input message="parlayx_call_notification:CallNotification_notifyNotReachableRequest"/>
+         <wsdl:output message="parlayx_call_notification:CallNotification_notifyNotReachableResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifyNoAnswer">
+         <wsdl:input message="parlayx_call_notification:CallNotification_notifyNoAnswerRequest"/>
+         <wsdl:output message="parlayx_call_notification:CallNotification_notifyNoAnswerResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifyCalledNumber">
+         <wsdl:input message="parlayx_call_notification:CallNotification_notifyCalledNumberRequest"/>
+         <wsdl:output message="parlayx_call_notification:CallNotification_notifyCalledNumberResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifyAnswer">
+         <wsdl:input message="parlayx_call_notification:CallNotification_notifyAnswerRequest"/>
+         <wsdl:output message="parlayx_call_notification:CallNotification_notifyAnswerResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifyPlayAndCollectEvent">
+         <wsdl:input message="parlayx_call_notification:CallNotification_notifyPlayAndCollectEventRequest"/>
+         <wsdl:output message="parlayx_call_notification:CallNotification_notifyPlayAndCollectEventResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifyPlayAndRecordEvent">
+         <wsdl:input message="parlayx_call_notification:CallNotification_notifyPlayAndRecordEventRequest"/>
+         <wsdl:output message="parlayx_call_notification:CallNotification_notifyPlayAndRecordEventResponse"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

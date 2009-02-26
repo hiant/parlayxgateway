@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- May 25, 2007 -->
+<xsd:schema
+   targetNamespace="http://www.csapi.org/schema/parlayx/audio_call/v3_2"
+   xmlns:audio_call_xsd="http://www.csapi.org/schema/parlayx/audio_call/v3_2"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v3_1"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+   <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+
+   <xsd:complexType name="MediaMessageStatus">
+      <xsd:sequence>
+         <xsd:element name="callParticipant" type="xsd:anyURI"/>
+         <xsd:element name="status" type="audio_call_xsd:MessageStatus"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="MediaParticipantInfo">
+      <xsd:sequence>
+         <xsd:element name="callParticipant" type="xsd:anyURI"/>
+         <xsd:element name="mediaInfo" type="parlayx_common_xsd:MediaInfo" minOccurs="1" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="DigitConfig">
+      <xsd:sequence>
+         <xsd:element name="maxDigits" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="minDigits" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="interruptMedia" type="xsd:boolean"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="RecConfig">
+      <xsd:sequence>
+         <xsd:element name="recFileLocation" type="xsd:anyURI" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="maxRecordingLength" type="parlayx_common_xsd:TimeMetric" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="PlayConfig">
+      <xsd:sequence>
+         <xsd:element name="playFileLocation" type="xsd:anyURI" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="textString" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="messageFormat" type="audio_call_xsd:AnnouncementFormat"/>
+         <xsd:element name="interruptMedia" type="xsd:boolean"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:simpleType name="MessageStatus">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Played"/>
+         <xsd:enumeration value="Playing"/>
+         <xsd:enumeration value="Pending"/>
+         <xsd:enumeration value="Error"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="AnnouncementFormat">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Audio"/>
+         <xsd:enumeration value="VoiceXML"/>
+         <xsd:enumeration value="TextToSpeech"/>
+         <xsd:enumeration value="Video"/>
+         <xsd:enumeration value="ApplicationSpecificFormat"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+</xsd:schema>

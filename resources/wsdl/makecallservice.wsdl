@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/communications/session_control/makecall/v1_0/" xmlns:impl="http://www.nortel.com/xmlprotocol/wsdl/communications/session_control/makecall/v1_0/" xmlns:intf="http://www.nortel.com/xmlprotocol/wsdl/communications/session_control/makecall/v1_0/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ 
+
+    <wsdl:types><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/communications/session_control/makecall/v1_0/">
+	<xsd:element name="makecall_with_announcement">
+		<xsd:complexType>
+			<xsd:sequence>
+
+				<xsd:element name="makeCallWithAnnouncement_parameter"
+					type="impl:makeCallWithAnnouncement_type">
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="makecall_with_announcementResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+
+				<xsd:element name="makeCallWithAnnouncementResponse_parameter" type="impl:makeCallWithAnnouncementResponse_type"></xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="makeCallWithAnnouncement_type">
+		<xsd:sequence>
+			<xsd:element name="callingParty" type="xsd:anyURI"></xsd:element>			<xsd:element name="calledParty" type="xsd:anyURI"></xsd:element>
+			<xsd:element name="announcement" type="xsd:anyURI"></xsd:element>
+                    <xsd:element name="requestor_id" type="xsd:string"></xsd:element>
+                    <xsd:element name="charging"
+                    	type="impl:ChargingInformation" minOccurs="0"
+                    	maxOccurs="1">
+                    </xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ChargingInformation">
+		<xsd:sequence>
+			<xsd:element name="description" type="xsd:string"
+				maxOccurs="1" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="currency" type="xsd:string" maxOccurs="1" minOccurs="0"></xsd:element>
+			<xsd:element name="amount" type="xsd:decimal" maxOccurs="1" minOccurs="0"></xsd:element>
+			<xsd:element name="code" type="xsd:string" maxOccurs="1" minOccurs="0"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="makeCall_ServiceException">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ServiceException"
+					type="impl:ServiceException">
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="makeCall_PolicyException">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="PolicyException"
+					type="impl:PolicyException">
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="makeCallWithAnnouncementResponse_type">
+		<xsd:sequence>
+			<xsd:element name="result" type="xsd:string"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+            <xsd:complexType name="ServiceException">
+            	<xsd:sequence>
+            		<xsd:element name="messageId" type="xsd:string"></xsd:element>
+            		<xsd:element name="text" type="xsd:string"></xsd:element>
+            		<xsd:element name="variables" type="xsd:string" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+            
+            <xsd:complexType name="PolicyException">
+            	<xsd:sequence>
+            		<xsd:element name="messageId" type="xsd:string"></xsd:element>
+            		<xsd:element name="text" type="xsd:string"></xsd:element>
+            		<xsd:element name="variables" type="xsd:string" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+</xsd:schema></wsdl:types>
+    <wsdl:message name="makecall_with_announcementRequest">
+    	<wsdl:part name="parameters" element="impl:makecall_with_announcement"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="makecall_with_announcementResponse">
+    	<wsdl:part name="parameters" element="impl:makecall_with_announcementResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="makeCall_ServiceExceptionMessage">
+    	<wsdl:part name="parameters" element="intf:makeCall_ServiceException"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="makeCall_PolicyExceptionMessage">
+    	<wsdl:part name="parameters" element="intf:makeCall_PolicyException"></wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="MakeCallServicePortType">
+    	<wsdl:operation name="makecall_with_announcement">
+    		<wsdl:input message="impl:makecall_with_announcementRequest"></wsdl:input>
+    		<wsdl:output message="impl:makecall_with_announcementResponse"></wsdl:output>
+            <wsdl:fault name="ServiceException" message="impl:makeCall_ServiceExceptionMessage"></wsdl:fault>
+            <wsdl:fault name="PolicyException" message="impl:makeCall_PolicyExceptionMessage"></wsdl:fault>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="MakeCallServiceBinding"
+    	type="impl:MakeCallServicePortType">
+    	<wsdlsoap:binding style="document"
+    		transport="http://schemas.xmlsoap.org/soap/http" />
+    	<wsdl:operation name="makecall_with_announcement">
+    		<wsdlsoap:operation
+    			soapAction="http://www.nortel.com/xmlprotocol/wsdl/communications/session_control/makecall/v1_0/makecall_with_announcement" />
+    		<wsdl:input>
+    			<wsdlsoap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<wsdlsoap:body use="literal" />
+    		</wsdl:output>
+    		<wsdl:fault name="ServiceException">
+    			<wsdlsoap:fault use="literal" name="ServiceException" />
+    		</wsdl:fault>
+    		<wsdl:fault name="PolicyException">
+    			<wsdlsoap:fault use="literal" name="PolicyException" />
+    		</wsdl:fault>
+    	</wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="makecall_service">
+    	<wsdl:port name="MakeCallServicePort" binding="impl:MakeCallServiceBinding">
+    		<wsdlsoap:address location="http://localhost:9080/MakeCall/services/MakeCallService" />
+    	</wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- May 25, 2007 -->
+<wsdl:definitions
+   name="parlayx_call_direction_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/call_direction/v3_2/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:parlayx_call_direction="http://www.csapi.org/wsdl/parlayx/call_direction/v3_2/interface"
+   xmlns:parlayx_call_notification_xsd="http://www.csapi.org/schema/parlayx/call_notification/v3_1"
+   xmlns:parlayx_call_direction_local_xsd="http://www.csapi.org/schema/parlayx/call_direction/v3_2/local">
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/call_direction/v3_2/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/call_notification/v3_1" schemaLocation="parlayx_call_notification_types_3_1.xsd"/>
+
+         <xsd:element name="handleBusy" type="parlayx_call_direction_local_xsd:handleBusy"/>
+         <xsd:complexType name="handleBusy">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="callingParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callingParticipantName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="calledParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callSessionIdentifier" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="handleBusyResponse" type="parlayx_call_direction_local_xsd:handleBusyResponse"/>
+         <xsd:complexType name="handleBusyResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="parlayx_call_notification_xsd:Action"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="handleNotReachable" type="parlayx_call_direction_local_xsd:handleNotReachable"/>
+         <xsd:complexType name="handleNotReachable">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="callingParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callingParticipantName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="calledParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callSessionIdentifier" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="handleNotReachableResponse" type="parlayx_call_direction_local_xsd:handleNotReachableResponse"/>
+         <xsd:complexType name="handleNotReachableResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="parlayx_call_notification_xsd:Action"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="handleNoAnswer" type="parlayx_call_direction_local_xsd:handleNoAnswer"/>
+         <xsd:complexType name="handleNoAnswer">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="callingParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callingParticipantName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="calledParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callSessionIdentifier" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="handleNoAnswerResponse" type="parlayx_call_direction_local_xsd:handleNoAnswerResponse"/>
+         <xsd:complexType name="handleNoAnswerResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="parlayx_call_notification_xsd:Action"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="handleCalledNumber" type="parlayx_call_direction_local_xsd:handleCalledNumber"/>
+         <xsd:complexType name="handleCalledNumber">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="callingParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callingParticipantName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="calledParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callSessionIdentifier" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="handleCalledNumberResponse" type="parlayx_call_direction_local_xsd:handleCalledNumberResponse"/>
+         <xsd:complexType name="handleCalledNumberResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="parlayx_call_notification_xsd:Action"/>
+            </xsd:sequence>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="CallDirection_handleBusyRequest">
+      <wsdl:part name="parameters" element="parlayx_call_direction_local_xsd:handleBusy"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallDirection_handleBusyResponse">
+      <wsdl:part name="result" element="parlayx_call_direction_local_xsd:handleBusyResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallDirection_handleNotReachableRequest">
+      <wsdl:part name="parameters" element="parlayx_call_direction_local_xsd:handleNotReachable"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallDirection_handleNotReachableResponse">
+      <wsdl:part name="result" element="parlayx_call_direction_local_xsd:handleNotReachableResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallDirection_handleNoAnswerRequest">
+      <wsdl:part name="parameters" element="parlayx_call_direction_local_xsd:handleNoAnswer"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallDirection_handleNoAnswerResponse">
+      <wsdl:part name="result" element="parlayx_call_direction_local_xsd:handleNoAnswerResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallDirection_handleCalledNumberRequest">
+      <wsdl:part name="parameters" element="parlayx_call_direction_local_xsd:handleCalledNumber"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallDirection_handleCalledNumberResponse">
+      <wsdl:part name="result" element="parlayx_call_direction_local_xsd:handleCalledNumberResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="CallDirection">
+      <wsdl:operation name="handleBusy">
+         <wsdl:input message="parlayx_call_direction:CallDirection_handleBusyRequest"/>
+         <wsdl:output message="parlayx_call_direction:CallDirection_handleBusyResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="handleNotReachable">
+         <wsdl:input message="parlayx_call_direction:CallDirection_handleNotReachableRequest"/>
+         <wsdl:output message="parlayx_call_direction:CallDirection_handleNotReachableResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="handleNoAnswer">
+         <wsdl:input message="parlayx_call_direction:CallDirection_handleNoAnswerRequest"/>
+         <wsdl:output message="parlayx_call_direction:CallDirection_handleNoAnswerResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="handleCalledNumber">
+         <wsdl:input message="parlayx_call_direction:CallDirection_handleCalledNumberRequest"/>
+         <wsdl:output message="parlayx_call_direction:CallDirection_handleCalledNumberResponse"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

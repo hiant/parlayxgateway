@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- March 9, 2007 -->
+<wsdl:definitions
+   name="terminal_location_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/terminal_location/v3_1/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:terminal_location="http://www.csapi.org/wsdl/parlayx/terminal_location/v3_1/interface"
+   xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults"
+   xmlns:terminal_location_xsd="http://www.csapi.org/schema/parlayx/terminal_location/v3_0"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v3_1"
+   xmlns:terminal_location_local_xsd="http://www.csapi.org/schema/parlayx/terminal_location/v3_1/local">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults" location="parlayx_common_faults_3_0.wsdl"/>
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/terminal_location/v3_1/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/terminal_location/v3_0" schemaLocation="parlayx_terminal_location_types_3_0.xsd"/>
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+
+         <xsd:element name="getLocation" type="terminal_location_local_xsd:getLocation"/>
+         <xsd:complexType name="getLocation">
+            <xsd:sequence>
+               <xsd:element name="requester" type="xsd:anyURI" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="address" type="xsd:anyURI"/>
+               <xsd:element name="requestedAccuracy" type="xsd:int"/>
+               <xsd:element name="acceptableAccuracy" type="xsd:int"/>
+               <xsd:element name="maximumAge" type="parlayx_common_xsd:TimeMetric" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="responseTime" type="parlayx_common_xsd:TimeMetric" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="tolerance" type="terminal_location_xsd:DelayTolerance"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getLocationResponse" type="terminal_location_local_xsd:getLocationResponse"/>
+         <xsd:complexType name="getLocationResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="terminal_location_xsd:LocationInfo"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getTerminalDistance" type="terminal_location_local_xsd:getTerminalDistance"/>
+         <xsd:complexType name="getTerminalDistance">
+            <xsd:sequence>
+               <xsd:element name="requester" type="xsd:anyURI" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="address" type="xsd:anyURI"/>
+               <xsd:element name="latitude" type="xsd:float"/>
+               <xsd:element name="longitude" type="xsd:float"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getTerminalDistanceResponse" type="terminal_location_local_xsd:getTerminalDistanceResponse"/>
+         <xsd:complexType name="getTerminalDistanceResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:int"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getLocationForGroup" type="terminal_location_local_xsd:getLocationForGroup"/>
+         <xsd:complexType name="getLocationForGroup">
+            <xsd:sequence>
+               <xsd:element name="requester" type="xsd:anyURI" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="addresses" type="xsd:anyURI" minOccurs="1" maxOccurs="unbounded"/>
+               <xsd:element name="requestedAccuracy" type="xsd:int"/>
+               <xsd:element name="acceptableAccuracy" type="xsd:int"/>
+               <xsd:element name="maximumAge" type="parlayx_common_xsd:TimeMetric" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="responseTime" type="parlayx_common_xsd:TimeMetric" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="tolerance" type="terminal_location_xsd:DelayTolerance"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getLocationForGroupResponse" type="terminal_location_local_xsd:getLocationForGroupResponse"/>
+         <xsd:complexType name="getLocationForGroupResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="terminal_location_xsd:LocationData" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="TerminalLocation_getLocationRequest">
+      <wsdl:part name="parameters" element="terminal_location_local_xsd:getLocation"/>
+   </wsdl:message>
+
+   <wsdl:message name="TerminalLocation_getLocationResponse">
+      <wsdl:part name="result" element="terminal_location_local_xsd:getLocationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="TerminalLocation_getTerminalDistanceRequest">
+      <wsdl:part name="parameters" element="terminal_location_local_xsd:getTerminalDistance"/>
+   </wsdl:message>
+
+   <wsdl:message name="TerminalLocation_getTerminalDistanceResponse">
+      <wsdl:part name="result" element="terminal_location_local_xsd:getTerminalDistanceResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="TerminalLocation_getLocationForGroupRequest">
+      <wsdl:part name="parameters" element="terminal_location_local_xsd:getLocationForGroup"/>
+   </wsdl:message>
+
+   <wsdl:message name="TerminalLocation_getLocationForGroupResponse">
+      <wsdl:part name="result" element="terminal_location_local_xsd:getLocationForGroupResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="TerminalLocation">
+      <wsdl:operation name="getLocation">
+         <wsdl:input message="terminal_location:TerminalLocation_getLocationRequest"/>
+         <wsdl:output message="terminal_location:TerminalLocation_getLocationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="getTerminalDistance">
+         <wsdl:input message="terminal_location:TerminalLocation_getTerminalDistanceRequest"/>
+         <wsdl:output message="terminal_location:TerminalLocation_getTerminalDistanceResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="getLocationForGroup">
+         <wsdl:input message="terminal_location:TerminalLocation_getLocationForGroupRequest"/>
+         <wsdl:output message="terminal_location:TerminalLocation_getLocationForGroupResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

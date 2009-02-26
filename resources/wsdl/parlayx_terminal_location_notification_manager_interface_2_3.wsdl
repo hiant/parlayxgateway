@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- January 5, 2006 -->
+<wsdl:definitions
+   name="terminal_location_notification_manager_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/terminal_location/notification_manager/v2_3/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:terminal_location_notification_manager="http://www.csapi.org/wsdl/parlayx/terminal_location/notification_manager/v2_3/interface"
+   xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v2_0/faults"
+   xmlns:terminal_location_xsd="http://www.csapi.org/schema/parlayx/terminal_location/v2_2"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v2_1"
+   xmlns:terminal_location_notification_manager_local_xsd="http://www.csapi.org/schema/parlayx/terminal_location/notification_manager/v2_3/local">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v2_0/faults" location="parlayx_common_faults_2_0.wsdl"/>
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/terminal_location/notification_manager/v2_3/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/terminal_location/v2_2" schemaLocation="parlayx_terminal_location_types_2_2.xsd"/>
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v2_1" schemaLocation="parlayx_common_types_2_1.xsd"/>
+
+         <xsd:element name="startGeographicalNotification" type="terminal_location_notification_manager_local_xsd:startGeographicalNotification"/>
+         <xsd:complexType name="startGeographicalNotification">
+            <xsd:sequence>
+               <xsd:element name="reference" type="parlayx_common_xsd:SimpleReference"/>
+               <xsd:element name="addresses" type="xsd:anyURI" minOccurs="1" maxOccurs="unbounded"/>
+               <xsd:element name="latitude" type="xsd:float"/>
+               <xsd:element name="longitude" type="xsd:float"/>
+               <xsd:element name="radius" type="xsd:float"/>
+               <xsd:element name="trackingAccuracy" type="xsd:float"/>
+               <xsd:element name="criteria" type="terminal_location_xsd:EnteringLeavingCriteria"/>
+               <xsd:element name="checkImmediate" type="xsd:boolean"/>
+               <xsd:element name="frequency" type="parlayx_common_xsd:TimeMetric"/>
+               <xsd:element name="duration" type="parlayx_common_xsd:TimeMetric" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="count" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="startGeographicalNotificationResponse" type="terminal_location_notification_manager_local_xsd:startGeographicalNotificationResponse"/>
+         <xsd:complexType name="startGeographicalNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="startPeriodicNotification" type="terminal_location_notification_manager_local_xsd:startPeriodicNotification"/>
+         <xsd:complexType name="startPeriodicNotification">
+            <xsd:sequence>
+               <xsd:element name="reference" type="parlayx_common_xsd:SimpleReference"/>
+               <xsd:element name="addresses" type="xsd:anyURI" minOccurs="1" maxOccurs="unbounded"/>
+               <xsd:element name="requestedAccuracy" type="xsd:int"/>
+               <xsd:element name="frequency" type="parlayx_common_xsd:TimeMetric"/>
+               <xsd:element name="duration" type="parlayx_common_xsd:TimeMetric" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="startPeriodicNotificationResponse" type="terminal_location_notification_manager_local_xsd:startPeriodicNotificationResponse"/>
+         <xsd:complexType name="startPeriodicNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="endNotification" type="terminal_location_notification_manager_local_xsd:endNotification"/>
+         <xsd:complexType name="endNotification">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="endNotificationResponse" type="terminal_location_notification_manager_local_xsd:endNotificationResponse"/>
+         <xsd:complexType name="endNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="TerminalLocationNotificationManager_startGeographicalNotificationRequest">
+      <wsdl:part name="parameters" element="terminal_location_notification_manager_local_xsd:startGeographicalNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="TerminalLocationNotificationManager_startGeographicalNotificationResponse">
+      <wsdl:part name="result" element="terminal_location_notification_manager_local_xsd:startGeographicalNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="TerminalLocationNotificationManager_startPeriodicNotificationRequest">
+      <wsdl:part name="parameters" element="terminal_location_notification_manager_local_xsd:startPeriodicNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="TerminalLocationNotificationManager_startPeriodicNotificationResponse">
+      <wsdl:part name="result" element="terminal_location_notification_manager_local_xsd:startPeriodicNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="TerminalLocationNotificationManager_endNotificationRequest">
+      <wsdl:part name="parameters" element="terminal_location_notification_manager_local_xsd:endNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="TerminalLocationNotificationManager_endNotificationResponse">
+      <wsdl:part name="result" element="terminal_location_notification_manager_local_xsd:endNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="TerminalLocationNotificationManager">
+      <wsdl:operation name="startGeographicalNotification">
+         <wsdl:input message="terminal_location_notification_manager:TerminalLocationNotificationManager_startGeographicalNotificationRequest"/>
+         <wsdl:output message="terminal_location_notification_manager:TerminalLocationNotificationManager_startGeographicalNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="startPeriodicNotification">
+         <wsdl:input message="terminal_location_notification_manager:TerminalLocationNotificationManager_startPeriodicNotificationRequest"/>
+         <wsdl:output message="terminal_location_notification_manager:TerminalLocationNotificationManager_startPeriodicNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="endNotification">
+         <wsdl:input message="terminal_location_notification_manager:TerminalLocationNotificationManager_endNotificationRequest"/>
+         <wsdl:output message="terminal_location_notification_manager:TerminalLocationNotificationManager_endNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

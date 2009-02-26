@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- July 11, 2008 -->
+<xsd:schema
+   targetNamespace="http://www.csapi.org/schema/parlayx/call_notification/v8_0"
+   xmlns:parlayx_call_notification_xsd="http://www.csapi.org/schema/parlayx/call_notification/v8_0"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+   <xsd:complexType name="CallEvent">
+      <xsd:sequence>
+         <xsd:element name="correlator" type="xsd:string"/>
+         <xsd:element name="eventNotified" type="parlayx_call_notification_xsd:EventDescription"/>
+         <xsd:element name="callingParticipant" type="xsd:anyURI"/>
+         <xsd:element name="callingParticipantName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="calledParticipant" type="xsd:anyURI"/>
+         <xsd:element name="callSessionIdentifier" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="EventDescription">
+      <xsd:sequence>
+         <xsd:element name="callEvent" type="parlayx_call_notification_xsd:CallEvents"/>
+         <xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:simpleType name="CallEvents">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Busy"/>
+         <xsd:enumeration value="NotReachable"/>
+         <xsd:enumeration value="NoAnswer"/>
+         <xsd:enumeration value="CalledNumber"/>
+         <xsd:enumeration value="Answer"/>
+         <xsd:enumeration value="Disconnected"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- March 8, 2007 -->
+<wsdl:definitions
+   name="parlayx_mm_send_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/multimedia_messaging/send/v3_1/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:parlayx_mm_send="http://www.csapi.org/wsdl/parlayx/multimedia_messaging/send/v3_1/interface"
+   xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults"
+   xmlns:parlayx_mm_xsd="http://www.csapi.org/schema/parlayx/multimedia_messaging/v3_0"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v3_1"
+   xmlns:parlayx_mm_send_local_xsd="http://www.csapi.org/schema/parlayx/multimedia_messaging/send/v3_1/local">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults" location="parlayx_common_faults_3_0.wsdl"/>
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/multimedia_messaging/send/v3_1/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/multimedia_messaging/v3_0" schemaLocation="parlayx_mm_types_3_0.xsd"/>
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+
+         <xsd:element name="sendMessage" type="parlayx_mm_send_local_xsd:sendMessage"/>
+         <xsd:complexType name="sendMessage">
+            <xsd:sequence>
+               <xsd:element name="addresses" type="xsd:anyURI" minOccurs="1" maxOccurs="unbounded"/>
+               <xsd:element name="senderAddress" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="subject" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="priority" type="parlayx_mm_xsd:MessagePriority" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="charging" type="parlayx_common_xsd:ChargingInformation" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="receiptRequest" type="parlayx_common_xsd:SimpleReference" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="sendMessageResponse" type="parlayx_mm_send_local_xsd:sendMessageResponse"/>
+         <xsd:complexType name="sendMessageResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getMessageDeliveryStatus" type="parlayx_mm_send_local_xsd:getMessageDeliveryStatus"/>
+         <xsd:complexType name="getMessageDeliveryStatus">
+            <xsd:sequence>
+               <xsd:element name="requestIdentifier" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getMessageDeliveryStatusResponse" type="parlayx_mm_send_local_xsd:getMessageDeliveryStatusResponse"/>
+         <xsd:complexType name="getMessageDeliveryStatusResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="parlayx_mm_xsd:DeliveryInformation" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="scheduleMessage" type="parlayx_mm_send_local_xsd:scheduleMessage"/>
+         <xsd:complexType name="scheduleMessage">
+            <xsd:sequence>
+               <xsd:element name="addresses" type="xsd:anyURI" minOccurs="1" maxOccurs="unbounded"/>
+               <xsd:element name="senderAddress" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="subject" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="priority" type="parlayx_mm_xsd:MessagePriority" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="charging" type="parlayx_common_xsd:ChargingInformation" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="startTime" type="xsd:dateTime"/>
+               <xsd:element name="stopTime" type="xsd:dateTime"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="scheduleMessageResponse" type="parlayx_mm_send_local_xsd:scheduleMessageResponse"/>
+         <xsd:complexType name="scheduleMessageResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="cancelScheduledMessage" type="parlayx_mm_send_local_xsd:cancelScheduledMessage"/>
+         <xsd:complexType name="cancelScheduledMessage">
+            <xsd:sequence>
+               <xsd:element name="requestIdentifier" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="cancelScheduledMessageResponse" type="parlayx_mm_send_local_xsd:cancelScheduledMessageResponse"/>
+         <xsd:complexType name="cancelScheduledMessageResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="getScheduledMessageStatus" type="parlayx_mm_send_local_xsd:getScheduledMessageStatus"/>
+         <xsd:complexType name="getScheduledMessageStatus">
+            <xsd:sequence>
+               <xsd:element name="requestIdentifier" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getScheduledMessageStatusResponse" type="parlayx_mm_send_local_xsd:getScheduledMessageStatusResponse"/>
+         <xsd:complexType name="getScheduledMessageStatusResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="parlayx_mm_xsd:ScheduledDeliveryInformation"/>
+            </xsd:sequence>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="SendMessage_sendMessageRequest">
+      <wsdl:part name="parameters" element="parlayx_mm_send_local_xsd:sendMessage"/>
+   </wsdl:message>
+
+   <wsdl:message name="SendMessage_sendMessageResponse">
+      <wsdl:part name="result" element="parlayx_mm_send_local_xsd:sendMessageResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="SendMessage_getMessageDeliveryStatusRequest">
+      <wsdl:part name="parameters" element="parlayx_mm_send_local_xsd:getMessageDeliveryStatus"/>
+   </wsdl:message>
+
+   <wsdl:message name="SendMessage_getMessageDeliveryStatusResponse">
+      <wsdl:part name="result" element="parlayx_mm_send_local_xsd:getMessageDeliveryStatusResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="SendMessage_scheduleMessageRequest">
+      <wsdl:part name="parameters" element="parlayx_mm_send_local_xsd:scheduleMessage"/>
+   </wsdl:message>
+
+   <wsdl:message name="SendMessage_scheduleMessageResponse">
+      <wsdl:part name="result" element="parlayx_mm_send_local_xsd:scheduleMessageResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="SendMessage_cancelScheduledMessageRequest">
+      <wsdl:part name="parameters" element="parlayx_mm_send_local_xsd:cancelScheduledMessage"/>
+   </wsdl:message>
+
+   <wsdl:message name="SendMessage_cancelScheduledMessageResponse">
+      <wsdl:part name="result" element="parlayx_mm_send_local_xsd:cancelScheduledMessageResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="SendMessage_getScheduledMessageStatusRequest">
+      <wsdl:part name="parameters" element="parlayx_mm_send_local_xsd:getScheduledMessageStatus"/>
+   </wsdl:message>
+
+   <wsdl:message name="SendMessage_getScheduledMessageStatusResponse">
+      <wsdl:part name="result" element="parlayx_mm_send_local_xsd:getScheduledMessageStatusResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="SendMessage">
+      <wsdl:operation name="sendMessage">
+         <wsdl:input message="parlayx_mm_send:SendMessage_sendMessageRequest"/>
+         <wsdl:output message="parlayx_mm_send:SendMessage_sendMessageResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="getMessageDeliveryStatus">
+         <wsdl:input message="parlayx_mm_send:SendMessage_getMessageDeliveryStatusRequest"/>
+         <wsdl:output message="parlayx_mm_send:SendMessage_getMessageDeliveryStatusResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="scheduleMessage">
+         <wsdl:input message="parlayx_mm_send:SendMessage_scheduleMessageRequest"/>
+         <wsdl:output message="parlayx_mm_send:SendMessage_scheduleMessageResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="cancelScheduledMessage">
+         <wsdl:input message="parlayx_mm_send:SendMessage_cancelScheduledMessageRequest"/>
+         <wsdl:output message="parlayx_mm_send:SendMessage_cancelScheduledMessageResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="getScheduledMessageStatus">
+         <wsdl:input message="parlayx_mm_send:SendMessage_getScheduledMessageStatusRequest"/>
+         <wsdl:output message="parlayx_mm_send:SendMessage_getScheduledMessageStatusResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- july 28, 2008 -->
+<wsdl:definitions
+   name="parlayx_call_notification_manager_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/call_notification/notification_manager/v3_8/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:parlayx_call_notification_manager="http://www.csapi.org/wsdl/parlayx/call_notification/notification_manager/v3_8/interface"
+   xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults"
+   xmlns:parlayx_call_notification_xsd="http://www.csapi.org/schema/parlayx/call_notification/v3_8"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v3_1"
+   xmlns:parlayx_call_notification_manager_local_xsd="http://www.csapi.org/schema/parlayx/call_notification/notification_manager/v3_8/local">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults" location="parlayx_common_faults_3_0.wsdl"/>
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/call_notification/notification_manager/v3_8/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/call_notification/v3_8" schemaLocation="parlayx_call_notification_types_3_8.xsd"/>
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+
+         <xsd:element name="startCallNotification" type="parlayx_call_notification_manager_local_xsd:startCallNotification"/>
+         <xsd:complexType name="startCallNotification">
+            <xsd:sequence>
+               <xsd:element name="reference" type="parlayx_common_xsd:SimpleReference"/>
+               <xsd:element name="addresses" type="xsd:anyURI" minOccurs="1" maxOccurs="unbounded"/>
+               <xsd:element name="criteria" type="parlayx_call_notification_xsd:CallEvents" minOccurs="0" maxOccurs="unbounded"/>
+               <xsd:element name="addressDirection" type="parlayx_call_notification_xsd:AddressDirection" minOccurs="0"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="startCallNotificationResponse" type="parlayx_call_notification_manager_local_xsd:startCallNotificationResponse"/>
+         <xsd:complexType name="startCallNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="stopCallNotification" type="parlayx_call_notification_manager_local_xsd:stopCallNotification"/>
+         <xsd:complexType name="stopCallNotification">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="stopCallNotificationResponse" type="parlayx_call_notification_manager_local_xsd:stopCallNotificationResponse"/>
+         <xsd:complexType name="stopCallNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="startPlayAndCollectNotification" type="parlayx_call_notification_manager_local_xsd:startPlayAndCollectNotification"/>
+         <xsd:complexType name="startPlayAndCollectNotification">
+            <xsd:sequence>
+               <xsd:element name="reference" type="parlayx_common_xsd:SimpleReference"/>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="startPlayAndCollectNotificationResponse" type="parlayx_call_notification_manager_local_xsd:startPlayAndCollectNotificationResponse"/>
+         <xsd:complexType name="startPlayAndCollectNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="startPlayAndRecordNotification" type="parlayx_call_notification_manager_local_xsd:startPlayAndRecordNotification"/>
+         <xsd:complexType name="startPlayAndRecordNotification">
+            <xsd:sequence>
+               <xsd:element name="reference" type="parlayx_common_xsd:SimpleReference"/>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="startPlayAndRecordNotificationResponse" type="parlayx_call_notification_manager_local_xsd:startPlayAndRecordNotificationResponse"/>
+         <xsd:complexType name="startPlayAndRecordNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="stopMediaInteractionNotification" type="parlayx_call_notification_manager_local_xsd:stopMediaInteractionNotification"/>
+         <xsd:complexType name="stopMediaInteractionNotification">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="stopMediaInteractionNotificationResponse" type="parlayx_call_notification_manager_local_xsd:stopMediaInteractionNotificationResponse"/>
+         <xsd:complexType name="stopMediaInteractionNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="CallNotificationManager_startCallNotificationRequest">
+      <wsdl:part name="parameters" element="parlayx_call_notification_manager_local_xsd:startCallNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotificationManager_startCallNotificationResponse">
+      <wsdl:part name="result" element="parlayx_call_notification_manager_local_xsd:startCallNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotificationManager_stopCallNotificationRequest">
+      <wsdl:part name="parameters" element="parlayx_call_notification_manager_local_xsd:stopCallNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotificationManager_stopCallNotificationResponse">
+      <wsdl:part name="result" element="parlayx_call_notification_manager_local_xsd:stopCallNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotificationManager_startPlayAndCollectNotificationRequest">
+      <wsdl:part name="parameters" element="parlayx_call_notification_manager_local_xsd:startPlayAndCollectNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotificationManager_startPlayAndCollectNotificationResponse">
+      <wsdl:part name="result" element="parlayx_call_notification_manager_local_xsd:startPlayAndCollectNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotificationManager_startPlayAndRecordNotificationRequest">
+      <wsdl:part name="parameters" element="parlayx_call_notification_manager_local_xsd:startPlayAndRecordNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotificationManager_startPlayAndRecordNotificationResponse">
+      <wsdl:part name="result" element="parlayx_call_notification_manager_local_xsd:startPlayAndRecordNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotificationManager_stopMediaInteractionNotificationRequest">
+      <wsdl:part name="parameters" element="parlayx_call_notification_manager_local_xsd:stopMediaInteractionNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallNotificationManager_stopMediaInteractionNotificationResponse">
+      <wsdl:part name="result" element="parlayx_call_notification_manager_local_xsd:stopMediaInteractionNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="CallNotificationManager">
+      <wsdl:operation name="startCallNotification">
+         <wsdl:input message="parlayx_call_notification_manager:CallNotificationManager_startCallNotificationRequest"/>
+         <wsdl:output message="parlayx_call_notification_manager:CallNotificationManager_startCallNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="stopCallNotification">
+         <wsdl:input message="parlayx_call_notification_manager:CallNotificationManager_stopCallNotificationRequest"/>
+         <wsdl:output message="parlayx_call_notification_manager:CallNotificationManager_stopCallNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="startPlayAndCollectNotification">
+         <wsdl:input message="parlayx_call_notification_manager:CallNotificationManager_startPlayAndCollectNotificationRequest"/>
+         <wsdl:output message="parlayx_call_notification_manager:CallNotificationManager_startPlayAndCollectNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="startPlayAndRecordNotification">
+         <wsdl:input message="parlayx_call_notification_manager:CallNotificationManager_startPlayAndRecordNotificationRequest"/>
+         <wsdl:output message="parlayx_call_notification_manager:CallNotificationManager_startPlayAndRecordNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="stopMediaInteractionNotification">
+         <wsdl:input message="parlayx_call_notification_manager:CallNotificationManager_stopMediaInteractionNotificationRequest"/>
+         <wsdl:output message="parlayx_call_notification_manager:CallNotificationManager_stopMediaInteractionNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

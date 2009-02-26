@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- May 25, 2007 -->
+<wsdl:definitions
+   name="audio_call_play_media_service"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/audio_call/play_media/v3_2/service"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:tns="http://www.csapi.org/wsdl/parlayx/audio_call/play_media/v3_2/service"
+   xmlns:interface="http://www.csapi.org/wsdl/parlayx/audio_call/play_media/v3_2/interface">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/audio_call/play_media/v3_2/interface" location="parlayx_audio_call_play_media_interface_3_2.wsdl"/>
+
+   <wsdl:binding name="AudioCallPlayMediaBinding" type="interface:AudioCallPlayMedia">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="playTextMessage">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="playAudioMessage">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="playVoiceXmlMessage">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="playVideoMessage">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="getMessageStatus">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="endMessage">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding>
+
+   <wsdl:service name="AudioCallPlayMediaService">
+      <wsdl:port name="AudioCallPlayMedia" binding="tns:AudioCallPlayMediaBinding">
+         <soap:address location="http://localhost:9080/AudioCallPlayMediaService/services/AudioCallPlayMedia"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

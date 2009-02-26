@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- January 5, 2006 -->
+<wsdl:definitions
+   name="group_mgmt_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/group_mgmt/v2_1/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:group_mgmt="http://www.csapi.org/wsdl/parlayx/group_mgmt/v2_1/interface"
+   xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v2_0/faults"
+   xmlns:group_xsd="http://www.csapi.org/schema/parlayx/group/v2_1"
+   xmlns:group_mgmt_local_xsd="http://www.csapi.org/schema/parlayx/group_mgmt/v2_1/local">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v2_0/faults" location="parlayx_common_faults_2_0.wsdl"/>
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/group_mgmt/v2_1/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/group/v2_1" schemaLocation="parlayx_group_types_2_1.xsd"/>
+
+         <xsd:element name="createGroup" type="group_mgmt_local_xsd:createGroup"/>
+         <xsd:complexType name="createGroup">
+            <xsd:sequence>
+               <xsd:element name="name" type="xsd:string"/>
+               <xsd:element name="domain" type="xsd:string"/>
+               <xsd:element name="autoName" type="xsd:boolean"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="createGroupResponse" type="group_mgmt_local_xsd:createGroupResponse"/>
+         <xsd:complexType name="createGroupResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:anyURI"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="deleteGroup" type="group_mgmt_local_xsd:deleteGroup"/>
+         <xsd:complexType name="deleteGroup">
+            <xsd:sequence>
+               <xsd:element name="group" type="xsd:anyURI"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="deleteGroupResponse" type="group_mgmt_local_xsd:deleteGroupResponse"/>
+         <xsd:complexType name="deleteGroupResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="queryGroups" type="group_mgmt_local_xsd:queryGroups"/>
+         <xsd:complexType name="queryGroups">
+            <xsd:sequence>
+               <xsd:element name="searchDomain" type="xsd:string"/>
+               <xsd:element name="hierarchy" type="xsd:boolean"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="queryGroupsResponse" type="group_mgmt_local_xsd:queryGroupsResponse"/>
+         <xsd:complexType name="queryGroupsResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="setAccess" type="group_mgmt_local_xsd:setAccess"/>
+         <xsd:complexType name="setAccess">
+            <xsd:sequence>
+               <xsd:element name="group" type="xsd:anyURI"/>
+               <xsd:element name="requester" type="xsd:string"/>
+               <xsd:element name="adminPermission" type="xsd:boolean"/>
+               <xsd:element name="addPermission" type="xsd:boolean"/>
+               <xsd:element name="deletePermission" type="xsd:boolean"/>
+               <xsd:element name="queryPermission" type="xsd:boolean"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="setAccessResponse" type="group_mgmt_local_xsd:setAccessResponse"/>
+         <xsd:complexType name="setAccessResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="queryAccess" type="group_mgmt_local_xsd:queryAccess"/>
+         <xsd:complexType name="queryAccess">
+            <xsd:sequence>
+               <xsd:element name="group" type="xsd:anyURI"/>
+               <xsd:element name="requester" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="queryAccessResponse" type="group_mgmt_local_xsd:queryAccessResponse"/>
+         <xsd:complexType name="queryAccessResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="group_xsd:AccessPermissions"/>
+            </xsd:sequence>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="GroupManagement_createGroupRequest">
+      <wsdl:part name="parameters" element="group_mgmt_local_xsd:createGroup"/>
+   </wsdl:message>
+
+   <wsdl:message name="GroupManagement_createGroupResponse">
+      <wsdl:part name="result" element="group_mgmt_local_xsd:createGroupResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="GroupManagement_deleteGroupRequest">
+      <wsdl:part name="parameters" element="group_mgmt_local_xsd:deleteGroup"/>
+   </wsdl:message>
+
+   <wsdl:message name="GroupManagement_deleteGroupResponse">
+      <wsdl:part name="result" element="group_mgmt_local_xsd:deleteGroupResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="GroupManagement_queryGroupsRequest">
+      <wsdl:part name="parameters" element="group_mgmt_local_xsd:queryGroups"/>
+   </wsdl:message>
+
+   <wsdl:message name="GroupManagement_queryGroupsResponse">
+      <wsdl:part name="result" element="group_mgmt_local_xsd:queryGroupsResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="GroupManagement_setAccessRequest">
+      <wsdl:part name="parameters" element="group_mgmt_local_xsd:setAccess"/>
+   </wsdl:message>
+
+   <wsdl:message name="GroupManagement_setAccessResponse">
+      <wsdl:part name="result" element="group_mgmt_local_xsd:setAccessResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="GroupManagement_queryAccessRequest">
+      <wsdl:part name="parameters" element="group_mgmt_local_xsd:queryAccess"/>
+   </wsdl:message>
+
+   <wsdl:message name="GroupManagement_queryAccessResponse">
+      <wsdl:part name="result" element="group_mgmt_local_xsd:queryAccessResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="GroupManagement">
+      <wsdl:operation name="createGroup">
+         <wsdl:input message="group_mgmt:GroupManagement_createGroupRequest"/>
+         <wsdl:output message="group_mgmt:GroupManagement_createGroupResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteGroup">
+         <wsdl:input message="group_mgmt:GroupManagement_deleteGroupRequest"/>
+         <wsdl:output message="group_mgmt:GroupManagement_deleteGroupResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="queryGroups">
+         <wsdl:input message="group_mgmt:GroupManagement_queryGroupsRequest"/>
+         <wsdl:output message="group_mgmt:GroupManagement_queryGroupsResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="setAccess">
+         <wsdl:input message="group_mgmt:GroupManagement_setAccessRequest"/>
+         <wsdl:output message="group_mgmt:GroupManagement_setAccessResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="queryAccess">
+         <wsdl:input message="group_mgmt:GroupManagement_queryAccessRequest"/>
+         <wsdl:output message="group_mgmt:GroupManagement_queryAccessResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

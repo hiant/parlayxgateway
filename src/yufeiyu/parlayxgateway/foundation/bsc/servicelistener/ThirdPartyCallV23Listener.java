@@ -1,5 +1,5 @@
 package yufeiyu.parlayxgateway.foundation.bsc.servicelistener;
 
-public class ThirdPartyCallListener extends ServiceListener {
+public class ThirdPartyCallV23Listener extends ServiceListener {
 
 }

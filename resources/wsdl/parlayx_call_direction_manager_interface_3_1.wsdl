@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- March 7, 2007 -->
+<wsdl:definitions
+   name="parlayx_call_direction_manager_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/call_direction/notification_manager/v3_1/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:parlayx_call_direction_manager="http://www.csapi.org/wsdl/parlayx/call_direction/notification_manager/v3_1/interface"
+   xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults"
+   xmlns:parlayx_call_notification_xsd="http://www.csapi.org/schema/parlayx/call_notification/v3_1"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v3_1"
+   xmlns:parlayx_call_direction_manager_local_xsd="http://www.csapi.org/schema/parlayx/call_direction/notification_manager/v3_1/local">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults" location="parlayx_common_faults_3_0.wsdl"/>
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/call_direction/notification_manager/v3_1/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/call_notification/v3_1" schemaLocation="parlayx_call_notification_types_3_1.xsd"/>
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+
+         <xsd:element name="startCallDirectionNotification" type="parlayx_call_direction_manager_local_xsd:startCallDirectionNotification"/>
+         <xsd:complexType name="startCallDirectionNotification">
+            <xsd:sequence>
+               <xsd:element name="reference" type="parlayx_common_xsd:SimpleReference"/>
+               <xsd:element name="addresses" type="xsd:anyURI" minOccurs="1" maxOccurs="unbounded"/>
+               <xsd:element name="criteria" type="parlayx_call_notification_xsd:CallEvents" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="startCallDirectionNotificationResponse" type="parlayx_call_direction_manager_local_xsd:startCallDirectionNotificationResponse"/>
+         <xsd:complexType name="startCallDirectionNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="stopCallDirectionNotification" type="parlayx_call_direction_manager_local_xsd:stopCallDirectionNotification"/>
+         <xsd:complexType name="stopCallDirectionNotification">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="stopCallDirectionNotificationResponse" type="parlayx_call_direction_manager_local_xsd:stopCallDirectionNotificationResponse"/>
+         <xsd:complexType name="stopCallDirectionNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="CallDirectionManager_startCallDirectionNotificationRequest">
+      <wsdl:part name="parameters" element="parlayx_call_direction_manager_local_xsd:startCallDirectionNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallDirectionManager_startCallDirectionNotificationResponse">
+      <wsdl:part name="result" element="parlayx_call_direction_manager_local_xsd:startCallDirectionNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallDirectionManager_stopCallDirectionNotificationRequest">
+      <wsdl:part name="parameters" element="parlayx_call_direction_manager_local_xsd:stopCallDirectionNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="CallDirectionManager_stopCallDirectionNotificationResponse">
+      <wsdl:part name="result" element="parlayx_call_direction_manager_local_xsd:stopCallDirectionNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="CallDirectionManager">
+      <wsdl:operation name="startCallDirectionNotification">
+         <wsdl:input message="parlayx_call_direction_manager:CallDirectionManager_startCallDirectionNotificationRequest"/>
+         <wsdl:output message="parlayx_call_direction_manager:CallDirectionManager_startCallDirectionNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="stopCallDirectionNotification">
+         <wsdl:input message="parlayx_call_direction_manager:CallDirectionManager_stopCallDirectionNotificationRequest"/>
+         <wsdl:output message="parlayx_call_direction_manager:CallDirectionManager_stopCallDirectionNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

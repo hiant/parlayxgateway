@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wsdl:definitions targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/communications/services/callforwarding/v1_0/"
+	xmlns:tns="http://www.nortel.com/xmlprotocol/wsdl/communications/services/callforwarding/v1_0/"
+	xmlns:intf="http://www.nortel.com/xmlprotocol/wsdl/communications/services/callforwarding/v1_0/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd1="http://www.csapi.org/schema/parlayx/common/v3_1"
+	xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults">
+	
+<wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults" location="parlayx_common_faults_3_0.wsdl"/>
+
+	<xsd:annotation>
+		<xsd:documentation>
+			The call forwarding service provides interfaces to manage forwarding functionality on a device, 
+			which is identified by address. The forwarding feature is a trigger at the device that will 
+			redirect incoming calls to another device based on a specific condition. 
+			
+			There are tree operations for the service:
+			setForwarding: Set the forwarding instructions for this Address.
+			getForwarding: Get the forwarding instructions for this Address. 
+			cancelForwarding: Cancel all of the forwarding instructions on this Address.
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/communications/services/callforwarding/v1_0/"
+			xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema"> 
+
+      <xsd:element name="setForwardingRequest" type="tns:forwardingType"/>
+       
+      <xsd:element name="setForwardingResponse" type="tns:emptyResponseType"/> 
+         
+      <xsd:element name="getForwardingRequest" type="tns:addressType"/> 
+           
+      <xsd:element name="getForwardingResponse" type="tns:forwardingType"/> 
+       
+      <xsd:element name="cancelForwardingRequest" type="tns:addressType"/>
+       
+      <xsd:element name="cancelForwardingResponse" type="tns:emptyResponseType"/>
+       
+      <xsd:complexType name="addressType">
+        <xsd:sequence> 
+            <xsd:element name="targetAddess" type="xsd:anyURI" /> 
+        </xsd:sequence> 
+      </xsd:complexType>   
+
+			<xsd:complexType name="forwardingType">
+				<xsd:sequence>
+					<xsd:element name="calleeAddress" maxOccurs="1" minOccurs="1" type="xsd:anyURI">
+						<xsd:annotation>
+							<xsd:documentation>Target Address the forwarding will be set to</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+
+					<xsd:element name="instruction" minOccurs="1"  maxOccurs="unbounded" type="tns:instructionType">
+						<xsd:annotation>
+							<xsd:documentation>forwarding instruction</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="instructionType">
+				<xsd:sequence>
+					<xsd:element name="forwardingAddress" minOccurs="1" maxOccurs="1" type="xsd:anyURI"/>
+					
+					<xsd:element name="activeForwarding" minOccurs="0" maxOccurs="1" type="xsd:boolean"  default="true">
+						<xsd:annotation>
+							<xsd:documentation>Active or deactive this forwarding instruction</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					
+					<xsd:element name="condition" minOccurs="0"  maxOccurs="1" 	type="tns:conditionType" default="forwardImmediate">
+						<xsd:annotation>
+							<xsd:documentation> Condition tells when to forward the call. There are
+								currently four types of conditions: 
+								forwardImmediate - always forwarding incoming calls, 
+								forwardBusy - forwarding incoming calls when the address is busy, 
+								forwardNoAns - forwarding incoming calls when no one answers,
+								forwardDoNotDisturb - forwarding incoming calls when Do-Not-Disturb is actived and require forwarding as follow up. 
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+
+					<xsd:element name="incomingFilter" minOccurs="0" maxOccurs="1" default="AllCalls"
+						type="tns:incomingFilterType">
+						<xsd:annotation>
+							<xsd:documentation> The filter indicates which type of incoming calls
+								this forwarding instruction should apply to. This forwarding
+								instruction can apply to all calls, to external calls only, to
+								internal calls only, or to a specific calling address.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					
+					<xsd:element name="ringCount" minOccurs="0" maxOccurs="1" type="xsd:integer">
+						<xsd:annotation>
+							<xsd:documentation>Specify the cycle ring count before forwarding When the condition is "forwardNoAns",the range is restricted to 1~100</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					
+					<xsd:element name="ringDuration" minOccurs="0" maxOccurs="1" type="xsd:integer">
+					 <xsd:annotation>
+							<xsd:documentation> 
+							  Specify the cycle ring duration before forwarding When the condition is "forwardNoAns", the time unit is second.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+
+					<xsd:element name="specificCaller" minOccurs="0" maxOccurs="unbounded" type="xsd:anyURI">
+						<xsd:annotation>
+							<xsd:documentation>Provide the addresses of the specific callers When the incoming filter is "SpecificCallers",
+								</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:simpleType name="conditionType">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="forwardBusy"/>
+					<xsd:enumeration value="forwardNoAns"/>
+					<xsd:enumeration value="forwardImmediate"/>
+					<xsd:enumeration value="forwardDoNotDisturb"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+
+			<xsd:simpleType name="incomingFilterType">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="AllCalls"/>
+					<xsd:enumeration value="ExternalCalls"/>
+					<xsd:enumeration value="InternalCalls"/>
+					<xsd:enumeration value="SpecificCallers"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+
+			<xsd:complexType name="emptyResponseType">
+				<xsd:sequence/>
+			</xsd:complexType>
+      
+		</xsd:schema>
+	</wsdl:types>
+
+
+	<wsdl:message name="setForwardingRequest">
+		<wsdl:part name="parameters" element="intf:setForwardingRequest"/>
+	</wsdl:message>
+	<wsdl:message name="setForwardingResponse">
+		<wsdl:part name="parameters" element="intf:setForwardingResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="getForwardingRequest">
+		<wsdl:part name="parameters" element="intf:getForwardingRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getForwardingResponse">
+		<wsdl:part name="parameters" element="intf:getForwardingResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="cancelForwardingRequest">
+		<wsdl:part name="parameters" element="intf:cancelForwardingRequest"/>
+	</wsdl:message>
+	<wsdl:message name="cancelForwardingResponse">
+		<wsdl:part name="parameters" element="intf:cancelForwardingResponse"/>
+	</wsdl:message>
+
+	<wsdl:portType name="CallForwardingService">
+		<wsdl:operation name="setCallForwarding">
+			<wsdl:input name="setForwardingRequest" message="intf:setForwardingRequest"/>
+			<wsdl:output name="setForwardingResponse" message="intf:setForwardingResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+                        <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="getCallForwarding">
+			<wsdl:input name="getForwardingRequest" message="intf:getForwardingRequest"/>
+			<wsdl:output name="getForwardingResponse" message="intf:getForwardingResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+                        <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="cancelCallForwarding">
+			<wsdl:input name="cancelForwardingRequest" message="intf:cancelForwardingRequest"/>
+			<wsdl:output name="cancelForwardingResponse" message="intf:cancelForwardingResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+                        <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="CallForwardingServiceBinding" type="intf:CallForwardingService">
+
+		<wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="setCallForwarding">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="setForwardingRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="setForwardingResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException">
+               			<soap:fault name="ServiceException" use="literal"/>
+            		</wsdl:fault>
+            		<wsdl:fault name="PolicyException">
+               			<soap:fault name="PolicyException" use="literal"/>
+            		</wsdl:fault>
+			
+		</wsdl:operation>
+
+		<wsdl:operation name="getCallForwarding">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="getForwardingRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getForwardingResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException">
+               			<soap:fault name="ServiceException" use="literal"/>
+            		</wsdl:fault>
+            		<wsdl:fault name="PolicyException">
+               			<soap:fault name="PolicyException" use="literal"/>
+            		</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="cancelCallForwarding">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="cancelForwardingRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="cancelForwardingResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException">
+               			<soap:fault name="ServiceException" use="literal"/>
+            		</wsdl:fault>
+            		<wsdl:fault name="PolicyException">
+               			<soap:fault name="PolicyException" use="literal"/>
+            		</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="CallForwardingService">
+		<wsdl:documentation>This service provides the interface for call forwarding functionality</wsdl:documentation>
+		<wsdl:port name="CallForwarding" binding="intf:CallForwardingServiceBinding">
+			<wsdlsoap:address
+				location="http://localhost:9080/CallForwarding/services/CallForwardingService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

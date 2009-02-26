@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- March 13, 2007 -->
+<wsdl:definitions
+   name="presence_consumer_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/presence/consumer/v3_2/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:presence_consumer="http://www.csapi.org/wsdl/parlayx/presence/consumer/v3_2/interface"
+   xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults"
+   xmlns:presence_xsd="http://www.csapi.org/schema/parlayx/presence/v3_2"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v3_1"
+   xmlns:presence_consumer_local_xsd="http://www.csapi.org/schema/parlayx/presence/consumer/v3_2/local">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults" location="parlayx_common_faults_3_0.wsdl"/>
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/presence/consumer/v3_2/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/presence/v3_2" schemaLocation="parlayx_presence_types_3_2.xsd"/>
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+
+         <xsd:element name="subscribePresence" type="presence_consumer_local_xsd:subscribePresence"/>
+         <xsd:complexType name="subscribePresence">
+            <xsd:sequence>
+               <xsd:element name="watcher" type="xsd:anyURI"/>
+               <xsd:element name="presentities" type="xsd:anyURI" minOccurs="1" maxOccurs="unbounded"/>
+               <xsd:element name="attributes" type="presence_xsd:PresenceAttributeType" minOccurs="0" maxOccurs="unbounded"/>
+               <xsd:element name="application" type="xsd:string"/>
+               <xsd:element name="reference" type="parlayx_common_xsd:SimpleReference"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="subscribePresenceResponse" type="presence_consumer_local_xsd:subscribePresenceResponse"/>
+         <xsd:complexType name="subscribePresenceResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="getUserPresence" type="presence_consumer_local_xsd:getUserPresence"/>
+         <xsd:complexType name="getUserPresence">
+            <xsd:sequence>
+               <xsd:element name="watcher" type="xsd:anyURI"/>
+               <xsd:element name="presentity" type="xsd:anyURI"/>
+               <xsd:element name="attributes" type="presence_xsd:PresenceAttributeType" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getUserPresenceResponse" type="presence_consumer_local_xsd:getUserPresenceResponse"/>
+         <xsd:complexType name="getUserPresenceResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="presence_xsd:PresenceAttribute" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="startPresenceNotification" type="presence_consumer_local_xsd:startPresenceNotification"/>
+         <xsd:complexType name="startPresenceNotification">
+            <xsd:sequence>
+               <xsd:element name="watcher" type="xsd:anyURI"/>
+               <xsd:element name="presentities" type="xsd:anyURI" minOccurs="1" maxOccurs="unbounded"/>
+               <xsd:element name="attributes" type="presence_xsd:PresenceAttributeType" minOccurs="0" maxOccurs="unbounded"/>
+               <xsd:element name="reference" type="parlayx_common_xsd:SimpleReference"/>
+               <xsd:element name="frequency" type="parlayx_common_xsd:TimeMetric"/>
+               <xsd:element name="duration" type="parlayx_common_xsd:TimeMetric" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="count" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="checkImmediate" type="xsd:boolean"/>
+               <xsd:element name="noFail" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="startPresenceNotificationResponse" type="presence_consumer_local_xsd:startPresenceNotificationResponse"/>
+         <xsd:complexType name="startPresenceNotificationResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="endPresenceNotification" type="presence_consumer_local_xsd:endPresenceNotification"/>
+         <xsd:complexType name="endPresenceNotification">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="endPresenceNotificationResponse" type="presence_consumer_local_xsd:endPresenceNotificationResponse"/>
+         <xsd:complexType name="endPresenceNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="PresenceConsumer_subscribePresenceRequest">
+      <wsdl:part name="parameters" element="presence_consumer_local_xsd:subscribePresence"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceConsumer_subscribePresenceResponse">
+      <wsdl:part name="result" element="presence_consumer_local_xsd:subscribePresenceResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceConsumer_getUserPresenceRequest">
+      <wsdl:part name="parameters" element="presence_consumer_local_xsd:getUserPresence"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceConsumer_getUserPresenceResponse">
+      <wsdl:part name="result" element="presence_consumer_local_xsd:getUserPresenceResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceConsumer_startPresenceNotificationRequest">
+      <wsdl:part name="parameters" element="presence_consumer_local_xsd:startPresenceNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceConsumer_startPresenceNotificationResponse">
+      <wsdl:part name="result" element="presence_consumer_local_xsd:startPresenceNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceConsumer_endPresenceNotificationRequest">
+      <wsdl:part name="parameters" element="presence_consumer_local_xsd:endPresenceNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceConsumer_endPresenceNotificationResponse">
+      <wsdl:part name="result" element="presence_consumer_local_xsd:endPresenceNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="PresenceConsumer">
+      <wsdl:operation name="subscribePresence">
+         <wsdl:input message="presence_consumer:PresenceConsumer_subscribePresenceRequest"/>
+         <wsdl:output message="presence_consumer:PresenceConsumer_subscribePresenceResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="getUserPresence">
+         <wsdl:input message="presence_consumer:PresenceConsumer_getUserPresenceRequest"/>
+         <wsdl:output message="presence_consumer:PresenceConsumer_getUserPresenceResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="startPresenceNotification">
+         <wsdl:input message="presence_consumer:PresenceConsumer_startPresenceNotificationRequest"/>
+         <wsdl:output message="presence_consumer:PresenceConsumer_startPresenceNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="endPresenceNotification">
+         <wsdl:input message="presence_consumer:PresenceConsumer_endPresenceNotificationRequest"/>
+         <wsdl:output message="presence_consumer:PresenceConsumer_endPresenceNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- May 25, 2007 -->
+<wsdl:definitions
+   name="audio_call_capture_media_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/audio_call/capture_media/v3_1/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:audio_call_capture_media="http://www.csapi.org/wsdl/parlayx/audio_call/capture_media/v3_1/interface"
+   xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults"
+   xmlns:audio_call_xsd="http://www.csapi.org/schema/parlayx/audio_call/v3_2"
+   xmlns:audio_call_capture_media_local_xsd="http://www.csapi.org/schema/parlayx/audio_call/capture_media/v3_1/local">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults" location="parlayx_common_faults_3_0.wsdl"/>
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/audio_call/capture_media/v3_1/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/audio_call/v3_2" schemaLocation="parlayx_audio_call_types_3_2.xsd"/>
+
+         <xsd:element name="startPlayAndCollectInteraction" type="audio_call_capture_media_local_xsd:startPlayAndCollectInteraction"/>
+         <xsd:complexType name="startPlayAndCollectInteraction">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+               <xsd:element name="callParticipant" type="xsd:anyURI" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="playingConfiguration" type="audio_call_xsd:PlayConfig"/>
+               <xsd:element name="digitConfiguration" type="audio_call_xsd:DigitConfig"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="startPlayAndCollectInteractionResponse" type="audio_call_capture_media_local_xsd:startPlayAndCollectInteractionResponse"/>
+         <xsd:complexType name="startPlayAndCollectInteractionResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="startPlayAndRecordInteraction" type="audio_call_capture_media_local_xsd:startPlayAndRecordInteraction"/>
+         <xsd:complexType name="startPlayAndRecordInteraction">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+               <xsd:element name="callParticipant" type="xsd:anyURI" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="playingConfiguration" type="audio_call_xsd:PlayConfig"/>
+               <xsd:element name="recordingConfiguration" type="audio_call_xsd:RecConfig"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="startPlayAndRecordInteractionResponse" type="audio_call_capture_media_local_xsd:startPlayAndRecordInteractionResponse"/>
+         <xsd:complexType name="startPlayAndRecordInteractionResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="stopMediaInteraction" type="audio_call_capture_media_local_xsd:stopMediaInteraction"/>
+         <xsd:complexType name="stopMediaInteraction">
+            <xsd:sequence>
+               <xsd:element name="mediaIdentifier" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="stopMediaInteractionResponse" type="audio_call_capture_media_local_xsd:stopMediaInteractionResponse"/>
+         <xsd:complexType name="stopMediaInteractionResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="AudioCallCaptureMedia_startPlayAndCollectInteractionRequest">
+      <wsdl:part name="parameters" element="audio_call_capture_media_local_xsd:startPlayAndCollectInteraction"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallCaptureMedia_startPlayAndCollectInteractionResponse">
+      <wsdl:part name="result" element="audio_call_capture_media_local_xsd:startPlayAndCollectInteractionResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallCaptureMedia_startPlayAndRecordInteractionRequest">
+      <wsdl:part name="parameters" element="audio_call_capture_media_local_xsd:startPlayAndRecordInteraction"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallCaptureMedia_startPlayAndRecordInteractionResponse">
+      <wsdl:part name="result" element="audio_call_capture_media_local_xsd:startPlayAndRecordInteractionResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallCaptureMedia_stopMediaInteractionRequest">
+      <wsdl:part name="parameters" element="audio_call_capture_media_local_xsd:stopMediaInteraction"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallCaptureMedia_stopMediaInteractionResponse">
+      <wsdl:part name="result" element="audio_call_capture_media_local_xsd:stopMediaInteractionResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="AudioCallCaptureMedia">
+      <wsdl:operation name="startPlayAndCollectInteraction">
+         <wsdl:input message="audio_call_capture_media:AudioCallCaptureMedia_startPlayAndCollectInteractionRequest"/>
+         <wsdl:output message="audio_call_capture_media:AudioCallCaptureMedia_startPlayAndCollectInteractionResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="startPlayAndRecordInteraction">
+         <wsdl:input message="audio_call_capture_media:AudioCallCaptureMedia_startPlayAndRecordInteractionRequest"/>
+         <wsdl:output message="audio_call_capture_media:AudioCallCaptureMedia_startPlayAndRecordInteractionResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="stopMediaInteraction">
+         <wsdl:input message="audio_call_capture_media:AudioCallCaptureMedia_stopMediaInteractionRequest"/>
+         <wsdl:output message="audio_call_capture_media:AudioCallCaptureMedia_stopMediaInteractionResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

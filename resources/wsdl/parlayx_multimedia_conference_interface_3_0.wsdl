@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- March 12, 2007 -->
+<wsdl:definitions
+   name="multimedia_conference_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/multimedia_conference/v3_0/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:multimedia_conference="http://www.csapi.org/wsdl/parlayx/multimedia_conference/v3_0/interface"
+   xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults"
+   xmlns:multimedia_conference_xsd="http://www.csapi.org/schema/parlayx/multimedia_conference/v3_0"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v3_1"
+   xmlns:multimedia_conference_local_xsd="http://www.csapi.org/schema/parlayx/multimedia_conference/v3_0/local">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults" location="parlayx_common_faults_3_0.wsdl"/>
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/multimedia_conference/v3_0/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/multimedia_conference/v3_0" schemaLocation="parlayx_multimedia_conference_types_3_0.xsd"/>
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+
+         <xsd:element name="createConference" type="multimedia_conference_local_xsd:createConference"/>
+         <xsd:complexType name="createConference">
+            <xsd:sequence>
+               <xsd:element name="conferenceType" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="conferenceDescription" type="xsd:string"/>
+               <xsd:element name="charging" type="parlayx_common_xsd:ChargingInformation" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="maximumDuration" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="maximumNumberOfParticipants" type="xsd:int"/>
+               <xsd:element name="conferenceOwner" type="xsd:anyURI" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="createConferenceResponse" type="multimedia_conference_local_xsd:createConferenceResponse"/>
+         <xsd:complexType name="createConferenceResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getConferenceInfo" type="multimedia_conference_local_xsd:getConferenceInfo"/>
+         <xsd:complexType name="getConferenceInfo">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getConferenceInfoResponse" type="multimedia_conference_local_xsd:getConferenceInfoResponse"/>
+         <xsd:complexType name="getConferenceInfoResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="multimedia_conference_xsd:ConferenceInfo"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="endConference" type="multimedia_conference_local_xsd:endConference"/>
+         <xsd:complexType name="endConference">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="endConferenceResponse" type="multimedia_conference_local_xsd:endConferenceResponse"/>
+         <xsd:complexType name="endConferenceResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="inviteParticipant" type="multimedia_conference_local_xsd:inviteParticipant"/>
+         <xsd:complexType name="inviteParticipant">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+               <xsd:element name="participant" type="xsd:anyURI"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="inviteParticipantResponse" type="multimedia_conference_local_xsd:inviteParticipantResponse"/>
+         <xsd:complexType name="inviteParticipantResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="disconnectParticipant" type="multimedia_conference_local_xsd:disconnectParticipant"/>
+         <xsd:complexType name="disconnectParticipant">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+               <xsd:element name="participant" type="xsd:anyURI"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="disconnectParticipantResponse" type="multimedia_conference_local_xsd:disconnectParticipantResponse"/>
+         <xsd:complexType name="disconnectParticipantResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="getParticipantInfo" type="multimedia_conference_local_xsd:getParticipantInfo"/>
+         <xsd:complexType name="getParticipantInfo">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+               <xsd:element name="participant" type="xsd:anyURI"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getParticipantInfoResponse" type="multimedia_conference_local_xsd:getParticipantInfoResponse"/>
+         <xsd:complexType name="getParticipantInfoResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="multimedia_conference_xsd:ParticipantInfo"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getParticipants" type="multimedia_conference_local_xsd:getParticipants"/>
+         <xsd:complexType name="getParticipants">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getParticipantsResponse" type="multimedia_conference_local_xsd:getParticipantsResponse"/>
+         <xsd:complexType name="getParticipantsResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="multimedia_conference_xsd:ParticipantInfo" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="MultimediaConference_createConferenceRequest">
+      <wsdl:part name="parameters" element="multimedia_conference_local_xsd:createConference"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_createConferenceResponse">
+      <wsdl:part name="result" element="multimedia_conference_local_xsd:createConferenceResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_getConferenceInfoRequest">
+      <wsdl:part name="parameters" element="multimedia_conference_local_xsd:getConferenceInfo"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_getConferenceInfoResponse">
+      <wsdl:part name="result" element="multimedia_conference_local_xsd:getConferenceInfoResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_endConferenceRequest">
+      <wsdl:part name="parameters" element="multimedia_conference_local_xsd:endConference"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_endConferenceResponse">
+      <wsdl:part name="result" element="multimedia_conference_local_xsd:endConferenceResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_inviteParticipantRequest">
+      <wsdl:part name="parameters" element="multimedia_conference_local_xsd:inviteParticipant"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_inviteParticipantResponse">
+      <wsdl:part name="result" element="multimedia_conference_local_xsd:inviteParticipantResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_disconnectParticipantRequest">
+      <wsdl:part name="parameters" element="multimedia_conference_local_xsd:disconnectParticipant"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_disconnectParticipantResponse">
+      <wsdl:part name="result" element="multimedia_conference_local_xsd:disconnectParticipantResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_getParticipantInfoRequest">
+      <wsdl:part name="parameters" element="multimedia_conference_local_xsd:getParticipantInfo"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_getParticipantInfoResponse">
+      <wsdl:part name="result" element="multimedia_conference_local_xsd:getParticipantInfoResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_getParticipantsRequest">
+      <wsdl:part name="parameters" element="multimedia_conference_local_xsd:getParticipants"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_getParticipantsResponse">
+      <wsdl:part name="result" element="multimedia_conference_local_xsd:getParticipantsResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="MultimediaConference">
+      <wsdl:operation name="createConference">
+         <wsdl:input message="multimedia_conference:MultimediaConference_createConferenceRequest"/>
+         <wsdl:output message="multimedia_conference:MultimediaConference_createConferenceResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="getConferenceInfo">
+         <wsdl:input message="multimedia_conference:MultimediaConference_getConferenceInfoRequest"/>
+         <wsdl:output message="multimedia_conference:MultimediaConference_getConferenceInfoResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="endConference">
+         <wsdl:input message="multimedia_conference:MultimediaConference_endConferenceRequest"/>
+         <wsdl:output message="multimedia_conference:MultimediaConference_endConferenceResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="inviteParticipant">
+         <wsdl:input message="multimedia_conference:MultimediaConference_inviteParticipantRequest"/>
+         <wsdl:output message="multimedia_conference:MultimediaConference_inviteParticipantResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="disconnectParticipant">
+         <wsdl:input message="multimedia_conference:MultimediaConference_disconnectParticipantRequest"/>
+         <wsdl:output message="multimedia_conference:MultimediaConference_disconnectParticipantResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="getParticipantInfo">
+         <wsdl:input message="multimedia_conference:MultimediaConference_getParticipantInfoRequest"/>
+         <wsdl:output message="multimedia_conference:MultimediaConference_getParticipantInfoResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="getParticipants">
+         <wsdl:input message="multimedia_conference:MultimediaConference_getParticipantsRequest"/>
+         <wsdl:output message="multimedia_conference:MultimediaConference_getParticipantsResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

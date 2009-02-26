@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- May 25, 2007 -->
+<wsdl:definitions
+   name="audio_call_play_media_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/audio_call/play_media/v3_2/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:audio_call_play_media="http://www.csapi.org/wsdl/parlayx/audio_call/play_media/v3_2/interface"
+   xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v3_1"
+   xmlns:audio_call_xsd="http://www.csapi.org/schema/parlayx/audio_call/v3_2"
+   xmlns:audio_call_play_media_local_xsd="http://www.csapi.org/schema/parlayx/audio_call/play_media/v3_2/local">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults" location="parlayx_common_faults_3_0.wsdl"/>
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/audio_call/play_media/v3_2/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/audio_call/v3_2" schemaLocation="parlayx_audio_call_types_3_2.xsd"/>
+
+         <xsd:element name="playTextMessage" type="audio_call_play_media_local_xsd:playTextMessage"/>
+         <xsd:complexType name="playTextMessage">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+               <xsd:element name="callParticipants" type="xsd:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+               <xsd:element name="text" type="xsd:string"/>
+               <xsd:element name="language" type="xsd:string"/>
+               <xsd:element name="charging" type="parlayx_common_xsd:ChargingInformation" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="playTextMessageResponse" type="audio_call_play_media_local_xsd:playTextMessageResponse"/>
+         <xsd:complexType name="playTextMessageResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="playAudioMessage" type="audio_call_play_media_local_xsd:playAudioMessage"/>
+         <xsd:complexType name="playAudioMessage">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+               <xsd:element name="callParticipants" type="xsd:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+               <xsd:element name="audioUrl" type="xsd:anyURI"/>
+               <xsd:element name="charging" type="parlayx_common_xsd:ChargingInformation" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="playAudioMessageResponse" type="audio_call_play_media_local_xsd:playAudioMessageResponse"/>
+         <xsd:complexType name="playAudioMessageResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="playVoiceXmlMessage" type="audio_call_play_media_local_xsd:playVoiceXmlMessage"/>
+         <xsd:complexType name="playVoiceXmlMessage">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+               <xsd:element name="callParticipants" type="xsd:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+               <xsd:element name="voiceXmlUrl" type="xsd:anyURI"/>
+               <xsd:element name="charging" type="parlayx_common_xsd:ChargingInformation" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="playVoiceXmlMessageResponse" type="audio_call_play_media_local_xsd:playVoiceXmlMessageResponse"/>
+         <xsd:complexType name="playVoiceXmlMessageResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="playVideoMessage" type="audio_call_play_media_local_xsd:playVideoMessage"/>
+         <xsd:complexType name="playVideoMessage">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+               <xsd:element name="callParticipants" type="xsd:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+               <xsd:element name="video" type="xsd:anyURI"/>
+               <xsd:element name="charging" type="parlayx_common_xsd:ChargingInformation" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="playVideoMessageResponse" type="audio_call_play_media_local_xsd:playVideoMessageResponse"/>
+         <xsd:complexType name="playVideoMessageResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getMessageStatus" type="audio_call_play_media_local_xsd:getMessageStatus"/>
+         <xsd:complexType name="getMessageStatus">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getMessageStatusResponse" type="audio_call_play_media_local_xsd:getMessageStatusResponse"/>
+         <xsd:complexType name="getMessageStatusResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="audio_call_xsd:MediaMessageStatus" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="endMessage" type="audio_call_play_media_local_xsd:endMessage"/>
+         <xsd:complexType name="endMessage">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="endMessageResponse" type="audio_call_play_media_local_xsd:endMessageResponse"/>
+         <xsd:complexType name="endMessageResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="audio_call_xsd:MediaMessageStatus" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="AudioCallPlayMedia_playTextMessageRequest">
+      <wsdl:part name="parameters" element="audio_call_play_media_local_xsd:playTextMessage"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallPlayMedia_playTextMessageResponse">
+      <wsdl:part name="result" element="audio_call_play_media_local_xsd:playTextMessageResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallPlayMedia_playAudioMessageRequest">
+      <wsdl:part name="parameters" element="audio_call_play_media_local_xsd:playAudioMessage"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallPlayMedia_playAudioMessageResponse">
+      <wsdl:part name="result" element="audio_call_play_media_local_xsd:playAudioMessageResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallPlayMedia_playVoiceXmlMessageRequest">
+      <wsdl:part name="parameters" element="audio_call_play_media_local_xsd:playVoiceXmlMessage"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallPlayMedia_playVoiceXmlMessageResponse">
+      <wsdl:part name="result" element="audio_call_play_media_local_xsd:playVoiceXmlMessageResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallPlayMedia_playVideoMessageRequest">
+      <wsdl:part name="parameters" element="audio_call_play_media_local_xsd:playVideoMessage"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallPlayMedia_playVideoMessageResponse">
+      <wsdl:part name="result" element="audio_call_play_media_local_xsd:playVideoMessageResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallPlayMedia_getMessageStatusRequest">
+      <wsdl:part name="parameters" element="audio_call_play_media_local_xsd:getMessageStatus"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallPlayMedia_getMessageStatusResponse">
+      <wsdl:part name="result" element="audio_call_play_media_local_xsd:getMessageStatusResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallPlayMedia_endMessageRequest">
+      <wsdl:part name="parameters" element="audio_call_play_media_local_xsd:endMessage"/>
+   </wsdl:message>
+
+   <wsdl:message name="AudioCallPlayMedia_endMessageResponse">
+      <wsdl:part name="result" element="audio_call_play_media_local_xsd:endMessageResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="AudioCallPlayMedia">
+      <wsdl:operation name="playTextMessage">
+         <wsdl:input message="audio_call_play_media:AudioCallPlayMedia_playTextMessageRequest"/>
+         <wsdl:output message="audio_call_play_media:AudioCallPlayMedia_playTextMessageResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="playAudioMessage">
+         <wsdl:input message="audio_call_play_media:AudioCallPlayMedia_playAudioMessageRequest"/>
+         <wsdl:output message="audio_call_play_media:AudioCallPlayMedia_playAudioMessageResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="playVoiceXmlMessage">
+         <wsdl:input message="audio_call_play_media:AudioCallPlayMedia_playVoiceXmlMessageRequest"/>
+         <wsdl:output message="audio_call_play_media:AudioCallPlayMedia_playVoiceXmlMessageResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="playVideoMessage">
+         <wsdl:input message="audio_call_play_media:AudioCallPlayMedia_playVideoMessageRequest"/>
+         <wsdl:output message="audio_call_play_media:AudioCallPlayMedia_playVideoMessageResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="getMessageStatus">
+         <wsdl:input message="audio_call_play_media:AudioCallPlayMedia_getMessageStatusRequest"/>
+         <wsdl:output message="audio_call_play_media:AudioCallPlayMedia_getMessageStatusResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="endMessage">
+         <wsdl:input message="audio_call_play_media:AudioCallPlayMedia_endMessageRequest"/>
+         <wsdl:output message="audio_call_play_media:AudioCallPlayMedia_endMessageResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

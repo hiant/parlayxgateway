@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- May 31, 2006 -->
+<wsdl:definitions
+   name="presence_notification_service"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/presence/notification/v2_3/service"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:tns="http://www.csapi.org/wsdl/parlayx/presence/notification/v2_3/service"
+   xmlns:interface="http://www.csapi.org/wsdl/parlayx/presence/notification/v2_3/interface">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/presence/notification/v2_3/interface" location="parlayx_presence_notification_interface_2_3.wsdl"/>
+
+   <wsdl:binding name="PresenceNotificationBinding" type="interface:PresenceNotification">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="statusChanged">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+      </wsdl:operation>
+
+      <wsdl:operation name="statusEnd">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifySubscription">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+      </wsdl:operation>
+
+      <wsdl:operation name="subscriptionEnded">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+
+   <wsdl:service name="PresenceNotificationService">
+      <wsdl:port name="PresenceNotification" binding="tns:PresenceNotificationBinding">
+         <soap:address location="http://localhost:9080/PresenceNotificationService/services/PresenceNotification"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

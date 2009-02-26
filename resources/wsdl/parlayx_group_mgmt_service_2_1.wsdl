@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- January 5, 2006 -->
+<wsdl:definitions
+   name="group_mgmt_service"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/group_mgmt/v2_1/service"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:tns="http://www.csapi.org/wsdl/parlayx/group_mgmt/v2_1/service"
+   xmlns:interface="http://www.csapi.org/wsdl/parlayx/group_mgmt/v2_1/interface">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/group_mgmt/v2_1/interface" location="parlayx_group_mgmt_interface_2_1.wsdl"/>
+
+   <wsdl:binding name="GroupManagementBinding" type="interface:GroupManagement">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="createGroup">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteGroup">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="queryGroups">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="setAccess">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="queryAccess">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding>
+
+   <wsdl:service name="GroupManagementService">
+      <wsdl:port name="GroupManagement" binding="tns:GroupManagementBinding">
+         <soap:address location="http://localhost:9080/GroupManagementService/services/GroupManagement"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

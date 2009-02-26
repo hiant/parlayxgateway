@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- May 31, 2006 -->
+<wsdl:definitions
+   name="presence_supplier_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/presence/supplier/v2_3/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:presence_supplier="http://www.csapi.org/wsdl/parlayx/presence/supplier/v2_3/interface"
+   xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v2_0/faults"
+   xmlns:presence_xsd="http://www.csapi.org/schema/parlayx/presence/v2_3"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v2_1"
+   xmlns:presence_supplier_local_xsd="http://www.csapi.org/schema/parlayx/presence/supplier/v2_3/local">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v2_0/faults" location="parlayx_common_faults_2_0.wsdl"/>
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/presence/supplier/v2_3/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/presence/v2_3" schemaLocation="parlayx_presence_types_2_3.xsd"/>
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v2_1" schemaLocation="parlayx_common_types_2_1.xsd"/>
+
+         <xsd:element name="publish" type="presence_supplier_local_xsd:publish"/>
+         <xsd:complexType name="publish">
+            <xsd:sequence>
+               <xsd:element name="presence" type="presence_xsd:PresenceAttribute" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="publishResponse" type="presence_supplier_local_xsd:publishResponse"/>
+         <xsd:complexType name="publishResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="getOpenSubscriptions" type="presence_supplier_local_xsd:getOpenSubscriptions"/>
+         <xsd:complexType name="getOpenSubscriptions">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="getOpenSubscriptionsResponse" type="presence_supplier_local_xsd:getOpenSubscriptionsResponse"/>
+         <xsd:complexType name="getOpenSubscriptionsResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="presence_xsd:SubscriptionRequest" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="updateSubscriptionAuthorization" type="presence_supplier_local_xsd:updateSubscriptionAuthorization"/>
+         <xsd:complexType name="updateSubscriptionAuthorization">
+            <xsd:sequence>
+               <xsd:element name="watcher" type="xsd:anyURI"/>
+               <xsd:element name="decisions" type="presence_xsd:PresencePermission" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="updateSubscriptionAuthorizationResponse" type="presence_supplier_local_xsd:updateSubscriptionAuthorizationResponse"/>
+         <xsd:complexType name="updateSubscriptionAuthorizationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="getMyWatchers" type="presence_supplier_local_xsd:getMyWatchers"/>
+         <xsd:complexType name="getMyWatchers">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="getMyWatchersResponse" type="presence_supplier_local_xsd:getMyWatchersResponse"/>
+         <xsd:complexType name="getMyWatchersResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getSubscribedAttributes" type="presence_supplier_local_xsd:getSubscribedAttributes"/>
+         <xsd:complexType name="getSubscribedAttributes">
+            <xsd:sequence>
+               <xsd:element name="watcher" type="xsd:anyURI"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getSubscribedAttributesResponse" type="presence_supplier_local_xsd:getSubscribedAttributesResponse"/>
+         <xsd:complexType name="getSubscribedAttributesResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="presence_xsd:PresenceAttributeType" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="blockSubscription" type="presence_supplier_local_xsd:blockSubscription"/>
+         <xsd:complexType name="blockSubscription">
+            <xsd:sequence>
+               <xsd:element name="watcher" type="xsd:anyURI"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="blockSubscriptionResponse" type="presence_supplier_local_xsd:blockSubscriptionResponse"/>
+         <xsd:complexType name="blockSubscriptionResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="PresenceSupplier_publishRequest">
+      <wsdl:part name="parameters" element="presence_supplier_local_xsd:publish"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplier_publishResponse">
+      <wsdl:part name="result" element="presence_supplier_local_xsd:publishResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplier_getOpenSubscriptionsRequest">
+      <wsdl:part name="parameters" element="presence_supplier_local_xsd:getOpenSubscriptions"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplier_getOpenSubscriptionsResponse">
+      <wsdl:part name="result" element="presence_supplier_local_xsd:getOpenSubscriptionsResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplier_updateSubscriptionAuthorizationRequest">
+      <wsdl:part name="parameters" element="presence_supplier_local_xsd:updateSubscriptionAuthorization"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplier_updateSubscriptionAuthorizationResponse">
+      <wsdl:part name="result" element="presence_supplier_local_xsd:updateSubscriptionAuthorizationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplier_getMyWatchersRequest">
+      <wsdl:part name="parameters" element="presence_supplier_local_xsd:getMyWatchers"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplier_getMyWatchersResponse">
+      <wsdl:part name="result" element="presence_supplier_local_xsd:getMyWatchersResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplier_getSubscribedAttributesRequest">
+      <wsdl:part name="parameters" element="presence_supplier_local_xsd:getSubscribedAttributes"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplier_getSubscribedAttributesResponse">
+      <wsdl:part name="result" element="presence_supplier_local_xsd:getSubscribedAttributesResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplier_blockSubscriptionRequest">
+      <wsdl:part name="parameters" element="presence_supplier_local_xsd:blockSubscription"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceSupplier_blockSubscriptionResponse">
+      <wsdl:part name="result" element="presence_supplier_local_xsd:blockSubscriptionResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="PresenceSupplier">
+      <wsdl:operation name="publish">
+         <wsdl:input message="presence_supplier:PresenceSupplier_publishRequest"/>
+         <wsdl:output message="presence_supplier:PresenceSupplier_publishResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="getOpenSubscriptions">
+         <wsdl:input message="presence_supplier:PresenceSupplier_getOpenSubscriptionsRequest"/>
+         <wsdl:output message="presence_supplier:PresenceSupplier_getOpenSubscriptionsResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="updateSubscriptionAuthorization">
+         <wsdl:input message="presence_supplier:PresenceSupplier_updateSubscriptionAuthorizationRequest"/>
+         <wsdl:output message="presence_supplier:PresenceSupplier_updateSubscriptionAuthorizationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="getMyWatchers">
+         <wsdl:input message="presence_supplier:PresenceSupplier_getMyWatchersRequest"/>
+         <wsdl:output message="presence_supplier:PresenceSupplier_getMyWatchersResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="getSubscribedAttributes">
+         <wsdl:input message="presence_supplier:PresenceSupplier_getSubscribedAttributesRequest"/>
+         <wsdl:output message="presence_supplier:PresenceSupplier_getSubscribedAttributesResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="blockSubscription">
+         <wsdl:input message="presence_supplier:PresenceSupplier_blockSubscriptionRequest"/>
+         <wsdl:output message="presence_supplier:PresenceSupplier_blockSubscriptionResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

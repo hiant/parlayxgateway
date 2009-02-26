@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- January 5, 2006 -->
+<wsdl:definitions
+   name="group_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/group/v2_1/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:group="http://www.csapi.org/wsdl/parlayx/group/v2_1/interface"
+   xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v2_0/faults"
+   xmlns:group_xsd="http://www.csapi.org/schema/parlayx/group/v2_1"
+   xmlns:group_local_xsd="http://www.csapi.org/schema/parlayx/group/v2_1/local">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v2_0/faults" location="parlayx_common_faults_2_0.wsdl"/>
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/group/v2_1/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/group/v2_1" schemaLocation="parlayx_group_types_2_1.xsd"/>
+
+         <xsd:element name="addMember" type="group_local_xsd:addMember"/>
+         <xsd:complexType name="addMember">
+            <xsd:sequence>
+               <xsd:element name="group" type="xsd:anyURI"/>
+               <xsd:element name="member" type="xsd:anyURI"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="addMemberResponse" type="group_local_xsd:addMemberResponse"/>
+         <xsd:complexType name="addMemberResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="addMembers" type="group_local_xsd:addMembers"/>
+         <xsd:complexType name="addMembers">
+            <xsd:sequence>
+               <xsd:element name="group" type="xsd:anyURI"/>
+               <xsd:element name="members" type="xsd:anyURI" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="addMembersResponse" type="group_local_xsd:addMembersResponse"/>
+         <xsd:complexType name="addMembersResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="deleteMember" type="group_local_xsd:deleteMember"/>
+         <xsd:complexType name="deleteMember">
+            <xsd:sequence>
+               <xsd:element name="group" type="xsd:anyURI"/>
+               <xsd:element name="member" type="xsd:anyURI"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="deleteMemberResponse" type="group_local_xsd:deleteMemberResponse"/>
+         <xsd:complexType name="deleteMemberResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="deleteMembers" type="group_local_xsd:deleteMembers"/>
+         <xsd:complexType name="deleteMembers">
+            <xsd:sequence>
+               <xsd:element name="group" type="xsd:anyURI"/>
+               <xsd:element name="members" type="xsd:anyURI" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="deleteMembersResponse" type="group_local_xsd:deleteMembersResponse"/>
+         <xsd:complexType name="deleteMembersResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="queryMembers" type="group_local_xsd:queryMembers"/>
+         <xsd:complexType name="queryMembers">
+            <xsd:sequence>
+               <xsd:element name="group" type="xsd:anyURI"/>
+               <xsd:element name="resolveGroups" type="xsd:boolean"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="queryMembersResponse" type="group_local_xsd:queryMembersResponse"/>
+         <xsd:complexType name="queryMembersResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="addGroupAttribute" type="group_local_xsd:addGroupAttribute"/>
+         <xsd:complexType name="addGroupAttribute">
+            <xsd:sequence>
+               <xsd:element name="group" type="xsd:anyURI"/>
+               <xsd:element name="value" type="group_xsd:SimpleAttribute"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="addGroupAttributeResponse" type="group_local_xsd:addGroupAttributeResponse"/>
+         <xsd:complexType name="addGroupAttributeResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="deleteGroupAttribute" type="group_local_xsd:deleteGroupAttribute"/>
+         <xsd:complexType name="deleteGroupAttribute">
+            <xsd:sequence>
+               <xsd:element name="group" type="xsd:anyURI"/>
+               <xsd:element name="attributeName" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="deleteGroupAttributeResponse" type="group_local_xsd:deleteGroupAttributeResponse"/>
+         <xsd:complexType name="deleteGroupAttributeResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="queryGroupAttributes" type="group_local_xsd:queryGroupAttributes"/>
+         <xsd:complexType name="queryGroupAttributes">
+            <xsd:sequence>
+               <xsd:element name="group" type="xsd:anyURI"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="queryGroupAttributesResponse" type="group_local_xsd:queryGroupAttributesResponse"/>
+         <xsd:complexType name="queryGroupAttributesResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="group_xsd:SimpleAttribute" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="addGroupMemberAttribute" type="group_local_xsd:addGroupMemberAttribute"/>
+         <xsd:complexType name="addGroupMemberAttribute">
+            <xsd:sequence>
+               <xsd:element name="group" type="xsd:anyURI"/>
+               <xsd:element name="member" type="xsd:anyURI"/>
+               <xsd:element name="value" type="group_xsd:SimpleAttribute"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="addGroupMemberAttributeResponse" type="group_local_xsd:addGroupMemberAttributeResponse"/>
+         <xsd:complexType name="addGroupMemberAttributeResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="deleteGroupMemberAttribute" type="group_local_xsd:deleteGroupMemberAttribute"/>
+         <xsd:complexType name="deleteGroupMemberAttribute">
+            <xsd:sequence>
+               <xsd:element name="group" type="xsd:anyURI"/>
+               <xsd:element name="member" type="xsd:anyURI"/>
+               <xsd:element name="attributeName" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="deleteGroupMemberAttributeResponse" type="group_local_xsd:deleteGroupMemberAttributeResponse"/>
+         <xsd:complexType name="deleteGroupMemberAttributeResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="queryGroupMemberAttributes" type="group_local_xsd:queryGroupMemberAttributes"/>
+         <xsd:complexType name="queryGroupMemberAttributes">
+            <xsd:sequence>
+               <xsd:element name="group" type="xsd:anyURI"/>
+               <xsd:element name="member" type="xsd:anyURI"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="queryGroupMemberAttributesResponse" type="group_local_xsd:queryGroupMemberAttributesResponse"/>
+         <xsd:complexType name="queryGroupMemberAttributesResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="group_xsd:SimpleAttribute" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="Group_addMemberRequest">
+      <wsdl:part name="parameters" element="group_local_xsd:addMember"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_addMemberResponse">
+      <wsdl:part name="result" element="group_local_xsd:addMemberResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_addMembersRequest">
+      <wsdl:part name="parameters" element="group_local_xsd:addMembers"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_addMembersResponse">
+      <wsdl:part name="result" element="group_local_xsd:addMembersResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_deleteMemberRequest">
+      <wsdl:part name="parameters" element="group_local_xsd:deleteMember"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_deleteMemberResponse">
+      <wsdl:part name="result" element="group_local_xsd:deleteMemberResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_deleteMembersRequest">
+      <wsdl:part name="parameters" element="group_local_xsd:deleteMembers"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_deleteMembersResponse">
+      <wsdl:part name="result" element="group_local_xsd:deleteMembersResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_queryMembersRequest">
+      <wsdl:part name="parameters" element="group_local_xsd:queryMembers"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_queryMembersResponse">
+      <wsdl:part name="result" element="group_local_xsd:queryMembersResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_addGroupAttributeRequest">
+      <wsdl:part name="parameters" element="group_local_xsd:addGroupAttribute"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_addGroupAttributeResponse">
+      <wsdl:part name="result" element="group_local_xsd:addGroupAttributeResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_deleteGroupAttributeRequest">
+      <wsdl:part name="parameters" element="group_local_xsd:deleteGroupAttribute"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_deleteGroupAttributeResponse">
+      <wsdl:part name="result" element="group_local_xsd:deleteGroupAttributeResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_queryGroupAttributesRequest">
+      <wsdl:part name="parameters" element="group_local_xsd:queryGroupAttributes"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_queryGroupAttributesResponse">
+      <wsdl:part name="result" element="group_local_xsd:queryGroupAttributesResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_addGroupMemberAttributeRequest">
+      <wsdl:part name="parameters" element="group_local_xsd:addGroupMemberAttribute"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_addGroupMemberAttributeResponse">
+      <wsdl:part name="result" element="group_local_xsd:addGroupMemberAttributeResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_deleteGroupMemberAttributeRequest">
+      <wsdl:part name="parameters" element="group_local_xsd:deleteGroupMemberAttribute"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_deleteGroupMemberAttributeResponse">
+      <wsdl:part name="result" element="group_local_xsd:deleteGroupMemberAttributeResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_queryGroupMemberAttributesRequest">
+      <wsdl:part name="parameters" element="group_local_xsd:queryGroupMemberAttributes"/>
+   </wsdl:message>
+
+   <wsdl:message name="Group_queryGroupMemberAttributesResponse">
+      <wsdl:part name="result" element="group_local_xsd:queryGroupMemberAttributesResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="Group">
+      <wsdl:operation name="addMember">
+         <wsdl:input message="group:Group_addMemberRequest"/>
+         <wsdl:output message="group:Group_addMemberResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="addMembers">
+         <wsdl:input message="group:Group_addMembersRequest"/>
+         <wsdl:output message="group:Group_addMembersResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteMember">
+         <wsdl:input message="group:Group_deleteMemberRequest"/>
+         <wsdl:output message="group:Group_deleteMemberResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteMembers">
+         <wsdl:input message="group:Group_deleteMembersRequest"/>
+         <wsdl:output message="group:Group_deleteMembersResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="queryMembers">
+         <wsdl:input message="group:Group_queryMembersRequest"/>
+         <wsdl:output message="group:Group_queryMembersResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="addGroupAttribute">
+         <wsdl:input message="group:Group_addGroupAttributeRequest"/>
+         <wsdl:output message="group:Group_addGroupAttributeResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteGroupAttribute">
+         <wsdl:input message="group:Group_deleteGroupAttributeRequest"/>
+         <wsdl:output message="group:Group_deleteGroupAttributeResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="queryGroupAttributes">
+         <wsdl:input message="group:Group_queryGroupAttributesRequest"/>
+         <wsdl:output message="group:Group_queryGroupAttributesResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="addGroupMemberAttribute">
+         <wsdl:input message="group:Group_addGroupMemberAttributeRequest"/>
+         <wsdl:output message="group:Group_addGroupMemberAttributeResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteGroupMemberAttribute">
+         <wsdl:input message="group:Group_deleteGroupMemberAttributeRequest"/>
+         <wsdl:output message="group:Group_deleteGroupMemberAttributeResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="queryGroupMemberAttributes">
+         <wsdl:input message="group:Group_queryGroupMemberAttributesRequest"/>
+         <wsdl:output message="group:Group_queryGroupMemberAttributesResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

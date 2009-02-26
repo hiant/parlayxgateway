@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	targetNamespace="http://ZoneLocation.app.appcore.nortel.com"
+	xmlns:tns="http://ZoneLocation.app.appcore.nortel.com"
+	xmlns:impl="http://ZoneLocation.app.appcore.nortel.com"
+	xmlns:intf="http://ZoneLocation.app.appcore.nortel.com"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd1="http://www.csapi.org/schema/parlayx/common/v2_1" 
+	xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v2_0/faults">
+	
+	<wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v2_0/faults" location="parlayx_common_faults_2_0.wsdl"/>
+	
+	<wsdl:types>
+		<xsd:schema
+			targetNamespace="http://ZoneLocation.app.appcore.nortel.com"
+			xmlns="http://www.w3.org/2001/XMLSchema"
+			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:element name="getZoneLocation" 
+				type="tns:getZoneLocationType">
+			 </xsd:element>
+			 
+			 <xsd:element name="getZoneLocationResponse" 
+			 	type="tns:getZoneLocationResponseType">
+			  </xsd:element>
+			
+				<xsd:complexType name="getZoneLocationType">
+					<xsd:sequence>
+						<xsd:element name="itemId" maxOccurs="1" minOccurs="1" type="xsd:string">
+							<xsd:annotation>
+								<xsd:documentation>
+								The identifier of the item being sought.
+								The format is application-specific.
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+						
+				<xsd:complexType name="getZoneLocationResponseType">
+					<xsd:sequence>
+						<xsd:element name="zoneName" maxOccurs="1" minOccurs="1" type="xsd:string">
+							<xsd:annotation>
+								<xsd:documentation>
+            					The zone in which the item is located.
+            					The actual meaning of the zone string is
+            					application-dependent.
+            					</xsd:documentation>
+            				</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="confidence" maxOccurs="1" minOccurs="1" type="xsd:nonNegativeInteger" >
+							<xsd:annotation>
+								<xsd:documentation>
+            					A number in the range 0-100 indicating
+            					the reliability and accuracy of the
+            					returned location. While the actual
+            					value itself has no precise me aning,
+            					larger numbers indicate a higher level
+            					of confidence in the location. The
+            					mechanism by which the confidence level
+            					is calculated is dependent on the
+            					underlying technology of the location
+            					service. It may depend on &quot;sanity&quot;
+            					checks, recency of the location reading,
+            					etc.
+            					</xsd:documentation>
+            				</xsd:annotation>
+            			</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+		</xsd:schema>
+		  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  			<xsd:import
+  				namespace="http://www.csapi.org/schema/parlayx/common/v2_1"
+  				schemaLocation="parlayx_common_types_2_1.xsd">
+  			</xsd:import>
+  		</xsd:schema>
+		
+	</wsdl:types>
+	
+	
+	<wsdl:message name="getZoneLocationRequest">
+		<wsdl:part element="intf:getZoneLocation" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="getZoneLocationResponse">
+		<wsdl:part element="intf:getZoneLocationResponse"
+			name="parameters" />
+	</wsdl:message>
+	
+	<wsdl:message name="ServiceException">
+   		<wsdl:part name="ServiceException" 	type="xsd1:ServiceException">
+   		</wsdl:part>
+   </wsdl:message>
+   		<wsdl:message name="PolicyException">
+   			<wsdl:part name="PolicyException" type="xsd1:PolicyException"></wsdl:part>
+   </wsdl:message>
+	
+	
+	<wsdl:portType name="ZoneLocationService">
+		<wsdl:operation name="getZoneLocation">
+			<wsdl:input message="intf:getZoneLocationRequest"
+				name="getZoneLocationRequest" />
+			<wsdl:output message="intf:getZoneLocationResponse"
+				name="getZoneLocationResponse" />
+		    <wsdl:fault name="ServiceException" message="intf:ServiceException"/>
+       		<wsdl:fault name="PolicyException" message="intf:PolicyException"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ZoneLocationServiceSOAP"
+		type="intf:ZoneLocationService">
+		
+		<wsdlsoap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getZoneLocation">
+			<wsdlsoap:operation soapAction="" />
+			<wsdl:input name="getZoneLocationRequest">
+				<wsdlsoap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getZoneLocationResponse">
+				<wsdlsoap:body use="literal" />
+			</wsdl:output>
+      		<wsdl:fault name="ServiceException" />
+      		<wsdl:fault name="PolicyException" />
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ZoneLocationService">
+		<wsdl:documentation>This service provides the interface for querying a zone for a specified item id</wsdl:documentation>
+		<wsdl:port binding="intf:ZoneLocationServiceSOAP"
+			name="ZoneLocationServiceSOAP">
+			<wsdlsoap:address
+				location="http://localhost:9080/ZoneLocation/services/ZoneLocationService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

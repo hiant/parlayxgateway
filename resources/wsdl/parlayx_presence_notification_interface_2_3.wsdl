@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- May 31, 2006 -->
+<wsdl:definitions
+   name="presence_notification_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/presence/notification/v2_3/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:presence_notification="http://www.csapi.org/wsdl/parlayx/presence/notification/v2_3/interface"
+   xmlns:presence_xsd="http://www.csapi.org/schema/parlayx/presence/v2_3"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v2_1"
+   xmlns:presence_notification_local_xsd="http://www.csapi.org/schema/parlayx/presence/notification/v2_3/local">
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/presence/notification/v2_3/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/presence/v2_3" schemaLocation="parlayx_presence_types_2_3.xsd"/>
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v2_1" schemaLocation="parlayx_common_types_2_1.xsd"/>
+
+         <xsd:element name="statusChanged" type="presence_notification_local_xsd:statusChanged"/>
+         <xsd:complexType name="statusChanged">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="presentity" type="xsd:anyURI"/>
+               <xsd:element name="changedAttributes" type="presence_xsd:PresenceAttribute" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="statusChangedResponse" type="presence_notification_local_xsd:statusChangedResponse"/>
+         <xsd:complexType name="statusChangedResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="statusEnd" type="presence_notification_local_xsd:statusEnd"/>
+         <xsd:complexType name="statusEnd">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="statusEndResponse" type="presence_notification_local_xsd:statusEndResponse"/>
+         <xsd:complexType name="statusEndResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="notifySubscription" type="presence_notification_local_xsd:notifySubscription"/>
+         <xsd:complexType name="notifySubscription">
+            <xsd:sequence>
+               <xsd:element name="presentity" type="xsd:anyURI"/>
+               <xsd:element name="decisions" type="presence_xsd:PresencePermission" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="notifySubscriptionResponse" type="presence_notification_local_xsd:notifySubscriptionResponse"/>
+         <xsd:complexType name="notifySubscriptionResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="subscriptionEnded" type="presence_notification_local_xsd:subscriptionEnded"/>
+         <xsd:complexType name="subscriptionEnded">
+            <xsd:sequence>
+               <xsd:element name="presentity" type="xsd:anyURI"/>
+               <xsd:element name="reason" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="subscriptionEndedResponse" type="presence_notification_local_xsd:subscriptionEndedResponse"/>
+         <xsd:complexType name="subscriptionEndedResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="PresenceNotification_statusChangedRequest">
+      <wsdl:part name="parameters" element="presence_notification_local_xsd:statusChanged"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceNotification_statusChangedResponse">
+      <wsdl:part name="result" element="presence_notification_local_xsd:statusChangedResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceNotification_statusEndRequest">
+      <wsdl:part name="parameters" element="presence_notification_local_xsd:statusEnd"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceNotification_statusEndResponse">
+      <wsdl:part name="result" element="presence_notification_local_xsd:statusEndResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceNotification_notifySubscriptionRequest">
+      <wsdl:part name="parameters" element="presence_notification_local_xsd:notifySubscription"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceNotification_notifySubscriptionResponse">
+      <wsdl:part name="result" element="presence_notification_local_xsd:notifySubscriptionResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceNotification_subscriptionEndedRequest">
+      <wsdl:part name="parameters" element="presence_notification_local_xsd:subscriptionEnded"/>
+   </wsdl:message>
+
+   <wsdl:message name="PresenceNotification_subscriptionEndedResponse">
+      <wsdl:part name="result" element="presence_notification_local_xsd:subscriptionEndedResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="PresenceNotification">
+      <wsdl:operation name="statusChanged">
+         <wsdl:input message="presence_notification:PresenceNotification_statusChangedRequest"/>
+         <wsdl:output message="presence_notification:PresenceNotification_statusChangedResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="statusEnd">
+         <wsdl:input message="presence_notification:PresenceNotification_statusEndRequest"/>
+         <wsdl:output message="presence_notification:PresenceNotification_statusEndResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifySubscription">
+         <wsdl:input message="presence_notification:PresenceNotification_notifySubscriptionRequest"/>
+         <wsdl:output message="presence_notification:PresenceNotification_notifySubscriptionResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="subscriptionEnded">
+         <wsdl:input message="presence_notification:PresenceNotification_subscriptionEndedRequest"/>
+         <wsdl:output message="presence_notification:PresenceNotification_subscriptionEndedResponse"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- March 8, 2007 -->
+<wsdl:definitions
+   name="parlayx_mm_notification_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/multimedia_messaging/notification/v3_1/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:parlayx_mm_notification="http://www.csapi.org/wsdl/parlayx/multimedia_messaging/notification/v3_1/interface"
+   xmlns:parlayx_mm_xsd="http://www.csapi.org/schema/parlayx/multimedia_messaging/v3_0"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v3_1"
+   xmlns:parlayx_mm_notification_local_xsd="http://www.csapi.org/schema/parlayx/multimedia_messaging/notification/v3_1/local">
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/multimedia_messaging/notification/v3_1/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/multimedia_messaging/v3_0" schemaLocation="parlayx_mm_types_3_0.xsd"/>
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+
+         <xsd:element name="notifyMessageReception" type="parlayx_mm_notification_local_xsd:notifyMessageReception"/>
+         <xsd:complexType name="notifyMessageReception">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="message" type="parlayx_mm_xsd:MessageReference"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="notifyMessageReceptionResponse" type="parlayx_mm_notification_local_xsd:notifyMessageReceptionResponse"/>
+         <xsd:complexType name="notifyMessageReceptionResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="notifyMessageDeliveryReceipt" type="parlayx_mm_notification_local_xsd:notifyMessageDeliveryReceipt"/>
+         <xsd:complexType name="notifyMessageDeliveryReceipt">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="deliveryStatus" type="parlayx_mm_xsd:DeliveryInformation"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="notifyMessageDeliveryReceiptResponse" type="parlayx_mm_notification_local_xsd:notifyMessageDeliveryReceiptResponse"/>
+         <xsd:complexType name="notifyMessageDeliveryReceiptResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="MessageNotification_notifyMessageReceptionRequest">
+      <wsdl:part name="parameters" element="parlayx_mm_notification_local_xsd:notifyMessageReception"/>
+   </wsdl:message>
+
+   <wsdl:message name="MessageNotification_notifyMessageReceptionResponse">
+      <wsdl:part name="result" element="parlayx_mm_notification_local_xsd:notifyMessageReceptionResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="MessageNotification_notifyMessageDeliveryReceiptRequest">
+      <wsdl:part name="parameters" element="parlayx_mm_notification_local_xsd:notifyMessageDeliveryReceipt"/>
+   </wsdl:message>
+
+   <wsdl:message name="MessageNotification_notifyMessageDeliveryReceiptResponse">
+      <wsdl:part name="result" element="parlayx_mm_notification_local_xsd:notifyMessageDeliveryReceiptResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="MessageNotification">
+      <wsdl:operation name="notifyMessageReception">
+         <wsdl:input message="parlayx_mm_notification:MessageNotification_notifyMessageReceptionRequest"/>
+         <wsdl:output message="parlayx_mm_notification:MessageNotification_notifyMessageReceptionResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="notifyMessageDeliveryReceipt">
+         <wsdl:input message="parlayx_mm_notification:MessageNotification_notifyMessageDeliveryReceiptRequest"/>
+         <wsdl:output message="parlayx_mm_notification:MessageNotification_notifyMessageDeliveryReceiptResponse"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

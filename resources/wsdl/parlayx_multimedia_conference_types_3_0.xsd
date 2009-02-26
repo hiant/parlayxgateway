@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- March 12, 2007 -->
+<xsd:schema
+   targetNamespace="http://www.csapi.org/schema/parlayx/multimedia_conference/v3_0"
+   xmlns:multimedia_conference_xsd="http://www.csapi.org/schema/parlayx/multimedia_conference/v3_0"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v3_1"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+   <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+
+   <xsd:complexType name="ConferenceInfo">
+      <xsd:sequence>
+         <xsd:element name="status" type="multimedia_conference_xsd:ConferenceStatus"/>
+         <xsd:element name="startTime" type="xsd:dateTime"/>
+         <xsd:element name="duration" type="xsd:int"/>
+         <xsd:element name="owner" type="xsd:anyURI"/>
+         <xsd:element name="numberOfParticipants" type="xsd:int"/>
+         <xsd:element name="maximumNumberOfParticipants" type="xsd:int"/>
+         <xsd:element name="conferenceIdentifier" type="xsd:string"/>
+         <xsd:element name="conferenceDescription" type="xsd:string"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="ParticipantInfo">
+      <xsd:sequence>
+         <xsd:element name="participant" type="xsd:anyURI"/>
+         <xsd:element name="mediaInfo" type="parlayx_common_xsd:MediaInfo" minOccurs="1" maxOccurs="unbounded"/>
+         <xsd:element name="startTime" type="xsd:dateTime"/>
+         <xsd:element name="status" type="multimedia_conference_xsd:ParticipantStatus"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:simpleType name="ConferenceStatus">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Initial"/>
+         <xsd:enumeration value="Active"/>
+         <xsd:enumeration value="Terminated"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="ParticipantStatus">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Invited"/>
+         <xsd:enumeration value="Connected"/>
+         <xsd:enumeration value="Disconnected"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+</xsd:schema>

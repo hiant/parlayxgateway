@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- May 25, 2007 -->
+<wsdl:definitions
+   name="parlayx_mm_notification_manager_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/multimedia_messaging/notification_manager/v3_2/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:parlayx_mm_notification_manager="http://www.csapi.org/wsdl/parlayx/multimedia_messaging/notification_manager/v3_2/interface"
+   xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults"
+   xmlns:parlayx_mm_xsd="http://www.csapi.org/schema/parlayx/multimedia_messaging/v3_0"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v3_1"
+   xmlns:parlayx_mm_notification_manager_local_xsd="http://www.csapi.org/schema/parlayx/multimedia_messaging/notification_manager/v3_2/local">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults" location="parlayx_common_faults_3_0.wsdl"/>
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/multimedia_messaging/notification_manager/v3_2/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/multimedia_messaging/v3_0" schemaLocation="parlayx_mm_types_3_0.xsd"/>
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+
+         <xsd:element name="startMessageNotification" type="parlayx_mm_notification_manager_local_xsd:startMessageNotification"/>
+         <xsd:complexType name="startMessageNotification">
+            <xsd:sequence>
+               <xsd:element name="reference" type="parlayx_common_xsd:SimpleReference"/>
+               <xsd:element name="messageServiceActivationNumber" type="xsd:anyURI"/>
+               <xsd:element name="criteria" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="startMessageNotificationResponse" type="parlayx_mm_notification_manager_local_xsd:startMessageNotificationResponse"/>
+         <xsd:complexType name="startMessageNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="stopMessageNotification" type="parlayx_mm_notification_manager_local_xsd:stopMessageNotification"/>
+         <xsd:complexType name="stopMessageNotification">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="stopMessageNotificationResponse" type="parlayx_mm_notification_manager_local_xsd:stopMessageNotificationResponse"/>
+         <xsd:complexType name="stopMessageNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="startDeliveryReceiptNotification" type="parlayx_mm_notification_manager_local_xsd:startDeliveryReceiptNotification"/>
+         <xsd:complexType name="startDeliveryReceiptNotification">
+            <xsd:sequence>
+               <xsd:element name="reference" type="parlayx_common_xsd:SimpleReference"/>
+               <xsd:element name="filterCriteria" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="startDeliveryReceiptNotificationResponse" type="parlayx_mm_notification_manager_local_xsd:startDeliveryReceiptNotificationResponse"/>
+         <xsd:complexType name="startDeliveryReceiptNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="stopDeliveryReceiptNotification" type="parlayx_mm_notification_manager_local_xsd:stopDeliveryReceiptNotification"/>
+         <xsd:complexType name="stopDeliveryReceiptNotification">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="stopDeliveryReceiptNotificationResponse" type="parlayx_mm_notification_manager_local_xsd:stopDeliveryReceiptNotificationResponse"/>
+         <xsd:complexType name="stopDeliveryReceiptNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="MessageNotificationManager_startMessageNotificationRequest">
+      <wsdl:part name="parameters" element="parlayx_mm_notification_manager_local_xsd:startMessageNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="MessageNotificationManager_startMessageNotificationResponse">
+      <wsdl:part name="result" element="parlayx_mm_notification_manager_local_xsd:startMessageNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="MessageNotificationManager_stopMessageNotificationRequest">
+      <wsdl:part name="parameters" element="parlayx_mm_notification_manager_local_xsd:stopMessageNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="MessageNotificationManager_stopMessageNotificationResponse">
+      <wsdl:part name="result" element="parlayx_mm_notification_manager_local_xsd:stopMessageNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="MessageNotificationManager_startDeliveryReceiptNotificationRequest">
+      <wsdl:part name="parameters" element="parlayx_mm_notification_manager_local_xsd:startDeliveryReceiptNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="MessageNotificationManager_startDeliveryReceiptNotificationResponse">
+      <wsdl:part name="result" element="parlayx_mm_notification_manager_local_xsd:startDeliveryReceiptNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="MessageNotificationManager_stopDeliveryReceiptNotificationRequest">
+      <wsdl:part name="parameters" element="parlayx_mm_notification_manager_local_xsd:stopDeliveryReceiptNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="MessageNotificationManager_stopDeliveryReceiptNotificationResponse">
+      <wsdl:part name="result" element="parlayx_mm_notification_manager_local_xsd:stopDeliveryReceiptNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="MessageNotificationManager">
+      <wsdl:operation name="startMessageNotification">
+         <wsdl:input message="parlayx_mm_notification_manager:MessageNotificationManager_startMessageNotificationRequest"/>
+         <wsdl:output message="parlayx_mm_notification_manager:MessageNotificationManager_startMessageNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="stopMessageNotification">
+         <wsdl:input message="parlayx_mm_notification_manager:MessageNotificationManager_stopMessageNotificationRequest"/>
+         <wsdl:output message="parlayx_mm_notification_manager:MessageNotificationManager_stopMessageNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="startDeliveryReceiptNotification">
+         <wsdl:input message="parlayx_mm_notification_manager:MessageNotificationManager_startDeliveryReceiptNotificationRequest"/>
+         <wsdl:output message="parlayx_mm_notification_manager:MessageNotificationManager_startDeliveryReceiptNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="stopDeliveryReceiptNotification">
+         <wsdl:input message="parlayx_mm_notification_manager:MessageNotificationManager_stopDeliveryReceiptNotificationRequest"/>
+         <wsdl:output message="parlayx_mm_notification_manager:MessageNotificationManager_stopDeliveryReceiptNotificationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- March 9, 2007 -->
+<xsd:schema
+   targetNamespace="http://www.csapi.org/schema/parlayx/terminal_location/v3_0"
+   xmlns:terminal_location_xsd="http://www.csapi.org/schema/parlayx/terminal_location/v3_0"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v3_1"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+   <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+
+   <xsd:complexType name="LocationInfo">
+      <xsd:sequence>
+         <xsd:element name="latitude" type="xsd:float"/>
+         <xsd:element name="longitude" type="xsd:float"/>
+         <xsd:element name="altitude" type="xsd:float" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="accuracy" type="xsd:int"/>
+         <xsd:element name="timestamp" type="xsd:dateTime"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="LocationData">
+      <xsd:sequence>
+         <xsd:element name="address" type="xsd:anyURI"/>
+         <xsd:element name="reportStatus" type="terminal_location_xsd:RetrievalStatus"/>
+         <xsd:element name="currentLocation" type="terminal_location_xsd:LocationInfo" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="errorInformation" type="parlayx_common_xsd:ServiceError" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:simpleType name="EnteringLeavingCriteria">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Entering"/>
+         <xsd:enumeration value="Leaving"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="RetrievalStatus">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Retrieved"/>
+         <xsd:enumeration value="NotRetrieved"/>
+         <xsd:enumeration value="Error"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="DelayTolerance">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="NoDelay"/>
+         <xsd:enumeration value="LowDelay"/>
+         <xsd:enumeration value="DelayTolerant"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+</xsd:schema>

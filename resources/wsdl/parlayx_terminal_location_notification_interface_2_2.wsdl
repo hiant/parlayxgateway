@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- January 5, 2006 -->
+<wsdl:definitions
+   name="terminal_location_notification_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/terminal_location/notification/v2_2/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:terminal_location_notification="http://www.csapi.org/wsdl/parlayx/terminal_location/notification/v2_2/interface"
+   xmlns:terminal_location_xsd="http://www.csapi.org/schema/parlayx/terminal_location/v2_2"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v2_1"
+   xmlns:terminal_location_notification_local_xsd="http://www.csapi.org/schema/parlayx/terminal_location/notification/v2_2/local">
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/terminal_location/notification/v2_2/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/terminal_location/v2_2" schemaLocation="parlayx_terminal_location_types_2_2.xsd"/>
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v2_1" schemaLocation="parlayx_common_types_2_1.xsd"/>
+
+         <xsd:element name="locationNotification" type="terminal_location_notification_local_xsd:locationNotification"/>
+         <xsd:complexType name="locationNotification">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="data" type="terminal_location_xsd:LocationData" minOccurs="1" maxOccurs="unbounded"/>
+               <xsd:element name="criteria" type="terminal_location_xsd:EnteringLeavingCriteria" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="locationNotificationResponse" type="terminal_location_notification_local_xsd:locationNotificationResponse"/>
+         <xsd:complexType name="locationNotificationResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="locationError" type="terminal_location_notification_local_xsd:locationError"/>
+         <xsd:complexType name="locationError">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+               <xsd:element name="address" type="xsd:anyURI" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="reason" type="parlayx_common_xsd:ServiceError"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="locationErrorResponse" type="terminal_location_notification_local_xsd:locationErrorResponse"/>
+         <xsd:complexType name="locationErrorResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="locationEnd" type="terminal_location_notification_local_xsd:locationEnd"/>
+         <xsd:complexType name="locationEnd">
+            <xsd:sequence>
+               <xsd:element name="correlator" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="locationEndResponse" type="terminal_location_notification_local_xsd:locationEndResponse"/>
+         <xsd:complexType name="locationEndResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="TerminalLocationNotification_locationNotificationRequest">
+      <wsdl:part name="parameters" element="terminal_location_notification_local_xsd:locationNotification"/>
+   </wsdl:message>
+
+   <wsdl:message name="TerminalLocationNotification_locationNotificationResponse">
+      <wsdl:part name="result" element="terminal_location_notification_local_xsd:locationNotificationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="TerminalLocationNotification_locationErrorRequest">
+      <wsdl:part name="parameters" element="terminal_location_notification_local_xsd:locationError"/>
+   </wsdl:message>
+
+   <wsdl:message name="TerminalLocationNotification_locationErrorResponse">
+      <wsdl:part name="result" element="terminal_location_notification_local_xsd:locationErrorResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="TerminalLocationNotification_locationEndRequest">
+      <wsdl:part name="parameters" element="terminal_location_notification_local_xsd:locationEnd"/>
+   </wsdl:message>
+
+   <wsdl:message name="TerminalLocationNotification_locationEndResponse">
+      <wsdl:part name="result" element="terminal_location_notification_local_xsd:locationEndResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="TerminalLocationNotification">
+      <wsdl:operation name="locationNotification">
+         <wsdl:input message="terminal_location_notification:TerminalLocationNotification_locationNotificationRequest"/>
+         <wsdl:output message="terminal_location_notification:TerminalLocationNotification_locationNotificationResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="locationError">
+         <wsdl:input message="terminal_location_notification:TerminalLocationNotification_locationErrorRequest"/>
+         <wsdl:output message="terminal_location_notification:TerminalLocationNotification_locationErrorResponse"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="locationEnd">
+         <wsdl:input message="terminal_location_notification:TerminalLocationNotification_locationEndRequest"/>
+         <wsdl:output message="terminal_location_notification:TerminalLocationNotification_locationEndResponse"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- January 5, 2006 -->
+<xsd:schema
+   targetNamespace="http://www.csapi.org/schema/parlayx/audio_call/v2_1"
+   xmlns:audio_call_xsd="http://www.csapi.org/schema/parlayx/audio_call/v2_1"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+   <xsd:simpleType name="MessageStatus">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Played"/>
+         <xsd:enumeration value="Playing"/>
+         <xsd:enumeration value="Pending"/>
+         <xsd:enumeration value="Error"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+</xsd:schema>

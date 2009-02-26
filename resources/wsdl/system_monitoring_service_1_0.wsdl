@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	xmlns:impl="http://www.nortel.com/xmlprotocol/wsdl/utilities/system_monitoring/v1_0/"
+	xmlns:intf="http://www.nortel.com/xmlprotocol/wsdl/utilities/system_monitoring/v1_0/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd1="http://www.csapi.org/schema/parlayx/common/v2_1"
+	xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v2_0/faults"
+	targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/utilities/system_monitoring/v1_0/">
+	<wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v2_0/faults"
+		location="parlayx_common_faults_2_0.wsdl"/>
+	<wsdl:types>
+		<schema
+			targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/utilities/system_monitoring/v1_0/"
+			xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<element name="getSystemInfoRequest">
+				<complexType>
+					<sequence/>
+				</complexType>
+			</element>
+			<element name="getSystemInfoResponse">
+				<complexType>
+					<sequence>
+						<element name="systemInfo" type="impl:SystemInfoT" nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<!--TYPES-->
+			<complexType name="SystemInfoT">
+				<sequence>
+					<element name="applicationUpTime" type="long" nillable="false" minOccurs="1"/>
+					<element name="applicationRestartToken" type="string" nillable="false" minOccurs="1"/>
+				</sequence>
+			</complexType>
+		</schema>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v2_1"
+				schemaLocation="parlayx_common_types_2_1.xsd"> </xsd:import>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="getSystemInfoRequest">
+		<wsdl:part name="parameters" element="intf:getSystemInfoRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getSystemInfoResponse">
+		<wsdl:part name="parameters" element="intf:getSystemInfoResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ServiceException">
+		<wsdl:part name="ServiceException" type="xsd1:ServiceException"> </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="PolicyException">
+		<wsdl:part name="PolicyException" type="xsd1:PolicyException"/>
+	</wsdl:message>
+	<wsdl:portType name="SystemMonitoringService">
+		<wsdl:operation name="getSystemInfo">
+			<wsdl:input name="getSystemInfoRequest" message="impl:getSystemInfoRequest"/>
+			<wsdl:output name="getSystemInfoResponse" message="impl:getSystemInfoResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="SystemMonitoringServiceSoapBinding" type="intf:SystemMonitoringService">
+		<wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsaw:UsingAddressing wsdl:required="false"
+			xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+		<wsdl:operation name="getSystemInfo">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="getSystemInfoRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getSystemInfoResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="SystemMonitoringService">
+		<wsdl:port name="SystemMonitoringService" binding="intf:SystemMonitoringServiceSoapBinding">
+			<wsdlsoap:address
+				location="http://localhost:9080/SystemMonitoringService/services/SystemMonitoring"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

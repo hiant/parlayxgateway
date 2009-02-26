@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions 
+   name="call_history_service"
+   targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/communications/services/call_history/v1_1/"   
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+   xmlns:intf="http://www.nortel.com/xmlprotocol/wsdl/communications/services/call_history/v1_1/"
+   xmlns:impl="http://www.nortel.com/xmlprotocol/wsdl/communications/services/call_history/v1_1/"
+   xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults" location="parlayx_common_faults_3_0.wsdl"/>
+
+   <wsdl:documentation>
+      The Call History Service allows the user to request that the server store incoming and outgoing call records and make them available for retrieval.
+   </wsdl:documentation>
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/communications/services/call_history/v1_1/">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+
+         <xsd:element name="getCallHistoryByProfile" type="impl:getCallHistoryByProfile"/>
+         <xsd:complexType name="getCallHistoryByProfile">
+            <xsd:annotation>
+               <xsd:documentation>Data structure defining which users and the type of call history records desired</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="userId" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+               <xsd:element name="direction" type="impl:Direction" minOccurs="0"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getCallHistoryByProfileResponse" type="impl:getCallHistoryByProfileResponse"/>
+         <xsd:complexType name="getCallHistoryByProfileResponse">
+            <xsd:annotation>
+               <xsd:documentation>Data structure containing the call history records for the requested users</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="history" type="impl:ProfileCallHistory" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getCallHistory" type="impl:getCallHistory"/>
+         <xsd:complexType name="getCallHistory">
+            <xsd:annotation>
+               <xsd:documentation>Data structure defining the addresses and the type of call history records desired</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="address" type="xsd:anyURI" minOccurs="1" maxOccurs="unbounded"/>
+               <xsd:element name="direction" type="impl:Direction" minOccurs="0"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getCallHistoryResponse" type="impl:getCallHistoryResponse"/>
+         <xsd:complexType name="getCallHistoryResponse">
+            <xsd:annotation>
+               <xsd:documentation>Data structure containing the call history record for requested addresses</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="history" type="impl:AddressCallHistory" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="registerCallHistory" type="impl:registerCallHistory"/>
+         <xsd:complexType name="registerCallHistory">
+            <xsd:annotation>
+               <xsd:documentation>Data structure defining what type of call history records are desired for addresses provisioned against the user ID</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="userId" type="xsd:string"/>
+               <xsd:element name="direction" type="impl:Direction" minOccurs="0"/>
+               <xsd:element name="address" type="xsd:anyURI" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="registerCallHistoryResponse" type="impl:registerCallHistoryResponse"/>
+         <xsd:complexType name="registerCallHistoryResponse">
+            <xsd:annotation>
+               <xsd:documentation>Response message conveying registration results</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="registrationResult" type="impl:RegistrationResult" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="deregisterCallHistory" type="impl:deregisterCallHistory"/>
+         <xsd:complexType name="deregisterCallHistory">
+            <xsd:annotation>
+               <xsd:documentation>Data type defining the addresses and type of call records that the user is no longer interested in</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="userId" type="xsd:string"/>
+               <xsd:element name="direction" type="impl:Direction" minOccurs="0"/>
+               <xsd:element name="address" type="xsd:anyURI" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="deregisterCallHistoryResponse" type="impl:deregisterCallHistoryResponse"/>
+         <xsd:complexType name="deregisterCallHistoryResponse">
+            <xsd:annotation>
+               <xsd:documentation>Response message conveying de-registration results</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="registrationResult" type="impl:RegistrationResult" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:simpleType name="Direction">
+            <xsd:annotation>
+               <xsd:documentation>Defines whether the address is the calling party (outgoing) or the called party (incoming)</xsd:documentation>
+            </xsd:annotation>
+            <xsd:restriction base="xsd:string">
+               <xsd:enumeration value="Incoming"/>
+               <xsd:enumeration value="Outgoing"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+
+         <xsd:complexType name="ProfileCallHistory">
+            <xsd:annotation>
+               <xsd:documentation>Data structure containing call records for any address associated with the User ID</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="userId" type="xsd:string"/>
+               <xsd:element name="success" type="xsd:boolean"/>
+               <xsd:element name="failureReason" type="xsd:string" minOccurs="0"/>
+               <xsd:element name="collection" type="impl:CallRecordCollection" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:complexType name="AddressCallHistory">
+            <xsd:annotation>
+               <xsd:documentation>Data structure containing the call records for an address</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="address" type="xsd:anyURI"/>
+               <xsd:element name="success" type="xsd:boolean"/>
+               <xsd:element name="failureReason" type="xsd:string" minOccurs="0"/>
+               <xsd:element name="record" type="impl:CallRecord" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:complexType name="CallRecordCollection">
+            <xsd:annotation>
+               <xsd:documentation>Data structure containing call records for the address</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="address" type="xsd:anyURI"/>
+               <xsd:element name="record" type="impl:CallRecord" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:simpleType name="CallStatus">
+            <xsd:annotation>
+               <xsd:documentation>Defines the result of the call</xsd:documentation>
+            </xsd:annotation>
+            <xsd:restriction base="xsd:string">
+               <xsd:enumeration value="Answer"/>
+               <xsd:enumeration value="NoAnswer"/>
+               <xsd:enumeration value="Unknown"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+
+         <xsd:complexType name="CallRecord">
+            <xsd:annotation>
+               <xsd:documentation>Data structure for the call record</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="callStatus" type="impl:CallStatus"/>
+               <xsd:element name="callStatusReason" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="callingParticipant" type="xsd:anyURI"/>
+               <xsd:element name="callingParticipantName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="calledParticipant" type="xsd:anyURI"/>
+               <xsd:element name="calledParticipantName" type="xsd:string" minOccurs="0" maxOccurs="1"/>      
+               <xsd:element name="timestamp" type="xsd:dateTime"/>        
+               <xsd:element name="callDuration" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="direction" type="impl:Direction"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:complexType name="RegistrationResult">
+            <xsd:annotation>
+               <xsd:documentation>Data structure for the response for an address registration action</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="address" type="xsd:anyURI"/>
+               <xsd:element name="success" type="xsd:boolean"/>
+               <xsd:element name="failureReason" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="getCallHistoryByProfileRequest">
+      <wsdl:part name="parameters" element="impl:getCallHistoryByProfile"/>
+   </wsdl:message>
+
+   <wsdl:message name="getCallHistoryByProfileResponse">
+      <wsdl:part name="result" element="impl:getCallHistoryByProfileResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="getCallHistoryRequest">
+      <wsdl:part name="parameters" element="impl:getCallHistory"/>
+   </wsdl:message>
+
+   <wsdl:message name="getCallHistoryResponse">
+      <wsdl:part name="result" element="impl:getCallHistoryResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="registerCallHistoryRequest">
+      <wsdl:part name="parameters" element="impl:registerCallHistory"/>
+   </wsdl:message>
+
+   <wsdl:message name="registerCallHistoryResponse">
+      <wsdl:part name="result" element="impl:registerCallHistoryResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="deregisterCallHistoryRequest">
+      <wsdl:part name="parameters" element="impl:deregisterCallHistory"/>
+   </wsdl:message>
+   
+   <wsdl:message name="deregisterCallHistoryResponse">
+      <wsdl:part name="result" element="impl:deregisterCallHistoryResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="CallHistory">
+      <wsdl:operation name="getCallHistoryByProfile">
+         <wsdl:input message="intf:getCallHistoryByProfileRequest"/>
+         <wsdl:output message="intf:getCallHistoryByProfileResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>					
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>					
+      </wsdl:operation>
+
+      <wsdl:operation name="getCallHistory">
+         <wsdl:input message="intf:getCallHistoryRequest"/>
+         <wsdl:output message="intf:getCallHistoryResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>					
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>					
+      </wsdl:operation>
+
+      <wsdl:operation name="registerCallHistory">
+         <wsdl:input message="intf:registerCallHistoryRequest"/>
+         <wsdl:output message="intf:registerCallHistoryResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>					
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>					
+      </wsdl:operation>
+
+      <wsdl:operation name="deregisterCallHistory">
+         <wsdl:input message="intf:deregisterCallHistoryRequest"/>
+         <wsdl:output message="intf:deregisterCallHistoryResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>					
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>					
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="CallHistoryBinding" type="intf:CallHistory">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getCallHistoryByProfile">
+         <wsdl:documentation>
+            The invocation of this operation requests the server to provide call history records
+            for any URIs associated with the User ID.
+
+            An optional direction parameter allows the caller to restrict the returned call records
+            to incoming or outgoing; if ommited both incoming and outgoing call records are returned.
+         </wsdl:documentation>
+         <soap:operation soapAction=""/>
+         <wsdl:input>
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="ServiceException">
+            <soap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>						
+         <wsdl:fault name="PolicyException">
+            <soap:fault name="PolicyException" use="literal"/>
+         </wsdl:fault>						
+      </wsdl:operation>
+
+      <wsdl:operation name="getCallHistory">
+         <wsdl:documentation>
+            The invocation of this operation requests the server to provide call history records for any address included in the request.
+
+            An optional direction parameter allows the caller to restrict the returned call records to incoming or outgoing; if ommited both incoming and outgoing call records are returned.
+         </wsdl:documentation>
+         <soap:operation soapAction=""/>
+         <wsdl:input>
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="ServiceException">
+            <soap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>						
+         <wsdl:fault name="PolicyException">
+            <soap:fault name="PolicyException" use="literal"/>
+         </wsdl:fault>						
+      </wsdl:operation>
+
+      <wsdl:operation name="registerCallHistory">
+         <wsdl:documentation>
+            This operation instructs the server to start producing call history records. Call
+            History records are not available until the server has successfully accepted the 
+            registration.
+         </wsdl:documentation>
+         <soap:operation soapAction=""/>
+         <wsdl:input>
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="ServiceException">
+            <soap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>						
+         <wsdl:fault name="PolicyException">
+            <soap:fault name="PolicyException" use="literal"/>
+         </wsdl:fault>						
+      </wsdl:operation>
+
+      <wsdl:operation name="deregisterCallHistory">
+         <wsdl:documentation>
+            This operation instructs the server to stop producing call history records. Any
+            records already produced will be unavailable for retrieval.
+         </wsdl:documentation>
+         <soap:operation soapAction=""/>
+         <wsdl:input>
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="ServiceException">
+            <soap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>						
+         <wsdl:fault name="PolicyException">
+            <soap:fault name="PolicyException" use="literal"/>
+         </wsdl:fault>						
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="CallHistoryService">
+      <wsdl:port name="CallHistory" binding="intf:CallHistoryBinding">
+         <soap:address location="http://localhost:9080/RaptorWeb/services/CallHistory"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

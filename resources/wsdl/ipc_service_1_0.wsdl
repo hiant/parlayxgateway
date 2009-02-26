@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wsdl:definitions
+	targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/communications/services/ipc/v1_0/"
+	xmlns:tns="http://www.nortel.com/xmlprotocol/wsdl/communications/services/ipc/v1_0/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd1="http://www.csapi.org/schema/parlayx/common/v3_1"
+	xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults">
+
+	<wsdl:import
+		namespace="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults"
+		location="parlayx_common_faults_3_0.wsdl" />
+
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/communications/services/ipc/v1_0/"
+			xmlns="http://www.w3.org/2001/XMLSchema"
+			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+			<xsd:element name="makeCallRequest"
+				type="tns:makeCallRequestType" />
+
+			<xsd:element name="makeCallResponse"
+				type="tns:makeCallResponseType" />
+
+			<xsd:element name="blindTransferRequest"
+				type="tns:blindTransferRequestType" />
+
+			<xsd:element name="blindTransferResponse"
+				type="tns:blindTransferResponseType" />
+
+			<xsd:element name="getStatusRequest"
+				type="tns:getStatusRequestType" />
+
+			<xsd:element name="getStatusResponse"
+				type="tns:getStatusResponseType" />
+
+			<xsd:complexType name="makeCallRequestType">
+				<xsd:sequence>
+					<xsd:element name="trid" type="xsd:anyURI"
+						maxOccurs="1" minOccurs="1">
+					</xsd:element>
+					<xsd:element name="calledParty" type="xsd:anyURI"
+						maxOccurs="1" minOccurs="1">
+					</xsd:element>
+					<xsd:element name="handset" type="tns:handset"
+						maxOccurs="1" minOccurs="0">
+					</xsd:element>
+					<xsd:element name="huntgroup" type="xsd:integer"
+						maxOccurs="1" minOccurs="0">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="makeCallResponseType">
+				<xsd:sequence>
+					<xsd:element name="callId" type="xsd:string"
+						maxOccurs="1" minOccurs="1" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="blindTransferRequestType">
+				<xsd:sequence>
+					<xsd:element name="trid" type="xsd:anyURI"
+						maxOccurs="1" minOccurs="1">
+					</xsd:element>
+					<xsd:element name="calledParty" type="xsd:anyURI"
+						maxOccurs="1" minOccurs="1">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="blindTransferResponseType">
+				<xsd:sequence>
+					<xsd:element name="callId" type="xsd:string"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+
+			<xsd:complexType name="getStatusRequestType">
+				<xsd:sequence>
+					<xsd:element name="callId" type="xsd:string"
+						maxOccurs="1" minOccurs="1">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+
+			<xsd:complexType name="getStatusResponseType">
+				<xsd:sequence>
+					<xsd:element name="callStatus" type="tns:callStatus"
+						maxOccurs="1" minOccurs="1">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+
+			<xsd:simpleType name="callStatus">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="Unknown" />
+					<xsd:enumeration value="Succeeded" />
+					<xsd:enumeration value="Failed" />
+				</xsd:restriction>
+			</xsd:simpleType>
+
+			<xsd:simpleType name="handset">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="Left" />
+					<xsd:enumeration value="Right" />
+				</xsd:restriction>
+			</xsd:simpleType>
+
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="makeCallRequest">
+		<wsdl:part name="parameters" element="tns:makeCallRequest" />
+	</wsdl:message>
+	<wsdl:message name="makeCallResponse">
+		<wsdl:part name="parameters" element="tns:makeCallResponse" />
+	</wsdl:message>
+	<wsdl:message name="blindTransferRequest">
+		<wsdl:part name="parameters"
+			element="tns:blindTransferRequest">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="blindTransferResponse">
+		<wsdl:part name="parameters"
+			element="tns:blindTransferResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getStatusRequest">
+		<wsdl:part name="parameters" element="tns:getStatusRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getStatusResponse">
+		<wsdl:part name="parameters" element="tns:getStatusResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:portType name="IPCService">
+		<wsdl:operation name="makeCall">
+			<wsdl:input name="makeCallRequest"
+				message="tns:makeCallRequest" />
+			<wsdl:output name="makeCallResponse"
+				message="tns:makeCallResponse" />
+			<wsdl:fault name="ServiceException"
+				message="parlayx_common_faults:ServiceException">
+			</wsdl:fault>
+			<wsdl:fault name="PolicyException"
+				message="parlayx_common_faults:PolicyException">
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="blindTransfer">
+			<wsdl:input name="blindTransferRequest"
+				message="tns:blindTransferRequest">
+			</wsdl:input>
+			<wsdl:output name="blindTransferResponse"
+				message="tns:blindTransferResponse">
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"
+				message="parlayx_common_faults:ServiceException">
+			</wsdl:fault>
+			<wsdl:fault name="PolicyException"
+				message="parlayx_common_faults:PolicyException">
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getStatus">
+			<wsdl:input name="getStatusRequest"
+				message="tns:getStatusRequest">
+			</wsdl:input>
+			<wsdl:output name="getStatusResponse"
+				message="tns:getStatusResponse">
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"
+				message="parlayx_common_faults:ServiceException">
+			</wsdl:fault>
+			<wsdl:fault name="PolicyException"
+				message="parlayx_common_faults:PolicyException">
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:portType>
+
+
+
+
+	<wsdl:binding name="IPCServiceBinding" type="tns:IPCService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="makeCall">
+			<soap:operation soapAction="" />
+			<wsdl:input name="makeCallRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="makeCallResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="ServiceException">
+				<soap:fault use="literal" name="ServiceException" />
+			</wsdl:fault>
+			<wsdl:fault name="PolicyException">
+				<soap:fault use="literal" name="PolicyException" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="blindTransfer">
+			<soap:operation soapAction="" />
+			<wsdl:input name="blindTransferRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="blindTransferResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="ServiceException">
+				<soap:fault use="literal" name="ServiceException" />
+			</wsdl:fault>
+			<wsdl:fault name="PolicyException">
+				<soap:fault use="literal" name="PolicyException" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getStatus">
+			<soap:operation soapAction="" />
+			<wsdl:input name="getStatusRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getStatusResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="ServiceException">
+				<soap:fault use="literal" name="ServiceException" />
+			</wsdl:fault>
+			<wsdl:fault name="PolicyException">
+				<soap:fault use="literal" name="PolicyException" />
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="IPCService">
+		<wsdl:port name="IPC" binding="tns:IPCServiceBinding">
+			<soap:address
+				location="http://localhost:9080/IPC/services/IPCServices" />
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

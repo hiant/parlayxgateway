@@ -1,0 +1,1539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:impl="http://www.nortel.com/xmlprotocol/wsdl/management/user_mgmt/v1_5/"
+	xmlns:intf="http://www.nortel.com/xmlprotocol/wsdl/management/user_mgmt/v1_5/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd1="http://www.csapi.org/schema/parlayx/common/v2_1"
+	xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v2_0/faults"
+	targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/management/user_mgmt/v1_5/">
+	<wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v2_0/faults"
+		location="parlayx_common_faults_2_0.wsdl"/>
+	<wsdl:types>
+		<schema targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/management/user_mgmt/v1_5/"
+			xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<element name="removeUserProfileRequest">
+				<complexType>
+					<sequence>
+						<element name="userNames" nillable="false" type="impl:UserNamesT"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="removeUserProfileResponse">
+				<complexType>
+					<sequence>
+						<element name="results" type="impl:BulkRemoveUserProfileResponsesT"
+							nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="removeUserGroupProfileRequest">
+				<complexType>
+					<sequence>
+						<element name="userGroupNames" nillable="false" minOccurs="1"
+							type="impl:UserGroupNamesT"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="removeUserGroupProfileResponse">
+				<complexType>
+					<sequence>
+						<element name="results" type="impl:BulkRemoveUserGroupProfileResponsesT"
+							nillable="false" minOccurs="1"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="createUserProfileRequest">
+				<complexType>
+					<sequence>
+						<element name="users" type="impl:BasicUsersT" nillable="false" minOccurs="1"
+						/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="createUserProfileResponse">
+				<complexType>
+					<sequence>
+						<element name="results" type="impl:BulkCreateUserProfileResponsesT"
+							nillable="false" minOccurs="1"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="updateUserGroupPolicyRequest">
+				<complexType>
+					<sequence>
+						<element name="userGroupName" type="impl:nonEmptyString" nillable="false"
+							minOccurs="1"/>
+						<element name="accessControlRules" type="impl:AccessControlRulesT"
+							nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="updateUserGroupPolicyResponse">
+				<complexType>
+					<sequence> </sequence>
+				</complexType>
+			</element>
+			<element name="queryGlobalSecuritySettingsRequest">
+				<complexType>
+					<sequence> </sequence>
+				</complexType>
+			</element>
+			<element name="queryGlobalSecuritySettingsResponse">
+				<complexType>
+					<sequence>
+						<element name="accessControlRules" type="impl:AccessControlRulesWithOperationsT"
+							nillable="false" minOccurs="1"/>
+						<element name="passwordPolicy" type="impl:PasswordPolicyT" nillable="false"
+							minOccurs="1"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="updateGlobalSecuritySettingsRequest">
+				<complexType>
+					<sequence>
+						<element name="passwordPolicy" type="impl:PasswordPolicyT" nillable="false"
+							minOccurs="1"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="updateGlobalSecuritySettingsResponse">
+				<complexType>
+					<sequence> </sequence>
+				</complexType>
+			</element>
+
+			<element name="queryUserGroupPolicyRequest">
+				<complexType>
+					<sequence>
+						<element name="userGroupName" type="impl:nonEmptyString" nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="queryUserGroupPolicyResponse">
+				<complexType>
+					<sequence>
+						<element name="accessControlRules" type="impl:AccessControlRulesWithOperationsT"
+							nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="createUserGroupProfileRequest">
+				<complexType>
+					<sequence>
+						<element name="userGroups" type="impl:BasicUserGroupsT" nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="createUserGroupProfileResponse">
+				<complexType>
+					<sequence>
+						<element name="results" type="impl:BulkCreateUserGroupProfileResponsesT"
+							nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="updatePersonalDataRequest">
+				<complexType>
+					<sequence>
+						<element name="userName" type="impl:nonEmptyString" nillable="false"/>
+						<element name="password" type="impl:nonEmptyString" nillable="false" minOccurs="0"/>
+						<element name="personalData" type="impl:PersonalDataT" nillable="false"
+							minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="updatePersonalDataResponse">
+				<complexType>
+					<sequence/>
+				</complexType>
+			</element>
+			<element name="changePasswordRequest">
+				<complexType>
+					<sequence>
+						<element name="oldPassword" type="impl:nonEmptyString" nillable="false"/>
+						<element name="newPassword" type="impl:nonEmptyString" nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="changePasswordResponse">
+				<complexType>
+					<sequence/>
+				</complexType>
+			</element>
+			<element name="addContactInfoToUserProfileRequest">
+				<complexType>
+					<sequence>
+						<element name="userName" type="impl:nonEmptyString" nillable="false"/>
+						<element name="contacts" nillable="false" type="impl:ContactsT"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="updateContactInfoRequest">
+				<complexType>
+					<sequence>
+						<element name="userName" type="impl:nonEmptyString" nillable="false"/>
+						<element name="contactsToUpdate" nillable="false"
+							type="impl:UpdateContactsT"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="removeContactInfoFromUserProfileRequest">
+				<complexType>
+					<sequence>
+						<element name="userName" type="impl:nonEmptyString" nillable="false"/>
+						<element name="contactIdentifiers" nillable="false"
+							type="impl:ContactIdentifiersT"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="addContactInfoToUserProfileResponse">
+				<complexType>
+					<sequence>
+						<element name="results"
+							type="impl:BulkAddContactInfoToUserProfileResponsesT" nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="updateContactInfoResponse">
+				<complexType>
+					<sequence>
+						<element name="results" type="impl:BulkUpdateContactInfoResponsesT"
+							nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="removeContactInfoFromUserProfileResponse">
+				<complexType>
+					<sequence>
+						<element name="results"
+							type="impl:BulkRemoveContactInfoFromUserProfileResponsesT"
+							nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="queryUserProfileRequest">
+				<complexType>
+					<sequence>
+						<element name="usernames" nillable="false" type="impl:UserNamesT"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="queryUserProfileResponse">
+				<complexType>
+					<sequence>
+						<element name="results" type="impl:BulkQueryUserProfileResponsesT"
+							nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="queryUserNamesByContactIDRequest">
+				<complexType>
+					<sequence>
+						<element name="contactIdentifier" nillable="false" type="impl:nonEmptyString"/>
+						<element name="type" nillable="true" type="impl:ValidContactTypeT" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="queryUserNamesByContactIDResponse">
+				<complexType>
+					<sequence>
+						<element name="usernames" type="impl:UnboundedUserNamesT" nillable="false"
+							minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="queryUserNamesByUserGroupRequest">
+				<complexType>
+					<sequence>
+						<element name="userGroupName" nillable="false" type="impl:nonEmptyString"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="queryUserNamesByUserGroupResponse">
+				<complexType>
+					<sequence>
+						<element name="usernames" type="impl:UnboundedUserNamesT" nillable="false"
+							minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="queryAllUserGroupNamesRequest">
+				<complexType>
+					<sequence/>
+				</complexType>
+			</element>
+			<element name="queryAllUserGroupNamesResponse">
+				<complexType>
+					<sequence>
+						<element name="userGroupNames" type="impl:UnboundedUserGroupNamesT"
+							nillable="false" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="queryUserGroupProfileRequest">
+				<complexType>
+					<sequence>
+						<element name="userGroupNames" nillable="false" minOccurs="1"
+							type="impl:UserGroupNamesT"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="queryUserGroupProfileResponse">
+				<complexType>
+					<sequence>
+						<element name="results" type="impl:BulkQueryUserGroupProfileResponsesT"
+							nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="addBuddyToBuddyGroupRequest">
+				<complexType>
+					<sequence>
+						<element name="userName" type="impl:nonEmptyString" nillable="false"/>
+						<element name="buddyGroupName" type="impl:nonEmptyString" nillable="false"/>
+						<element name="buddies" type="impl:BuddiesT" nillable="false" minOccurs="1"
+						/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="addBuddyToBuddyGroupResponse">
+				<complexType>
+					<sequence>
+						<element name="results" type="impl:BulkAddBuddyToBuddyGroupResponsesT"
+							nillable="false" minOccurs="1"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="removeBuddyFromBuddyGroupRequest">
+				<complexType>
+					<sequence>
+						<element name="userName" type="impl:nonEmptyString" nillable="false"/>
+						<element name="buddyGroupName" type="impl:nonEmptyString" nillable="false"/>
+						<element name="buddyNames" type="impl:BuddyNamesT" nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="removeBuddyFromBuddyGroupResponse">
+				<complexType>
+					<sequence>
+						<element name="results" type="impl:BulkRemoveBuddyFromBuddyGroupResponsesT"
+							nillable="false" minOccurs="1"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="addBuddyGroupToUserProfileRequest">
+				<complexType>
+					<sequence>
+						<element name="userName" type="impl:nonEmptyString" nillable="false"/>
+						<element name="buddyGroups" type="impl:BuddyGroupsT" nillable="false"
+							minOccurs="1" maxOccurs="1"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="addBuddyGroupToUserProfileResponse">
+				<complexType>
+					<sequence>
+						<element name="results" type="impl:BulkAddBuddyGroupToUserProfileResponsesT"
+							nillable="false" minOccurs="1"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="removeBuddyGroupFromUserProfileRequest">
+				<complexType>
+					<sequence>
+						<element name="userName" type="impl:nonEmptyString" nillable="false"/>
+						<element name="buddyGroups" type="impl:BuddyGroupNamesT" nillable="false"
+							minOccurs="1"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="removeBuddyGroupFromUserProfileResponse">
+				<complexType>
+					<sequence>
+						<element name="results"
+							type="impl:BulkRemoveBuddyGroupFromUserProfileResponsesT"
+							nillable="false" minOccurs="1"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="addUserToUserGroupRequest">
+				<complexType>
+					<sequence>
+						<element name="userName" type="impl:nonEmptyString" nillable="false"/>
+						<element name="userGroupName" type="impl:nonEmptyString" nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="removeUserFromUserGroupRequest">
+				<complexType>
+					<sequence>
+						<element name="userName" type="impl:nonEmptyString" nillable="false"/>
+						<element name="userGroupName" type="impl:nonEmptyString" nillable="false"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="removeUserFromUserGroupResponse">
+				<complexType>
+					<sequence/>
+				</complexType>
+			</element>
+			<element name="addUserToUserGroupResponse">
+				<complexType>
+					<sequence/>
+				</complexType>
+			</element>
+			<!--TYPES-->
+			<complexType name="AccessControlRuleT">
+				<sequence>
+					<element name="serviceName" nillable="false" type="impl:nonEmptyString"/>
+					<element name="serviceAccessMode" nillable="false"
+						type="impl:ValidServiceAccessModeT"/>
+				</sequence>
+			</complexType>
+			<complexType name="AccessControlRuleWithOperationT">
+				<sequence>
+					<element name="serviceName" nillable="false" type="impl:nonEmptyString"/>
+					<element name="serviceAccessMode" nillable="false"
+						type="impl:ValidServiceAccessModeT"/>
+					<element name="operations" nillable="false" type="impl:ServiceOperationsT"/>
+				</sequence>
+			</complexType>
+			<complexType name="ServiceOperationsT">
+				<sequence>
+					<element maxOccurs="25" minOccurs="1" name="operation" nillable="false"
+						type="impl:ServiceOperationT"/>
+				</sequence>
+			</complexType>
+
+			<complexType name="ServiceOperationT">
+				<sequence>
+					<element name="name" nillable="false" type="impl:nonEmptyString"/>
+					<element name="accessMode" nillable="false"
+						type="impl:ValidServiceOperationAccessModeT"/>
+				</sequence>
+			</complexType>
+
+
+			<simpleType name="ValidServiceAccessModeT">
+				<restriction base="xsd:string">
+					<enumeration value="OFF"/>
+					<enumeration value="READ_ONLY"/>
+					<enumeration value="READ_WRITE"/>
+					<enumeration value="ADMIN"/>
+				</restriction>
+			</simpleType>
+			<simpleType name="ValidServiceOperationAccessModeT">
+				<restriction base="xsd:string">
+					<enumeration value="READ"/>
+					<enumeration value="WRITE"/>
+					<enumeration value="ADMIN"/>
+				</restriction>
+			</simpleType>
+			<complexType name="ContactInfoT">
+				<sequence>
+					<element name="type" nillable="false" type="impl:ValidContactTypeT"/>
+					<element name="contactIdentifier" nillable="false" type="impl:nonEmptyString"/>
+					<element name="priority" nillable="false" type="xsd:float"/>
+					<element name="contactName" nillable="false" type="impl:nonEmptyString"/>
+					<element name="pin" nillable="true" type="xsd:string" minOccurs="0"/>
+				</sequence>
+			</complexType>
+
+
+			<complexType name="QueryContactInfoT">
+				<sequence>
+					<element name="type" nillable="false" type="impl:ValidContactTypeT"/>
+					<element name="contactIdentifier" nillable="false" type="impl:nonEmptyString"/>
+					<element name="priority" nillable="false" type="xsd:float"/>
+					<element name="contactName" nillable="false" type="impl:nonEmptyString"/>
+				</sequence>
+			</complexType>
+			<complexType name="UpdateContactInfoT">
+				<sequence>
+					<element name="contactIdentifier" nillable="false" type="impl:nonEmptyString"/>
+					<!-- the contactIdentifier can not be updated. It is required to uniquely identify a contact. -->
+					<element name="contactName" nillable="true" type="impl:nonEmptyString" minOccurs="0"/>
+					<element name="pin" nillable="true" type="xsd:string" minOccurs="0"/>
+					<element name="priority" nillable="true" type="xsd:float" minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<xsd:simpleType name="ValidContactTypeT">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="Phone"/>
+					<xsd:enumeration value="Chat"/>
+					<xsd:enumeration value="Sms"/>
+					<xsd:enumeration value="Video"/>
+					<xsd:enumeration value="Web"/>
+					<xsd:enumeration value="Email"/>
+					<xsd:enumeration value="Mms"/>
+					<xsd:enumeration value="Conference"/>
+					<xsd:enumeration value="MeansOther"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<complexType name="UserT">
+				<sequence>
+					<element name="creationDate" nillable="false" type="xsd:dateTime" minOccurs="1"/>
+					<element name="lastModificationDate" nillable="false" type="xsd:dateTime"
+						minOccurs="1"/>
+					<element name="userName" nillable="false" type="impl:nonEmptyString" minOccurs="1"/>
+					<element name="personalData" nillable="false" type="impl:PersonalDataT"
+						minOccurs="0"/>
+					<element name="buddyGroups" nillable="false" type="impl:BuddyGroupsT"
+						minOccurs="0"/>
+					<element name="userGroups" nillable="false" minOccurs="0"
+						type="impl:UserGroupNamesT"/>
+					<element name="contacts" nillable="false" type="impl:QueryContactsT" minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<complexType name="BasicUserT">
+				<sequence>
+					<element name="userName" nillable="false" type="impl:nonEmptyString" minOccurs="1"/>
+					<element name="password" nillable="false" type="impl:nonEmptyString" minOccurs="1"/>
+					<element name="personalData" nillable="false" type="impl:PersonalDataT"
+						minOccurs="0"/>
+					<element name="buddyGroups" nillable="false" type="impl:BuddyGroupsT"
+						minOccurs="0"/>
+					<element name="userGroups" nillable="false" minOccurs="0"
+						type="impl:UserGroupNamesT"/>
+					<element name="contacts" nillable="false" type="impl:ContactsT" minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<complexType name="PersonalDataT">
+				<sequence>
+					<element name="surname" nillable="false" type="xsd:string" minOccurs="0"/>
+					<element name="givenName" nillable="false" type="xsd:string" minOccurs="0"/>
+					<element name="commonName" nillable="false" type="xsd:string" minOccurs="0"/>
+					<element name="nickName" nillable="false" type="xsd:string" minOccurs="0"/>
+					<element name="postalAddress" nillable="false" type="xsd:string" minOccurs="0"/>
+					<element name="title" nillable="false" type="xsd:string" minOccurs="0"/>
+					<element name="description" nillable="false" type="xsd:string" minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<simpleType name="ValidResponseStatusT">
+				<restriction base="xsd:string">
+					<enumeration value="SUCCEEDED"/>
+					<enumeration value="FAILED"/>
+				</restriction>
+			</simpleType>
+			<complexType name="BulkCreateUserProfileResponseT">
+				<sequence>
+					<element name="userName" nillable="false" type="impl:nonEmptyString"/>
+					<element name="status" nillable="false" type="impl:ValidResponseStatusT"/>
+					<!--If the status is SUCCEEDED then reason element will be omitted. The reason will
+                       contain an explanation if the status is FAILED-->
+					<element name="reason" nillable="false" type="impl:nonEmptyString" minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<complexType name="BulkRemoveUserProfileResponseT">
+				<sequence>
+					<element name="userName" nillable="false" type="impl:nonEmptyString"/>
+					<element name="status" nillable="false" type="impl:ValidResponseStatusT"/>
+					<!--If the status is SUCCEEDED then reason element will be omitted. The reason will
+						contain an explanation if the status is FAILED-->
+					<element name="reason" nillable="false" type="impl:nonEmptyString" minOccurs="0"/>
+				</sequence>
+			</complexType>
+
+			<complexType name="BulkAddBuddyGroupToUserProfileResponseT">
+				<sequence>
+					<element name="buddyGroupName" nillable="false" type="impl:nonEmptyString" minOccurs="1"/>
+					<element name="status" nillable="false" type="impl:ValidResponseStatusT"/>
+					<!--If the status is SUCCEEDED then reason element will be omitted. The reason will
+						contain an explanation if the status is FAILED-->
+					<element name="reason" nillable="false" type="impl:nonEmptyString" minOccurs="0"/>
+				</sequence>
+			</complexType>
+
+			<complexType name="BulkRemoveBuddyGroupFromUserProfileResponseT">
+				<sequence>
+					<element name="buddyGroupName" nillable="false" type="impl:nonEmptyString" minOccurs="1"/>
+					<element name="status" nillable="false" type="impl:ValidResponseStatusT"/>
+					<!--If the status is SUCCEEDED then reason element will be omitted. The reason will
+						contain an explanation if the status is FAILED-->
+					<element name="reason" nillable="false" type="impl:nonEmptyString" minOccurs="0"/>
+				</sequence>
+			</complexType>
+
+
+			<complexType name="BulkAddBuddyToBuddyGroupResponseT">
+				<sequence>
+					<element name="buddyName" nillable="false" type="impl:nonEmptyString" minOccurs="1"/>
+					<element name="status" nillable="false" type="impl:ValidResponseStatusT"/>
+					<!--If the status is SUCCEEDED then reason element will be omitted. The reason will
+						contain an explanation if the status is FAILED-->
+					<element name="reason" nillable="false" type="impl:nonEmptyString" minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<complexType name="BulkRemoveBuddyFromBuddyGroupResponseT">
+				<sequence>
+					<element name="buddyName" nillable="false" type="impl:nonEmptyString" minOccurs="1"/>
+					<element name="status" nillable="false" type="impl:ValidResponseStatusT"/>
+					<!--If the status is SUCCEEDED then reason element will be omitted. The reason will
+						contain an explanation if the status is FAILED-->
+					<element name="reason" nillable="false" type="impl:nonEmptyString" minOccurs="0"/>
+				</sequence>
+			</complexType>
+
+			<complexType name="BulkAddContactInfoToUserProfileResponseT">
+				<sequence>
+					<element name="contactIdentifier" nillable="false" type="impl:nonEmptyString"
+						minOccurs="1"/>
+					<element name="status" nillable="false" type="impl:ValidResponseStatusT"/>
+					<!--If the status is SUCCEEDED then reason element will be omitted. The reason will
+						contain an explanation if the status is FAILED-->
+					<element name="reason" nillable="false" type="impl:nonEmptyString" minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<complexType name="BulkAddContactInfoToUserProfileResponsesT">
+				<sequence>
+					<element maxOccurs="5" minOccurs="1" name="result" nillable="false"
+						type="impl:BulkAddContactInfoToUserProfileResponseT"/>
+				</sequence>
+			</complexType>
+
+			<complexType name="BulkUpdateContactInfoResponseT">
+				<sequence>
+					<element name="contactIdentifier" nillable="false" type="impl:nonEmptyString"
+						minOccurs="1"/>
+					<element name="status" nillable="false" type="impl:ValidResponseStatusT"/>
+					<!--If the status is SUCCEEDED then reason element will be omitted. The reason will
+						contain an explanation if the status is FAILED-->
+					<element name="reason" nillable="false" type="impl:nonEmptyString" minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<complexType name="BulkUpdateContactInfoResponsesT">
+				<sequence>
+					<element maxOccurs="20" minOccurs="1" name="result" nillable="false"
+						type="impl:BulkUpdateContactInfoResponseT"/>
+				</sequence>
+			</complexType>
+
+			<complexType name="BulkRemoveContactInfoFromUserProfileResponseT">
+				<sequence>
+					<element name="contactIdentifier" nillable="false" type="impl:nonEmptyString"
+						minOccurs="1"/>
+					<element name="status" nillable="false" type="impl:ValidResponseStatusT"/>
+					<!--If the status is SUCCEEDED then reason element will be omitted. The reason will
+						contain an explanation if the status is FAILED-->
+					<element name="reason" nillable="false" type="impl:nonEmptyString" minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<complexType name="BulkRemoveContactInfoFromUserProfileResponsesT">
+				<sequence>
+					<element maxOccurs="5" minOccurs="1" name="result" nillable="false"
+						type="impl:BulkRemoveContactInfoFromUserProfileResponseT"/>
+				</sequence>
+			</complexType>
+			<complexType name="BulkCreateUserProfileResponsesT">
+				<sequence>
+					<element maxOccurs="50" minOccurs="1" name="result" nillable="false"
+						type="impl:BulkCreateUserProfileResponseT"/>
+				</sequence>
+			</complexType>
+			<complexType name="BulkRemoveUserProfileResponsesT">
+				<sequence>
+					<element maxOccurs="50" minOccurs="1" name="result" nillable="false"
+						type="impl:BulkRemoveUserProfileResponseT"/>
+				</sequence>
+			</complexType>
+
+			<complexType name="BulkAddBuddyGroupToUserProfileResponsesT">
+				<sequence>
+					<element maxOccurs="5" minOccurs="1" name="result" nillable="false"
+						type="impl:BulkAddBuddyGroupToUserProfileResponseT"/>
+				</sequence>
+			</complexType>
+
+			<complexType name="BulkRemoveBuddyGroupFromUserProfileResponsesT">
+				<sequence>
+					<element maxOccurs="5" minOccurs="1" name="result" nillable="false"
+						type="impl:BulkRemoveBuddyGroupFromUserProfileResponseT"/>
+				</sequence>
+			</complexType>
+
+
+			<complexType name="BulkAddBuddyToBuddyGroupResponsesT">
+				<sequence>
+					<element maxOccurs="5" minOccurs="1" name="result" nillable="false"
+						type="impl:BulkAddBuddyToBuddyGroupResponseT"/>
+				</sequence>
+			</complexType>
+
+			<complexType name="BulkRemoveBuddyFromBuddyGroupResponsesT">
+				<sequence>
+					<element maxOccurs="5" minOccurs="1" name="result" nillable="false"
+						type="impl:BulkRemoveBuddyFromBuddyGroupResponseT"/>
+				</sequence>
+			</complexType>
+
+
+			<complexType name="BulkRemoveUserGroupProfileResponseT">
+				<sequence>
+					<element name="userGroupName" nillable="false" type="impl:nonEmptyString"/>
+					<element name="status" nillable="false" type="impl:ValidResponseStatusT"/>
+					<!--If the status is SUCCEEDED then reason element will be omitted. The reason will
+						contain an explanation if the status is FAILED-->
+					<element name="reason" nillable="false" type="impl:nonEmptyString" minOccurs="0"/>
+				</sequence>
+			</complexType>
+
+			<complexType name="BulkCreateUserGroupProfileResponseT">
+				<sequence>
+					<element name="userGroupName" nillable="false" type="impl:nonEmptyString"/>
+					<element name="status" nillable="false" type="impl:ValidResponseStatusT"/>
+					<!--If the status is SUCCEEDED then reason element will be omitted. The reason will
+                       contain an explanation if the status is FAILED-->
+					<element name="reason" nillable="false" type="impl:nonEmptyString" minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<complexType name="BulkCreateUserGroupProfileResponsesT">
+				<sequence>
+					<element maxOccurs="50" minOccurs="1" name="result" nillable="false"
+						type="impl:BulkCreateUserGroupProfileResponseT"/>
+				</sequence>
+			</complexType>
+
+			<complexType name="BulkRemoveUserGroupProfileResponsesT">
+				<sequence>
+					<element maxOccurs="50" minOccurs="1" name="result" nillable="false"
+						type="impl:BulkRemoveUserGroupProfileResponseT"/>
+				</sequence>
+			</complexType>
+
+
+			<complexType name="BulkQueryUserGroupProfileResponseT">
+				<sequence>
+					<element name="userGroupName" nillable="false" type="impl:nonEmptyString"/>
+					<element name="status" nillable="false" type="impl:ValidResponseStatusT"/>
+					<!--If the status is SUCCEEDED then reason element will be omitted. The reason will
+                       contain an explanation if the status is FAILED-->
+					<element name="reason" nillable="false" type="impl:nonEmptyString" minOccurs="0"/>
+					<element name="userGroup" nillable="false" type="impl:UserGroupT" minOccurs="0"
+					/>
+				</sequence>
+			</complexType>
+			<complexType name="BulkQueryUserGroupProfileResponsesT">
+				<sequence>
+					<element maxOccurs="50" minOccurs="1" name="result" nillable="false"
+						type="impl:BulkQueryUserGroupProfileResponseT"/>
+				</sequence>
+			</complexType>
+			<complexType name="BulkQueryUserProfileResponseT">
+				<sequence>
+					<element name="userName" nillable="false" type="impl:nonEmptyString"/>
+					<element name="status" nillable="false" type="impl:ValidResponseStatusT"/>
+					<!--If the status is SUCCEEDED then reason element will be omitted. The reason will
+                       contain an explanation if the status is FAILED-->
+					<element name="reason" nillable="false" type="impl:nonEmptyString" minOccurs="0"/>
+					<element name="user" nillable="false" type="impl:UserT" minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<complexType name="BulkQueryUserProfileResponsesT">
+				<sequence>
+					<element maxOccurs="50" minOccurs="1" name="result" nillable="false"
+						type="impl:BulkQueryUserProfileResponseT"/>
+				</sequence>
+			</complexType>
+			<complexType name="AccessControlRulesT">
+				<sequence>
+					<element maxOccurs="25" minOccurs="1" name="accessControlRule" nillable="false"
+						type="impl:AccessControlRuleT"/>
+				</sequence>
+			</complexType>
+			<complexType name="AccessControlRulesWithOperationsT">
+				<sequence>
+					<element maxOccurs="25" minOccurs="1" name="accessControlRule" nillable="false"
+						type="impl:AccessControlRuleWithOperationT"/>
+				</sequence>
+			</complexType>
+
+
+			<complexType name="UserNamesT">
+				<sequence>
+					<element maxOccurs="50" minOccurs="1" name="userName" nillable="false"
+						type="impl:nonEmptyString"/>
+				</sequence>
+			</complexType>
+			<complexType name="UnboundedUserNamesT">
+				<sequence>
+					<element maxOccurs="unbounded" name="userName" nillable="false" minOccurs="1"
+						type="impl:nonEmptyString"/>
+				</sequence>
+			</complexType>
+			<complexType name="UnboundedUserGroupNamesT">
+				<sequence>
+					<element maxOccurs="unbounded" name="userGroupName" nillable="false"
+						type="impl:nonEmptyString"/>
+				</sequence>
+			</complexType>
+
+			<complexType name="BasicUsersT">
+				<sequence>
+					<element maxOccurs="50" minOccurs="1" name="user" nillable="false"
+						type="impl:BasicUserT"/>
+				</sequence>
+			</complexType>
+			<simpleType name="ValidBuddyTypeT">
+				<restriction base="xsd:string">
+					<enumeration value="ACE_USER"/>
+					<enumeration value="OTHER"/>
+				</restriction>
+			</simpleType>
+			<complexType name="BuddyT">
+				<sequence>
+					<element name="buddyName" nillable="false" type="impl:nonEmptyString"/>
+					<element name="buddyType" nillable="false" type="impl:ValidBuddyTypeT"/>
+				</sequence>
+			</complexType>
+			<complexType name="BuddyGroupsT">
+				<sequence>
+					<element maxOccurs="5" minOccurs="1" name="buddyGroup" nillable="false"
+						type="impl:BuddyGroupT"/>
+				</sequence>
+			</complexType>
+			<complexType name="BuddyGroupT">
+				<sequence>
+					<element name="groupName" nillable="false" type="impl:nonEmptyString" minOccurs="1"/>
+					<element name="buddies" nillable="false" type="impl:BuddiesT" minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<complexType name="BuddiesT">
+				<sequence>
+					<element maxOccurs="5" minOccurs="0" name="buddy" nillable="false"
+						type="impl:BuddyT"/>
+				</sequence>
+			</complexType>
+			<complexType name="ContactsT">
+				<sequence>
+					<element maxOccurs="5" minOccurs="1" name="contact" nillable="false"
+						type="impl:ContactInfoT"/>
+				</sequence>
+			</complexType>
+			<complexType name="QueryContactsT">
+				<sequence>
+					<element maxOccurs="5" minOccurs="1" name="contact" nillable="false"
+						type="impl:QueryContactInfoT"/>
+				</sequence>
+			</complexType>
+			<complexType name="UpdateContactsT">
+				<sequence>
+					<element maxOccurs="20" minOccurs="1" name="contact" nillable="false"
+						type="impl:UpdateContactInfoT"/>
+				</sequence>
+			</complexType>
+			<complexType name="BasicUserGroupT">
+				<sequence>
+					<element name="name" nillable="false" type="impl:nonEmptyString" minOccurs="1"/>
+					<element name="type" nillable="false" type="impl:ValidUserGroupTypeT"
+						minOccurs="1"/>
+					<element name="parentUserGroupName" nillable="false" type="impl:nonEmptyString"
+						minOccurs="1"/>
+				</sequence>
+			</complexType>
+			<complexType name="UserGroupT">
+				<sequence>
+					<element name="creationDate" nillable="false" type="xsd:dateTime"/>
+					<element name="lastModificationDate" nillable="false" type="xsd:dateTime"/>
+					<element name="lastModifiedBy" nillable="false" type="impl:nonEmptyString"/>
+					<element name="userGroupInfo" nillable="false" type="impl:BasicUserGroupT"/>
+					<element name="memberUsers" nillable="false" type="impl:UserNamesT"
+						minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<complexType name="BasicUserGroupsT">
+				<sequence>
+					<element maxOccurs="50" minOccurs="1" name="userGroup" nillable="false"
+						type="impl:BasicUserGroupT"/>
+				</sequence>
+			</complexType>
+			<complexType name="UserGroupNamesT">
+				<sequence>
+					<element maxOccurs="50" minOccurs="1" name="userGroup" nillable="false"
+						type="impl:nonEmptyString"/>
+				</sequence>
+			</complexType>
+			<complexType name="BuddyGroupNamesT">
+				<sequence>
+					<element maxOccurs="5" minOccurs="1" name="buddyGroup" nillable="false"
+						type="impl:nonEmptyString"/>
+				</sequence>
+			</complexType>
+
+			<complexType name="ContactIdentifiersT">
+				<sequence>
+					<element maxOccurs="5" minOccurs="1" name="contactIdentifier" nillable="false"
+						type="impl:nonEmptyString"/>
+				</sequence>
+			</complexType>
+			<complexType name="BuddyNamesT">
+				<sequence>
+					<element maxOccurs="5" minOccurs="1" name="buddyName" nillable="false"
+						type="impl:nonEmptyString"/>
+				</sequence>
+			</complexType>
+			<complexType name="PasswordPolicyT">
+				<sequence>
+					<!--passwordExpiryPeriod is in "days"-->
+					<element name="passwordExpiryPeriod" nillable="false" type="xsd:int"
+						minOccurs="0"/>
+					<element name="passwordRules" nillable="false" type="impl:PasswordRulesT"
+						minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<complexType name="PasswordRulesT">
+				<sequence>
+					<element name="minPasswordLength" nillable="false" type="xsd:int" minOccurs="0"/>
+					<element name="minDifferentCharacters" nillable="false" type="xsd:int"
+						minOccurs="0"/>
+					<element name="mixedCase" nillable="false" type="xsd:boolean" minOccurs="0"/>
+					<element name="minAlphaCharacters" nillable="false" type="xsd:int" minOccurs="0"/>
+					<element name="minSpecialCharacters" nillable="false" type="xsd:int"
+						minOccurs="0"/>
+					<element name="permittedSpecialCharacters" nillable="false" type="xsd:string"
+						minOccurs="0"/>
+					<element name="minNumericCharacters" nillable="false" type="xsd:int"
+						minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<complexType name="BuddGroupNamesT">
+				<sequence>
+					<element maxOccurs="5" minOccurs="1" name="buddyGroupName" nillable="false"
+						type="impl:nonEmptyString"/>
+				</sequence>
+			</complexType>
+
+			<simpleType name="ValidUserGroupTypeT">
+				<restriction base="xsd:string">
+					<enumeration value="USER"/>
+					<enumeration value="SYSTEM_ADMIN"/>
+					<enumeration value="GROUP_ADMIN"/>
+				</restriction>
+			</simpleType>
+			<simpleType name="nonEmptyString">
+			                    <restriction base="xsd:string">
+			                    	<minLength value="1"/>
+			                    	<maxLength value="255"/>
+			                    	<whiteSpace value="collapse"/>
+			                    	<pattern value=".+"></pattern>
+			                    </restriction>
+			</simpleType>
+		</schema>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v2_1"
+				schemaLocation="parlayx_common_types_2_1.xsd"> </xsd:import>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="createUserProfileRequest">
+		<wsdl:part name="parameters" element="intf:createUserProfileRequest"/>
+	</wsdl:message>
+	<wsdl:message name="createUserProfileResponse">
+		<wsdl:part name="parameters" element="intf:createUserProfileResponse"/>
+	</wsdl:message>
+	<wsdl:message name="removeUserProfileRequest">
+		<wsdl:part name="parameters" element="intf:removeUserProfileRequest"/>
+	</wsdl:message>
+	<wsdl:message name="removeUserProfileResponse">
+		<wsdl:part name="parameters" element="intf:removeUserProfileResponse"/>
+	</wsdl:message>
+	<wsdl:message name="queryUserProfileRequest">
+		<wsdl:part name="parameters" element="intf:queryUserProfileRequest"/>
+	</wsdl:message>
+	<wsdl:message name="queryUserProfileResponse">
+		<wsdl:part name="parameters" element="intf:queryUserProfileResponse"/>
+	</wsdl:message>
+	<wsdl:message name="queryUserNamesByContactIDRequest">
+		<wsdl:part name="parameters" element="intf:queryUserNamesByContactIDRequest"/>
+	</wsdl:message>
+	<wsdl:message name="queryUserNamesByContactIDResponse">
+		<wsdl:part name="parameters" element="intf:queryUserNamesByContactIDResponse"/>
+	</wsdl:message>
+	<wsdl:message name="queryUserNamesByUserGroupRequest">
+		<wsdl:part name="parameters" element="intf:queryUserNamesByUserGroupRequest"/>
+	</wsdl:message>
+	<wsdl:message name="queryUserNamesByUserGroupResponse">
+		<wsdl:part name="parameters" element="intf:queryUserNamesByUserGroupResponse"/>
+	</wsdl:message>
+	<wsdl:message name="queryAllUserGroupNamesRequest">
+		<wsdl:part name="parameters" element="intf:queryAllUserGroupNamesRequest"/>
+	</wsdl:message>
+	<wsdl:message name="queryAllUserGroupNamesResponse">
+		<wsdl:part name="parameters" element="intf:queryAllUserGroupNamesResponse"/>
+	</wsdl:message>
+	<wsdl:message name="updatePersonalDataRequest">
+		<wsdl:part name="parameters" element="intf:updatePersonalDataRequest"/>
+	</wsdl:message>
+	<wsdl:message name="updatePersonalDataResponse">
+		<wsdl:part name="parameters" element="intf:updatePersonalDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="changePasswordRequest">
+		<wsdl:part name="parameters" element="intf:changePasswordRequest"/>
+	</wsdl:message>
+	<wsdl:message name="changePasswordResponse">
+		<wsdl:part name="parameters" element="intf:changePasswordResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addContactInfoToUserProfileRequest">
+		<wsdl:part name="parameters" element="intf:addContactInfoToUserProfileRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addContactInfoToUserProfileResponse">
+		<wsdl:part name="parameters" element="intf:addContactInfoToUserProfileResponse"/>
+	</wsdl:message>
+	<wsdl:message name="removeContactInfoFromUserProfileRequest">
+		<wsdl:part name="parameters" element="intf:removeContactInfoFromUserProfileRequest"/>
+	</wsdl:message>
+	<wsdl:message name="removeContactInfoFromUserProfileResponse">
+		<wsdl:part name="parameters" element="intf:removeContactInfoFromUserProfileResponse"/>
+	</wsdl:message>
+	<wsdl:message name="updateContactInfoRequest">
+		<wsdl:part name="parameters" element="intf:updateContactInfoRequest"/>
+	</wsdl:message>
+	<wsdl:message name="updateContactInfoResponse">
+		<wsdl:part name="parameters" element="intf:updateContactInfoResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addBuddyToBuddyGroupRequest">
+		<wsdl:part name="parameters" element="intf:addBuddyToBuddyGroupRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addBuddyToBuddyGroupResponse">
+		<wsdl:part name="parameters" element="intf:addBuddyToBuddyGroupResponse"/>
+	</wsdl:message>
+	<wsdl:message name="removeBuddyFromBuddyGroupRequest">
+		<wsdl:part name="parameters" element="intf:removeBuddyFromBuddyGroupRequest"/>
+	</wsdl:message>
+	<wsdl:message name="removeBuddyFromBuddyGroupResponse">
+		<wsdl:part name="parameters" element="intf:removeBuddyFromBuddyGroupResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addBuddyGroupToUserProfileRequest">
+		<wsdl:part name="parameters" element="intf:addBuddyGroupToUserProfileRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addBuddyGroupToUserProfileResponse">
+		<wsdl:part name="parameters" element="intf:addBuddyGroupToUserProfileResponse"/>
+	</wsdl:message>
+	<wsdl:message name="removeBuddyGroupFromUserProfileRequest">
+		<wsdl:part name="parameters" element="intf:removeBuddyGroupFromUserProfileRequest"/>
+	</wsdl:message>
+	<wsdl:message name="removeBuddyGroupFromUserProfileResponse">
+		<wsdl:part name="parameters" element="intf:removeBuddyGroupFromUserProfileResponse"/>
+	</wsdl:message>
+	<wsdl:message name="createUserGroupProfileRequest">
+		<wsdl:part name="parameters" element="intf:createUserGroupProfileRequest"/>
+	</wsdl:message>
+	<wsdl:message name="createUserGroupProfileResponse">
+		<wsdl:part name="parameters" element="intf:createUserGroupProfileResponse"/>
+	</wsdl:message>
+	<wsdl:message name="removeUserGroupProfileRequest">
+		<wsdl:part name="parameters" element="intf:removeUserGroupProfileRequest"/>
+	</wsdl:message>
+	<wsdl:message name="removeUserGroupProfileResponse">
+		<wsdl:part name="parameters" element="intf:removeUserGroupProfileResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addUserToUserGroupRequest">
+		<wsdl:part name="parameters" element="intf:addUserToUserGroupRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addUserToUserGroupResponse">
+		<wsdl:part name="parameters" element="intf:addUserToUserGroupResponse"/>
+	</wsdl:message>
+	<wsdl:message name="removeUserFromUserGroupRequest">
+		<wsdl:part name="parameters" element="intf:removeUserFromUserGroupRequest"/>
+	</wsdl:message>
+	<wsdl:message name="removeUserFromUserGroupResponse">
+		<wsdl:part name="parameters" element="intf:removeUserFromUserGroupResponse"/>
+	</wsdl:message>
+	<wsdl:message name="queryUserGroupProfileRequest">
+		<wsdl:part name="parameters" element="intf:queryUserGroupProfileRequest"/>
+	</wsdl:message>
+	<wsdl:message name="queryUserGroupProfileResponse">
+		<wsdl:part name="parameters" element="intf:queryUserGroupProfileResponse"/>
+	</wsdl:message>
+	<wsdl:message name="updateUserGroupPolicyRequest">
+		<wsdl:part name="parameters" element="intf:updateUserGroupPolicyRequest"/>
+	</wsdl:message>
+	<wsdl:message name="updateUserGroupPolicyResponse">
+		<wsdl:part name="parameters" element="intf:updateUserGroupPolicyResponse"/>
+	</wsdl:message>
+	<wsdl:message name="queryGlobalSecuritySettingsRequest">
+		<wsdl:part name="parameters" element="intf:queryGlobalSecuritySettingsRequest"/>
+	</wsdl:message>
+	<wsdl:message name="queryGlobalSecuritySettingsResponse">
+		<wsdl:part name="parameters" element="intf:queryGlobalSecuritySettingsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="updateGlobalSecuritySettingsRequest">
+		<wsdl:part name="parameters" element="intf:updateGlobalSecuritySettingsRequest"/>
+	</wsdl:message>
+	<wsdl:message name="updateGlobalSecuritySettingsResponse">
+		<wsdl:part name="parameters" element="intf:updateGlobalSecuritySettingsResponse"/>
+	</wsdl:message>
+
+
+	<wsdl:message name="queryUserGroupPolicyRequest">
+		<wsdl:part name="parameters" element="intf:queryUserGroupPolicyRequest"/>
+	</wsdl:message>
+	<wsdl:message name="queryUserGroupPolicyResponse">
+		<wsdl:part name="parameters" element="intf:queryUserGroupPolicyResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="ServiceException">
+		<wsdl:part name="ServiceException" type="xsd1:ServiceException"> </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="PolicyException">
+		<wsdl:part name="PolicyException" type="xsd1:PolicyException"/>
+	</wsdl:message>
+	<wsdl:portType name="UserProfileService">
+		<wsdl:operation name="removeBuddyFromBuddyGroup">
+			<wsdl:input name="removeBuddyFromBuddyGroupRequest"
+				message="impl:removeBuddyFromBuddyGroupRequest"/>
+			<wsdl:output name="removeBuddyFromBuddyGroupResponse"
+				message="impl:removeBuddyFromBuddyGroupResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="addBuddyToBuddyGroup">
+			<wsdl:input name="addBuddyToBuddyGroupRequest"
+				message="impl:addBuddyToBuddyGroupRequest"/>
+			<wsdl:output name="addBuddyToBuddyGroupResponse"
+				message="impl:addBuddyToBuddyGroupResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="removeBuddyGroupFromUserProfile">
+			<wsdl:input name="removeBuddyGroupFromUserProfileRequest"
+				message="impl:removeBuddyGroupFromUserProfileRequest"/>
+			<wsdl:output name="removeBuddyGroupFromUserProfileResponse"
+				message="impl:removeBuddyGroupFromUserProfileResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="addBuddyGroupToUserProfile">
+			<wsdl:input name="addBuddyGroupToUserProfileRequest"
+				message="impl:addBuddyGroupToUserProfileRequest"/>
+			<wsdl:output name="addBuddyGroupToUserProfileResponse"
+				message="impl:addBuddyGroupToUserProfileResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="removeUserProfile">
+			<wsdl:input name="removeUserProfileRequest" message="impl:removeUserProfileRequest"/>
+			<wsdl:output name="removeUserProfileResponse" message="impl:removeUserProfileResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="createUserProfile">
+			<wsdl:input name="createUserProfileRequest" message="impl:createUserProfileRequest"/>
+			<wsdl:output name="createUserProfileResponse" message="impl:createUserProfileResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="updatePersonalData">
+			<wsdl:input name="updatePersonalDataRequest" message="impl:updatePersonalDataRequest"/>
+			<wsdl:output name="updatePersonalDataResponse" message="impl:updatePersonalDataResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="changePassword">
+			<wsdl:input name="changePasswordRequest" message="impl:changePasswordRequest"/>
+			<wsdl:output name="changePasswordResponse" message="impl:changePasswordResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="addContactInfoToUserProfile">
+			<wsdl:input name="addContactInfoToUserProfileRequest"
+				message="impl:addContactInfoToUserProfileRequest"/>
+			<wsdl:output name="addContactInfoToUserProfileResponse"
+				message="impl:addContactInfoToUserProfileResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="removeContactInfoFromUserProfile">
+			<wsdl:input name="removeContactInfoFromUserProfileRequest"
+				message="impl:removeContactInfoFromUserProfileRequest"/>
+			<wsdl:output name="removeContactInfoFromUserProfileResponse"
+				message="impl:removeContactInfoFromUserProfileResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="updateContactInfo">
+			<wsdl:input name="updateContactInfoRequest" message="impl:updateContactInfoRequest"/>
+			<wsdl:output name="updateContactInfoResponse" message="impl:updateContactInfoResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="queryUserProfile">
+			<wsdl:input name="queryUserProfileRequest" message="impl:queryUserProfileRequest"/>
+			<wsdl:output name="queryUserProfileResponse" message="impl:queryUserProfileResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="queryUserNamesByContactID">
+			<wsdl:input name="queryUserNamesByContactIDRequest"
+				message="impl:queryUserNamesByContactIDRequest"/>
+			<wsdl:output name="queryUserNamesByContactIDResponse"
+				message="impl:queryUserNamesByContactIDResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="queryUserNamesByUserGroup">
+			<wsdl:input name="queryUserNamesByUserGroupRequest"
+				message="impl:queryUserNamesByUserGroupRequest"/>
+			<wsdl:output name="queryUserNamesByUserGroupResponse"
+				message="impl:queryUserNamesByUserGroupResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="queryAllUserGroupNames">
+			<wsdl:input name="queryAllUserGroupNamesRequest"
+				message="impl:queryAllUserGroupNamesRequest"/>
+			<wsdl:output name="queryAllUserGroupNamesResponse"
+				message="impl:queryAllUserGroupNamesResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="removeUserGroupProfile">
+			<wsdl:input name="removeUserGroupProfileRequest"
+				message="impl:removeUserGroupProfileRequest"/>
+			<wsdl:output name="removeUserGroupProfileResponse"
+				message="impl:removeUserGroupProfileResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="createUserGroupProfile">
+			<wsdl:input name="createUserGroupProfileRequest"
+				message="impl:createUserGroupProfileRequest"/>
+			<wsdl:output name="createUserGroupProfileResponse"
+				message="impl:createUserGroupProfileResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="addUserToUserGroup">
+			<wsdl:input name="addUserToUserGroupRequest" message="impl:addUserToUserGroupRequest"/>
+			<wsdl:output name="addUserToUserGroupResponse" message="impl:addUserToUserGroupResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="removeUserFromUserGroup">
+			<wsdl:input name="removeUserFromUserGroupRequest"
+				message="impl:removeUserFromUserGroupRequest"/>
+			<wsdl:output name="removeUserFromUserGroupResponse"
+				message="impl:removeUserFromUserGroupResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="queryUserGroupProfile">
+			<wsdl:input name="queryUserGroupProfileRequest"
+				message="impl:queryUserGroupProfileRequest"/>
+			<wsdl:output name="queryUserGroupProfileResponse"
+				message="impl:queryUserGroupProfileResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="updateUserGroupPolicy">
+			<wsdl:input name="updateUserGroupPolicyRequest"
+				message="impl:updateUserGroupPolicyRequest"/>
+			<wsdl:output name="updateUserGroupPolicyResponse"
+				message="impl:updateUserGroupPolicyResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="queryGlobalSecuritySettings">
+			<wsdl:input name="queryGlobalSecuritySettingsRequest"
+				message="impl:queryGlobalSecuritySettingsRequest"/>
+			<wsdl:output name="queryGlobalSecuritySettingsResponse"
+				message="impl:queryGlobalSecuritySettingsResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="updateGlobalSecuritySettings">
+			<wsdl:input name="updateGlobalSecuritySettingsRequest"
+				message="impl:updateGlobalSecuritySettingsRequest"/>
+			<wsdl:output name="updateGlobalSecuritySettingsResponse"
+				message="impl:updateGlobalSecuritySettingsResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="queryUserGroupPolicy">
+			<wsdl:input name="queryUserGroupPolicyRequest"
+				message="impl:queryUserGroupPolicyRequest"/>
+			<wsdl:output name="queryUserGroupPolicyResponse"
+				message="impl:queryUserGroupPolicyResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="UserProfileServiceSoapBinding" type="intf:UserProfileService">
+		<wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsaw:UsingAddressing wsdl:required="false"
+			xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+		<wsdl:operation name="removeBuddyFromBuddyGroup">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="removeBuddyFromBuddyGroupRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="removeBuddyFromBuddyGroupResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="addBuddyToBuddyGroup">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="addBuddyToBuddyGroupRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="addBuddyToBuddyGroupResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="removeBuddyGroupFromUserProfile">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="removeBuddyGroupFromUserProfileRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="removeBuddyGroupFromUserProfileResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="addBuddyGroupToUserProfile">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="addBuddyGroupToUserProfileRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="addBuddyGroupToUserProfileResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="removeUserProfile">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="removeUserProfileRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="removeUserProfileResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="createUserProfile">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="createUserProfileRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="createUserProfileResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="updatePersonalData">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="updatePersonalDataRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="updatePersonalDataResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="changePassword">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="changePasswordRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="changePasswordResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="addContactInfoToUserProfile">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="addContactInfoToUserProfileRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="addContactInfoToUserProfileResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="removeContactInfoFromUserProfile">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="removeContactInfoFromUserProfileRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="removeContactInfoFromUserProfileResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="updateContactInfo">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="updateContactInfoRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="updateContactInfoResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="queryUserProfile">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="queryUserProfileRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="queryUserProfileResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="queryUserNamesByContactID">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="queryUserNamesByContactIDRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="queryUserNamesByContactIDResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="queryUserNamesByUserGroup">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="queryUserNamesByUserGroupRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="queryUserNamesByUserGroupResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="queryAllUserGroupNames">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="queryAllUserGroupNamesRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="queryAllUserGroupNamesResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="removeUserGroupProfile">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="removeUserGroupProfileRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="removeUserGroupProfileResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="createUserGroupProfile">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="createUserGroupProfileRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="createUserGroupProfileResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="addUserToUserGroup">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="addUserToUserGroupRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="addUserToUserGroupResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="removeUserFromUserGroup">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="removeUserFromUserGroupRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="removeUserFromUserGroupResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="queryUserGroupProfile">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="queryUserGroupProfileRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="queryUserGroupProfileResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="updateUserGroupPolicy">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="updateUserGroupPolicyRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="updateUserGroupPolicyResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="queryGlobalSecuritySettings">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="queryGlobalSecuritySettingsRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="queryGlobalSecuritySettingsResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="updateGlobalSecuritySettings">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="updateGlobalSecuritySettingsRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="updateGlobalSecuritySettingsResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="queryUserGroupPolicy">
+			<wsdlsoap:operation soapAction=""/>
+			<wsdl:input name="queryUserGroupPolicyRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="queryUserGroupPolicyResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException"/>
+			<wsdl:fault name="PolicyException"/>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="UserProfileService">
+		<wsdl:port name="UserProfileService" binding="intf:UserProfileServiceSoapBinding">
+			<wsdlsoap:address
+				location="http://localhost:9080/UserProfileService/services/UserProfile"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

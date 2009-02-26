@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- March 12, 2007 -->
+<wsdl:definitions
+   name="multimedia_conference_service"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/multimedia_conference/v3_0/service"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:tns="http://www.csapi.org/wsdl/parlayx/multimedia_conference/v3_0/service"
+   xmlns:interface="http://www.csapi.org/wsdl/parlayx/multimedia_conference/v3_0/interface">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/multimedia_conference/v3_0/interface" location="parlayx_multimedia_conference_interface_3_0.wsdl"/>
+
+   <wsdl:binding name="MultimediaConferenceBinding" type="interface:MultimediaConference">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="createConference">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="getConferenceInfo">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="endConference">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="inviteParticipant">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="disconnectParticipant">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="getParticipantInfo">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="getParticipants">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding>
+
+   <wsdl:service name="MultimediaConferenceService">
+      <wsdl:port name="MultimediaConference" binding="tns:MultimediaConferenceBinding">
+         <soap:address location="http://localhost:9080/MultimediaConferenceService/services/MultimediaConference"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

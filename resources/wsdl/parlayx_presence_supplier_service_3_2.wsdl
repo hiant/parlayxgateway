@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- March 13, 2007 -->
+<wsdl:definitions
+   name="presence_supplier_service"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/presence/supplier/v3_2/service"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:tns="http://www.csapi.org/wsdl/parlayx/presence/supplier/v3_2/service"
+   xmlns:interface="http://www.csapi.org/wsdl/parlayx/presence/supplier/v3_2/interface">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/presence/supplier/v3_2/interface" location="parlayx_presence_supplier_interface_3_2.wsdl"/>
+
+   <wsdl:binding name="PresenceSupplierBinding" type="interface:PresenceSupplier">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="publish">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="getOpenSubscriptions">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="updateSubscriptionAuthorization">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="getMyWatchers">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="getSubscribedAttributes">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="blockSubscription">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding>
+
+   <wsdl:service name="PresenceSupplierService">
+      <wsdl:port name="PresenceSupplier" binding="tns:PresenceSupplierBinding">
+         <soap:address location="http://localhost:9080/PresenceSupplierService/services/PresenceSupplier"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

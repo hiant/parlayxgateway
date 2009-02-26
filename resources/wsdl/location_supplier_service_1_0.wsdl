@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wsdl:definitions targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/location/services/location_supplier/v1_0/"
+	xmlns:tns="http://www.nortel.com/xmlprotocol/wsdl/location/services/location_supplier/v1_0/"
+	xmlns:intf="http://www.nortel.com/xmlprotocol/wsdl/location/services/location_supplier/v1_0/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd1="http://www.csapi.org/schema/parlayx/common/v3_1"
+	xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults">
+	
+<wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults" location="parlayx_common_faults_3_0.wsdl"/>
+
+	<xsd:annotation>
+		<xsd:documentation>
+			The location supplier service provides interfaces to set terminal location functionality 
+			for a device, which is identified by address. The location feature is a trigger at the device
+			that will publish its location based on a specific condition. 
+		
+			The following operations for the service are supported:
+				publish: Set the terminal location for this Address.
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/location/services/location_supplier/v1_0/"
+			xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema"> 
+			
+		<xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" 
+			schemaLocation="parlayx_common_types_3_1.xsd"/>
+			
+		<xsd:complexType name="LocationInfo">
+			<xsd:sequence>
+				<xsd:element name="latitude" type="xsd:float"/>
+				<xsd:element name="longitude" type="xsd:float"/>
+				<xsd:element name="altitude" type="xsd:float" minOccurs="0" maxOccurs="1"/>
+				<xsd:element name="accuracy" type="xsd:int"/>
+				<xsd:element name="timestamp" type="xsd:dateTime"/>
+			</xsd:sequence>
+		</xsd:complexType>
+		
+		<xsd:simpleType name="LocationTechnologyType">
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="SATELLITE"/>
+                <xsd:enumeration value="SHORTRANGE"/>
+                <xsd:enumeration value="CELLULAR"/>
+            </xsd:restriction>
+        </xsd:simpleType>
+      
+		<xsd:complexType name="publishType">
+			<xsd:sequence>
+			    <xsd:element name="address" type="xsd:anyURI"/>
+				<xsd:element name="locationInfo" type="tns:LocationInfo"/>
+				<xsd:element name="locationTechnology" type="tns:LocationTechnologyType" minOccurs="0" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+		
+		<xsd:element name="publish" type="tns:publishType"/>
+		
+		<xsd:complexType name="publishResponseType">
+			<xsd:sequence/>
+		</xsd:complexType>
+		
+		<xsd:element name="publishResponse" type="tns:publishResponseType"/>
+      
+		</xsd:schema>
+	</wsdl:types>
+
+
+	<wsdl:message name="publishRequest">
+		<wsdl:part name="parameters" element="intf:publish"/>
+	</wsdl:message>
+
+	<wsdl:message name="publishResponse">
+		<wsdl:part name="result" element="intf:publishResponse"/>
+	</wsdl:message>
+
+	<wsdl:portType name="LocationSupplier">
+		<wsdl:operation name="publish">
+			<wsdl:input name="publishRequest" message="intf:publishRequest"/>
+			<wsdl:output name="publishResponse" message="intf:publishResponse"/>
+			<wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="LocationSupplierBinding" type="intf:LocationSupplier">
+      	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      	<wsdl:operation name="publish">
+         		<soap:operation soapAction="" style="document"/>
+            	<wsdl:input>
+               		<soap:body use="literal"/>
+            	</wsdl:input>
+            	<wsdl:output>
+               		<soap:body use="literal"/>
+            	</wsdl:output>
+            	<wsdl:fault name="ServiceException">
+               		<soap:fault name="ServiceException" use="literal"/>
+            	</wsdl:fault>
+            	<wsdl:fault name="PolicyException">
+               		<soap:fault name="PolicyException" use="literal"/>
+            	</wsdl:fault>
+      	</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="LocationSupplierService">
+		<wsdl:documentation>This service provides the interface for call forwarding functionality</wsdl:documentation>
+		<wsdl:port name="LocationSupplier" binding="intf:LocationSupplierServiceBinding">
+			<wsdlsoap:address
+				location="http://localhost:9080/LocationSupplier/services/LocationSupplierService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

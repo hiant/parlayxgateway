@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- May 25, 2007 -->
+<wsdl:definitions
+   name="audio_call_capture_media_service"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/audio_call/capture_media/v3_1/service"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:tns="http://www.csapi.org/wsdl/parlayx/audio_call/capture_media/v3_1/service"
+   xmlns:interface="http://www.csapi.org/wsdl/parlayx/audio_call/capture_media/v3_1/interface">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/audio_call/capture_media/v3_1/interface" location="parlayx_audio_call_capture_media_interface_3_1.wsdl"/>
+
+   <wsdl:binding name="AudioCallCaptureMediaBinding" type="interface:AudioCallCaptureMedia">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="startPlayAndCollectInteraction">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="startPlayAndRecordInteraction">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="stopMediaInteraction">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding>
+
+   <wsdl:service name="AudioCallCaptureMediaService">
+      <wsdl:port name="AudioCallCaptureMedia" binding="tns:AudioCallCaptureMediaBinding">
+         <soap:address location="http://localhost:9080/AudioCallCaptureMediaService/services/AudioCallCaptureMedia"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- May 25, 2007 -->
+<wsdl:definitions
+   name="parlayx_third_party_call_interface"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/third_party_call/v3_4/interface"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:parlayx_third_party_call="http://www.csapi.org/wsdl/parlayx/third_party_call/v3_4/interface"
+   xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults"
+   xmlns:parlayx_common_xsd="http://www.csapi.org/schema/parlayx/common/v3_1"
+   xmlns:parlayx_third_party_call_local_xsd="http://www.csapi.org/schema/parlayx/third_party_call/v3_4/local">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults" location="parlayx_common_faults_3_0.wsdl"/>
+
+   <wsdl:types>
+      <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.csapi.org/schema/parlayx/third_party_call/v3_4/local">
+         <xsd:import namespace="http://www.csapi.org/schema/parlayx/common/v3_1" schemaLocation="parlayx_common_types_3_1.xsd"/>
+
+         <xsd:element name="makeCallSession" type="parlayx_third_party_call_local_xsd:makeCallSession"/>
+         <xsd:complexType name="makeCallSession">
+            <xsd:sequence>
+               <xsd:element name="callParticipants" type="xsd:anyURI" minOccurs="1" maxOccurs="2"/>
+               <xsd:element name="callingParticipantName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="charging" type="parlayx_common_xsd:ChargingInformation" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="mediaInfo" type="parlayx_common_xsd:MediaInfo" minOccurs="0" maxOccurs="unbounded"/>
+               <xsd:element name="changeMediaNotAllowed" type="xsd:boolean"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="makeCallSessionResponse" type="parlayx_third_party_call_local_xsd:makeCallSessionResponse"/>
+         <xsd:complexType name="makeCallSessionResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="addCallParticipant" type="parlayx_third_party_call_local_xsd:addCallParticipant"/>
+         <xsd:complexType name="addCallParticipant">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+               <xsd:element name="callParticipant" type="xsd:anyURI"/>
+               <xsd:element name="mediaInfo" type="parlayx_common_xsd:MediaInfo" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="addCallParticipantResponse" type="parlayx_third_party_call_local_xsd:addCallParticipantResponse"/>
+         <xsd:complexType name="addCallParticipantResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="transferCallParticipant" type="parlayx_third_party_call_local_xsd:transferCallParticipant"/>
+         <xsd:complexType name="transferCallParticipant">
+            <xsd:sequence>
+               <xsd:element name="destinationCallSessionIdentifier" type="xsd:string"/>
+               <xsd:element name="sourceCallSessionIdentifier" type="xsd:string"/>
+               <xsd:element name="callParticipant" type="xsd:anyURI"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="transferCallParticipantResponse" type="parlayx_third_party_call_local_xsd:transferCallParticipantResponse"/>
+         <xsd:complexType name="transferCallParticipantResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="getCallParticipantInformation" type="parlayx_third_party_call_local_xsd:getCallParticipantInformation"/>
+         <xsd:complexType name="getCallParticipantInformation">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+               <xsd:element name="callParticipant" type="xsd:anyURI"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getCallParticipantInformationResponse" type="parlayx_third_party_call_local_xsd:getCallParticipantInformationResponse"/>
+         <xsd:complexType name="getCallParticipantInformationResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="parlayx_common_xsd:CallParticipantInformation"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getCallSessionInformation" type="parlayx_third_party_call_local_xsd:getCallSessionInformation"/>
+         <xsd:complexType name="getCallSessionInformation">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="getCallSessionInformationResponse" type="parlayx_third_party_call_local_xsd:getCallSessionInformationResponse"/>
+         <xsd:complexType name="getCallSessionInformationResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="parlayx_common_xsd:CallSession"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="deleteCallParticipant" type="parlayx_third_party_call_local_xsd:deleteCallParticipant"/>
+         <xsd:complexType name="deleteCallParticipant">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+               <xsd:element name="callParticipant" type="xsd:anyURI"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="deleteCallParticipantResponse" type="parlayx_third_party_call_local_xsd:deleteCallParticipantResponse"/>
+         <xsd:complexType name="deleteCallParticipantResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+
+         <xsd:element name="endCallSession" type="parlayx_third_party_call_local_xsd:endCallSession"/>
+         <xsd:complexType name="endCallSession">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+
+         <xsd:element name="endCallSessionResponse" type="parlayx_third_party_call_local_xsd:endCallSessionResponse"/>
+         <xsd:complexType name="endCallSessionResponse">
+            <xsd:sequence/>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="ThirdPartyCall_makeCallSessionRequest">
+      <wsdl:part name="parameters" element="parlayx_third_party_call_local_xsd:makeCallSession"/>
+   </wsdl:message>
+
+   <wsdl:message name="ThirdPartyCall_makeCallSessionResponse">
+      <wsdl:part name="result" element="parlayx_third_party_call_local_xsd:makeCallSessionResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="ThirdPartyCall_addCallParticipantRequest">
+      <wsdl:part name="parameters" element="parlayx_third_party_call_local_xsd:addCallParticipant"/>
+   </wsdl:message>
+
+   <wsdl:message name="ThirdPartyCall_addCallParticipantResponse">
+      <wsdl:part name="result" element="parlayx_third_party_call_local_xsd:addCallParticipantResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="ThirdPartyCall_transferCallParticipantRequest">
+      <wsdl:part name="parameters" element="parlayx_third_party_call_local_xsd:transferCallParticipant"/>
+   </wsdl:message>
+
+   <wsdl:message name="ThirdPartyCall_transferCallParticipantResponse">
+      <wsdl:part name="result" element="parlayx_third_party_call_local_xsd:transferCallParticipantResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="ThirdPartyCall_getCallParticipantInformationRequest">
+      <wsdl:part name="parameters" element="parlayx_third_party_call_local_xsd:getCallParticipantInformation"/>
+   </wsdl:message>
+
+   <wsdl:message name="ThirdPartyCall_getCallParticipantInformationResponse">
+      <wsdl:part name="result" element="parlayx_third_party_call_local_xsd:getCallParticipantInformationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="ThirdPartyCall_getCallSessionInformationRequest">
+      <wsdl:part name="parameters" element="parlayx_third_party_call_local_xsd:getCallSessionInformation"/>
+   </wsdl:message>
+
+   <wsdl:message name="ThirdPartyCall_getCallSessionInformationResponse">
+      <wsdl:part name="result" element="parlayx_third_party_call_local_xsd:getCallSessionInformationResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="ThirdPartyCall_deleteCallParticipantRequest">
+      <wsdl:part name="parameters" element="parlayx_third_party_call_local_xsd:deleteCallParticipant"/>
+   </wsdl:message>
+
+   <wsdl:message name="ThirdPartyCall_deleteCallParticipantResponse">
+      <wsdl:part name="result" element="parlayx_third_party_call_local_xsd:deleteCallParticipantResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="ThirdPartyCall_endCallSessionRequest">
+      <wsdl:part name="parameters" element="parlayx_third_party_call_local_xsd:endCallSession"/>
+   </wsdl:message>
+
+   <wsdl:message name="ThirdPartyCall_endCallSessionResponse">
+      <wsdl:part name="result" element="parlayx_third_party_call_local_xsd:endCallSessionResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="ThirdPartyCall">
+      <wsdl:operation name="makeCallSession">
+         <wsdl:input message="parlayx_third_party_call:ThirdPartyCall_makeCallSessionRequest"/>
+         <wsdl:output message="parlayx_third_party_call:ThirdPartyCall_makeCallSessionResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="addCallParticipant">
+         <wsdl:input message="parlayx_third_party_call:ThirdPartyCall_addCallParticipantRequest"/>
+         <wsdl:output message="parlayx_third_party_call:ThirdPartyCall_addCallParticipantResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="transferCallParticipant">
+         <wsdl:input message="parlayx_third_party_call:ThirdPartyCall_transferCallParticipantRequest"/>
+         <wsdl:output message="parlayx_third_party_call:ThirdPartyCall_transferCallParticipantResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="getCallParticipantInformation">
+         <wsdl:input message="parlayx_third_party_call:ThirdPartyCall_getCallParticipantInformationRequest"/>
+         <wsdl:output message="parlayx_third_party_call:ThirdPartyCall_getCallParticipantInformationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="getCallSessionInformation">
+         <wsdl:input message="parlayx_third_party_call:ThirdPartyCall_getCallSessionInformationRequest"/>
+         <wsdl:output message="parlayx_third_party_call:ThirdPartyCall_getCallSessionInformationResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteCallParticipant">
+         <wsdl:input message="parlayx_third_party_call:ThirdPartyCall_deleteCallParticipantRequest"/>
+         <wsdl:output message="parlayx_third_party_call:ThirdPartyCall_deleteCallParticipantResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="endCallSession">
+         <wsdl:input message="parlayx_third_party_call:ThirdPartyCall_endCallSessionRequest"/>
+         <wsdl:output message="parlayx_third_party_call:ThirdPartyCall_endCallSessionResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

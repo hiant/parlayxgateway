@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wsdl:definitions
+  name="multimedia_conference_service" 
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:tns="http://www.nortel.com/xmlprotocol/wsdl/communications/multimedia_conference/v1_0/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:parlayx_common_faults="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults"
+  targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/communications/multimedia_conference/v1_0/"
+  xmlns:multimedia_conference_xsd="http://www.nortel.com/xmlprotocol/wsdl/communications/multimedia_conference/v1_0/">
+  
+  <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/common/v3_0/faults" location="parlayx_common_faults_3_0.wsdl"/>
+ 
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified"
+                xmlns:xsd="http://www.w3.org/2001/XMLSchema"  
+                targetNamespace="http://www.nortel.com/xmlprotocol/wsdl/communications/multimedia_conference/v1_0/">
+     
+      <xsd:simpleType name="sessionStatus">
+         <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Ringing"/>
+            <xsd:enumeration value="Connectiing"/>
+            <xsd:enumeration value="Connected"/>
+            <xsd:enumeration value="Releasing"/>
+            <xsd:enumeration value="Terminated"/>
+         </xsd:restriction>
+      </xsd:simpleType>
+ 
+      <xsd:simpleType name="messageType">
+         <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="AppSharing"/>
+            <xsd:enumeration value="WebPush"/>
+            <xsd:enumeration value="IM"/>
+         </xsd:restriction>
+      </xsd:simpleType>
+ 
+      <xsd:element name="startConference" type="multimedia_conference_xsd:startConference"/>
+  
+      <xsd:complexType name="startConference">
+          <xsd:sequence>
+               <xsd:element name="callerNumber" type="xsd:string"/>
+               <xsd:element name="callerDisplayName" type="xsd:string"/>
+               <xsd:element name="callerHostIpAddres" type="xsd:string"/>
+               <xsd:element name="accesscode" type="xsd:string"/>
+               <xsd:element name="passcode" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="chairPersonSipAddress" type="xsd:anyURI" minOccurs="0" maxOccurs="1"/>
+               <xsd:element name="chairPersonPassword" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          </xsd:sequence>
+      </xsd:complexType>
+  
+      <xsd:element name="startConferenceResponse" type="multimedia_conference_xsd:startConferenceResponse"/>
+      
+      <xsd:complexType name="startConferenceResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:string">
+                  <xsd:annotation>
+					 <xsd:documentation>
+						 The call session identifier when succeeded.
+					</xsd:documentation>
+			      </xsd:annotation>
+			    </xsd:element>						
+            </xsd:sequence>
+      </xsd:complexType> 
+      
+      <xsd:element name="endSession" type="multimedia_conference_xsd:conferenceSessionId"/>
+
+      <xsd:complexType name="conferenceSessionId">
+           <xsd:sequence>
+              <xsd:element name="calSessionIdentifier" type="xsd:string"/>
+           </xsd:sequence>
+      </xsd:complexType>
+ 
+      <xsd:element name="endSessionResponse" type="multimedia_conference_xsd:noOutputResponse"/>
+      
+      <xsd:complexType name="noOutputResponse">
+            <xsd:sequence/>
+      </xsd:complexType> 
+ 
+  
+      <xsd:element name="getSessionStatus" type="multimedia_conference_xsd:conferenceSessionId"/>
+ 
+      <xsd:element name="getSessionStatusResponse" type="multimedia_conference_xsd:getSessionStatusResponse"/>
+      
+      <xsd:complexType name="getSessionStatusResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="multimedia_conference_xsd:sessionStatus"/>
+            </xsd:sequence> 
+      </xsd:complexType> 
+   
+      <xsd:element name="startApplicationSharing" type="multimedia_conference_xsd:conferenceSessionId"/>
+ 
+      <xsd:element name="startApplicationSharingResponse" type="multimedia_conference_xsd:noOutputResponse"/>
+
+      <xsd:element name="getMessage" type="multimedia_conference_xsd:getMessage"/>
+       
+       <xsd:complexType name="getMessage">
+            <xsd:sequence>
+               <xsd:element name="callSessionIdentifier" type="xsd:string"/>
+               <xsd:element name="messageType" type="multimedia_conference_xsd:messageType"/>              
+           </xsd:sequence>
+      </xsd:complexType> 
+    
+ 
+      <xsd:element name="getMessageResponse" type="multimedia_conference_xsd:getMessageResponse"/>
+      
+      <xsd:complexType name="getMessageResponse">
+            <xsd:sequence>
+               <xsd:element name="result" type="xsd:string"/>
+           </xsd:sequence>
+      </xsd:complexType> 
+            
+    </xsd:schema>
+  </wsdl:types>
+  
+   <wsdl:message name="MultimediaConference_startConferenceRequest">
+     <wsdl:part name="parameters" element="multimedia_conference_xsd:startConference"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_startConferenceResponse">
+      <wsdl:part name="result" element="multimedia_conference_xsd:startConferenceResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_endSessionRequest">
+      <wsdl:part name="parameters" element="multimedia_conference_xsd:endSession"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_endSessionResponse">
+      <wsdl:part name="result" element="multimedia_conference_xsd:endSessionResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_getSessionStatusRequest">
+      <wsdl:part name="parameters" element="multimedia_conference_xsd:getSessionStatus"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_getSessionStatusResponse">
+      <wsdl:part name="result" element="multimedia_conference_xsd:getSessionStatusResponse"/>
+   </wsdl:message>
+   
+   <wsdl:message name="MultimediaConference_startApplicationSharingRequest">
+      <wsdl:part name="parameters" element="multimedia_conference_xsd:startApplicationSharing"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_startApplicationSharingResponse">
+      <wsdl:part name="result" element="multimedia_conference_xsd:startApplicationSharingResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_getMessageRequest">
+      <wsdl:part name="parameters" element="multimedia_conference_xsd:getMessage"/>
+   </wsdl:message>
+
+   <wsdl:message name="MultimediaConference_getMessageResponse">
+      <wsdl:part name="result" element="multimedia_conference_xsd:getMessageResponse"/>
+   </wsdl:message>
+
+  
+  <wsdl:portType name="MultimediaConference">
+  
+      <wsdl:operation name="startConference">
+         <wsdl:input message="tns:MultimediaConference_startConferenceRequest"/>
+         <wsdl:output message="tns:MultimediaConference_startConferenceResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="parlayx_common_faults:PolicyException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="endSession">
+         <wsdl:input message="tns:MultimediaConference_endSessionRequest"/>
+         <wsdl:output message="tns:MultimediaConference_endSessionResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+      </wsdl:operation>
+
+       <wsdl:operation name="getSessionStatus">
+         <wsdl:input message="tns:MultimediaConference_getSessionStatusRequest"/>
+         <wsdl:output message="tns:MultimediaConference_getSessionStatusResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="startApplicationSharing">
+         <wsdl:input message="tns:MultimediaConference_startApplicationSharingRequest"/>
+         <wsdl:output message="tns:MultimediaConference_startApplicationSharingResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+      </wsdl:operation>
+
+      <wsdl:operation name="getMessage">
+         <wsdl:input message="tns:MultimediaConference_getMessageRequest"/>
+         <wsdl:output message="tns:MultimediaConference_getMessageResponse"/>
+         <wsdl:fault name="ServiceException" message="parlayx_common_faults:ServiceException"/>
+      </wsdl:operation>
+  
+   </wsdl:portType>
+  
+   <wsdl:binding name="MultimediaConferenceBinding" type="tns:MultimediaConference">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="startConference">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="endSession">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="getSessionStatus">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="startApplicationSharing">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="getMessage">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+      
+  </wsdl:binding>
+  
+  <wsdl:service name="MultimediaConferenceServices">
+    <wsdl:port binding="tns:MultimediaConferenceBinding" name="MultimediaConferencePort">
+      <soap:address location="http://localhost:9080/MultimediaConferenceService/services/MultimediaConference"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

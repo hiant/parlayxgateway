@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- March 13, 2007 -->
+<xsd:schema
+   targetNamespace="http://www.csapi.org/schema/parlayx/presence/v3_2"
+   xmlns:presence_xsd="http://www.csapi.org/schema/parlayx/presence/v3_2"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+   <xsd:complexType name="CommunicationMeans">
+      <xsd:sequence>
+         <xsd:element name="priority" type="xsd:float"/>
+         <xsd:element name="contact" type="xsd:anyURI"/>
+         <xsd:element name="type" type="presence_xsd:CommunicationMeansType"/>
+         <xsd:element name="status" type="presence_xsd:CommunicationStatusType" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="relationship" type="presence_xsd:RelationshipValue" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="CommunicationValue">
+      <xsd:sequence>
+         <xsd:element name="means" type="presence_xsd:CommunicationMeans" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="OtherValue">
+      <xsd:sequence>
+         <xsd:element name="name" type="xsd:string"/>
+         <xsd:element name="value" type="xsd:string"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="PresenceAttribute">
+      <xsd:sequence>
+         <xsd:element name="lastChange" type="xsd:dateTime"/>
+         <xsd:element name="note" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="typeAndValue" type="presence_xsd:AttributeTypeAndValue"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="SubscriptionRequest">
+      <xsd:sequence>
+         <xsd:element name="watcher" type="xsd:anyURI"/>
+         <xsd:element name="attributes" type="presence_xsd:PresenceAttributeType" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="application" type="xsd:string"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="PresencePermission">
+      <xsd:sequence>
+         <xsd:element name="presenceAttribute" type="presence_xsd:PresenceAttributeType"/>
+         <xsd:element name="decision" type="xsd:boolean"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="AttributeTypeAndValue">
+      <xsd:sequence>
+         <xsd:element name="UnionElement" type="presence_xsd:PresenceAttributeType"/>
+         <xsd:element name="Activity" type="presence_xsd:ActivityValue" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="PlaceType" type="presence_xsd:PlaceTypeValue" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="Privacy" type="presence_xsd:PrivacyValue" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="Sphere" type="presence_xsd:SphereValue" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="Communication" type="presence_xsd:CommunicationValue" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="Mood" type="presence_xsd:MoodValue" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="PlaceIs" type="presence_xsd:PlaceIsValue" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="TimeOffset" type="presence_xsd:TimeOffsetValue" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="StatusIcon" type="presence_xsd:StatusIconValue" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="Other" type="presence_xsd:OtherValue" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="PrivacyValue">
+      <xsd:sequence>
+         <xsd:element name="privacyTypes" type="presence_xsd:PrivacyType" minOccurs="1" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="PlaceIsValue">
+      <xsd:sequence>
+         <xsd:element name="audio" type="presence_xsd:PlaceIsAudioValue" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="video" type="presence_xsd:PlaceIsVideoValue" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="text" type="presence_xsd:PlaceIsTextValue" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="TimeOffsetValue">
+      <xsd:sequence>
+         <xsd:element name="timezone" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+         <xsd:element name="minutes" type="xsd:int"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="StatusIconValue">
+      <xsd:sequence>
+         <xsd:element name="statusIcon" type="xsd:anyURI"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="Watcher">
+      <xsd:sequence>
+         <xsd:element name="watcher" type="xsd:anyURI"/>
+         <xsd:element name="watcherSubscriptionStatus" type="presence_xsd:WatcherSubscriptionStatus"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:simpleType name="PresenceAttributeType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Activity"/>
+         <xsd:enumeration value="PlaceType"/>
+         <xsd:enumeration value="Privacy"/>
+         <xsd:enumeration value="Sphere"/>
+         <xsd:enumeration value="Communication"/>
+         <xsd:enumeration value="Mood"/>
+         <xsd:enumeration value="PlaceIs"/>
+         <xsd:enumeration value="TimeOffset"/>
+         <xsd:enumeration value="StatusIcon"/>
+         <xsd:enumeration value="Other"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="ActivityValue">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="ActivityNone"/>
+         <xsd:enumeration value="Appointment"/>
+         <xsd:enumeration value="Available"/>
+         <xsd:enumeration value="Busy"/>
+         <xsd:enumeration value="DoNotDisturb"/>
+         <xsd:enumeration value="OnThePhone"/>
+         <xsd:enumeration value="Steering"/>
+         <xsd:enumeration value="Meeting"/>
+         <xsd:enumeration value="Away"/>
+         <xsd:enumeration value="Meal"/>
+         <xsd:enumeration value="Breakfast"/>
+         <xsd:enumeration value="Lunch"/>
+         <xsd:enumeration value="Dinner"/>
+         <xsd:enumeration value="PermanentAbsence"/>
+         <xsd:enumeration value="Vacation"/>
+         <xsd:enumeration value="Holiday"/>
+         <xsd:enumeration value="Performance"/>
+         <xsd:enumeration value="InTransit"/>
+         <xsd:enumeration value="Travel"/>
+         <xsd:enumeration value="Sleeping"/>
+         <xsd:enumeration value="LookingForWork"/>
+         <xsd:enumeration value="Playing"/>
+         <xsd:enumeration value="Presentation"/>
+         <xsd:enumeration value="Shopping"/>
+         <xsd:enumeration value="Spectator"/>
+         <xsd:enumeration value="TV"/>
+         <xsd:enumeration value="Working"/>
+         <xsd:enumeration value="Worship"/>
+         <xsd:enumeration value="ActivityOther"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="PlaceTypeValue">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="PlaceNone"/>
+         <xsd:enumeration value="Arena"/>
+         <xsd:enumeration value="Home"/>
+         <xsd:enumeration value="Office"/>
+         <xsd:enumeration value="PublicTransport"/>
+         <xsd:enumeration value="Street"/>
+         <xsd:enumeration value="Outdoors"/>
+         <xsd:enumeration value="PublicPlace"/>
+         <xsd:enumeration value="Hotel"/>
+         <xsd:enumeration value="Theatre"/>
+         <xsd:enumeration value="Restaurant"/>
+         <xsd:enumeration value="School"/>
+         <xsd:enumeration value="Industrial"/>
+         <xsd:enumeration value="Quiet"/>
+         <xsd:enumeration value="Noisy"/>
+         <xsd:enumeration value="Aircraft"/>
+         <xsd:enumeration value="Watercraft"/>
+         <xsd:enumeration value="Automobile"/>
+         <xsd:enumeration value="Bus"/>
+         <xsd:enumeration value="BusStation"/>
+         <xsd:enumeration value="TrainStation"/>
+         <xsd:enumeration value="ShoppingArea"/>
+         <xsd:enumeration value="Airport"/>
+         <xsd:enumeration value="Train"/>
+         <xsd:enumeration value="Bank"/>
+         <xsd:enumeration value="Bar"/>
+         <xsd:enumeration value="Bicycle"/>
+         <xsd:enumeration value="Cafe"/>
+         <xsd:enumeration value="Classroom"/>
+         <xsd:enumeration value="Club"/>
+         <xsd:enumeration value="Construction"/>
+         <xsd:enumeration value="ConventionCenter"/>
+         <xsd:enumeration value="Government"/>
+         <xsd:enumeration value="Hospital"/>
+         <xsd:enumeration value="Library"/>
+         <xsd:enumeration value="Motorcycle"/>
+         <xsd:enumeration value="Parking"/>
+         <xsd:enumeration value="PlaceOfWorship"/>
+         <xsd:enumeration value="Prison"/>
+         <xsd:enumeration value="Residence"/>
+         <xsd:enumeration value="Stadium"/>
+         <xsd:enumeration value="Store"/>
+         <xsd:enumeration value="Truck"/>
+         <xsd:enumeration value="Underway"/>
+         <xsd:enumeration value="Warehouse"/>
+         <xsd:enumeration value="Water"/>
+         <xsd:enumeration value="PlaceOther"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="PrivacyType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="PrivacyNone"/>
+         <xsd:enumeration value="PrivacyPublic"/>
+         <xsd:enumeration value="PrivacyPrivate"/>
+         <xsd:enumeration value="PrivacyQuiet"/>
+         <xsd:enumeration value="PrivacyOther"/>
+         <xsd:enumeration value="PrivacyAudio"/>
+         <xsd:enumeration value="PrivacyText"/>
+         <xsd:enumeration value="PrivacyVideo"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="SphereValue">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="SphereNone"/>
+         <xsd:enumeration value="SphereWork"/>
+         <xsd:enumeration value="SphereHome"/>
+         <xsd:enumeration value="SphereOther"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="CommunicationMeansType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Phone"/>
+         <xsd:enumeration value="Chat"/>
+         <xsd:enumeration value="Sms"/>
+         <xsd:enumeration value="Video"/>
+         <xsd:enumeration value="Web"/>
+         <xsd:enumeration value="Email"/>
+         <xsd:enumeration value="Mms"/>
+         <xsd:enumeration value="MeansOther"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="CommunicationStatusType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="On"/>
+         <xsd:enumeration value="Off"/>
+         <xsd:enumeration value="Busy"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="WatcherSubscriptionStatus">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Authorised"/>
+         <xsd:enumeration value="Blocked"/>
+         <xsd:enumeration value="PoliteBlocked"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="MoodValue">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Afraid"/>
+         <xsd:enumeration value="Amazed"/>
+         <xsd:enumeration value="Angry"/>
+         <xsd:enumeration value="Annoyed"/>
+         <xsd:enumeration value="Anxious"/>
+         <xsd:enumeration value="Ashamed"/>
+         <xsd:enumeration value="Bored"/>
+         <xsd:enumeration value="Brave"/>
+         <xsd:enumeration value="Calm"/>
+         <xsd:enumeration value="Cold"/>
+         <xsd:enumeration value="Confused"/>
+         <xsd:enumeration value="Contented"/>
+         <xsd:enumeration value="Cranky"/>
+         <xsd:enumeration value="Curious"/>
+         <xsd:enumeration value="Depressed"/>
+         <xsd:enumeration value="Disappointed"/>
+         <xsd:enumeration value="Disgusted"/>
+         <xsd:enumeration value="Distracted"/>
+         <xsd:enumeration value="Embarrassed"/>
+         <xsd:enumeration value="Excited"/>
+         <xsd:enumeration value="Flirtatious"/>
+         <xsd:enumeration value="Frustrated"/>
+         <xsd:enumeration value="Grumpy"/>
+         <xsd:enumeration value="Guilty"/>
+         <xsd:enumeration value="Happy"/>
+         <xsd:enumeration value="Hot"/>
+         <xsd:enumeration value="Humbled"/>
+         <xsd:enumeration value="Humiliated"/>
+         <xsd:enumeration value="Hungry"/>
+         <xsd:enumeration value="Hurt"/>
+         <xsd:enumeration value="Impressed"/>
+         <xsd:enumeration value="InAwe"/>
+         <xsd:enumeration value="InLove"/>
+         <xsd:enumeration value="Indignant"/>
+         <xsd:enumeration value="Interested"/>
+         <xsd:enumeration value="Invincible"/>
+         <xsd:enumeration value="Jealous"/>
+         <xsd:enumeration value="Lonely"/>
+         <xsd:enumeration value="Mean"/>
+         <xsd:enumeration value="MoodNone"/>
+         <xsd:enumeration value="Moody"/>
+         <xsd:enumeration value="Nervous"/>
+         <xsd:enumeration value="Neutral"/>
+         <xsd:enumeration value="Offended"/>
+         <xsd:enumeration value="Playful"/>
+         <xsd:enumeration value="Proud"/>
+         <xsd:enumeration value="Relieved"/>
+         <xsd:enumeration value="Remorseful"/>
+         <xsd:enumeration value="Restless"/>
+         <xsd:enumeration value="Sad"/>
+         <xsd:enumeration value="Sarcastic"/>
+         <xsd:enumeration value="Serious"/>
+         <xsd:enumeration value="Shocked"/>
+         <xsd:enumeration value="Shy"/>
+         <xsd:enumeration value="Sick"/>
+         <xsd:enumeration value="Sleepy"/>
+         <xsd:enumeration value="Stressed"/>
+         <xsd:enumeration value="Surprised"/>
+         <xsd:enumeration value="Thirsty"/>
+         <xsd:enumeration value="Worried"/>
+         <xsd:enumeration value="MoodOther"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="PlaceIsAudioValue">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Noisy"/>
+         <xsd:enumeration value="Ok"/>
+         <xsd:enumeration value="Quiet"/>
+         <xsd:enumeration value="Unknown"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="PlaceIsVideoValue">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="TooBright"/>
+         <xsd:enumeration value="Ok"/>
+         <xsd:enumeration value="Dark"/>
+         <xsd:enumeration value="Unknown"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="PlaceIsTextValue">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Uncomfortable"/>
+         <xsd:enumeration value="Inappropriate"/>
+         <xsd:enumeration value="Ok"/>
+         <xsd:enumeration value="Unknown"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="RelationshipValue">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Family"/>
+         <xsd:enumeration value="Assistant"/>
+         <xsd:enumeration value="Friend"/>
+         <xsd:enumeration value="Associate"/>
+         <xsd:enumeration value="Supervisor"/>
+         <xsd:enumeration value="RelationshipNone"/>
+         <xsd:enumeration value="RelationshipOther"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+</xsd:schema>

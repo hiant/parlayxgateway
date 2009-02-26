@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- March 8, 2007 -->
+<wsdl:definitions
+   name="parlayx_mm_receive_service"
+   targetNamespace="http://www.csapi.org/wsdl/parlayx/multimedia_messaging/receive/v3_1/service"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:tns="http://www.csapi.org/wsdl/parlayx/multimedia_messaging/receive/v3_1/service"
+   xmlns:interface="http://www.csapi.org/wsdl/parlayx/multimedia_messaging/receive/v3_1/interface">
+
+   <wsdl:import namespace="http://www.csapi.org/wsdl/parlayx/multimedia_messaging/receive/v3_1/interface" location="parlayx_mm_receive_interface_3_1.wsdl"/>
+
+   <wsdl:binding name="ReceiveMessageBinding" type="interface:ReceiveMessage">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getReceivedMessages">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="getMessageURIs">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+
+      <wsdl:operation name="getMessage">
+         <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+               <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+               <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+               <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="PolicyException">
+               <soap:fault name="PolicyException" use="literal"/>
+            </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding>
+
+   <wsdl:service name="ReceiveMessageService">
+      <wsdl:port name="ReceiveMessage" binding="tns:ReceiveMessageBinding">
+         <soap:address location="http://localhost:9080/ReceiveMessageService/services/ReceiveMessage"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>
