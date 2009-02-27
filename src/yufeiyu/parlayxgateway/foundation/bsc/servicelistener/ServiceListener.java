@@ -8,7 +8,7 @@ public abstract class ServiceListener extends AbstractMarshallingPayloadEndpoint
 	
 	@Override
 	protected Object invokeInternal(Object requestObject) throws Exception {
-		// TODO Auto-generated method stub
+		System.out.println(requestObject.getClass().getCanonicalName());
 		return null;
 	}
 }

@@ -1,2 +1,2 @@
-spring 2.5
+spring 2.5.2
 jaxb 2.1.10
