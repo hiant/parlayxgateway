@@ -6,7 +6,6 @@ public abstract class ServiceListener extends AbstractMarshallingPayloadEndpoint
 	
 	public void init() {}
 	
-	@Override
 	protected Object invokeInternal(Object requestObject) throws Exception {
 		System.out.println(requestObject.getClass().getCanonicalName());
 		return null;

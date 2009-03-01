@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ParlayX Gateway" default="package" basedir=".">
+
+	<property name="src.dir" value="${basedir}/src"></property>
+	<property name="wsdl.dir" value="resources/wsdl"></property>
+	<property name="lib.dir" value="${basedir}/lib"></property>
+	<property name="jaxb_home" value="D:/Private/JavaProjects/JAXB/jaxb-ri-20090206"></property>
+	<property name="web-inf" value="WEB-INF"></property>
+	<property name="web-inf.lib" value="${web-inf}/lib"></property>
+	<property name="web-inf.classes" value="WEB-INF/classes"></property>
+	<property name="war" value="parlayxgateway.war"></property>
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	
+    <target name="init">
+    	<mkdir dir="${web-inf.lib}"/>
+    	<mkdir dir="${web-inf.classes}"/>
+    	<ant target="wsdl2java"></ant>
+    </target>
+	
+	<target name="wsdl2java" depends="wsdl2java.check" unless="java.existed">
+		<exec executable="cmd" dir="${wsdl.dir}">
+			<arg value="/c ${jaxb_home}/bin/xjc.bat -wsdl -d ${src.dir} *.wsdl" />
+		</exec>
+	</target>
+	
+	<target name="wsdl2java.check">
+		<condition property="java.existed">
+			<and>
+				<available type="dir" file="${src.dir}/org"></available>
+				<available type="dir" file="${src.dir}/com"></available>
+			</and>
+		</condition>
+	</target>
+	
+	<target name="compile" depends="init">
+		<javac srcdir="${src.dir}" destdir="${web-inf.classes}" classpathref="classpath">
+			<compilerarg value="-Xlint:deprecation"/>
+		</javac>
+	</target>
+	
+	<target name="copylib" depends="init">
+		<copy todir="${web-inf.lib}">
+			<fileset dir="${lib.dir}">
+				<include name="**/*.jar"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="package" depends="compile,copylib">
+		<jar destfile="${war}" basedir="." >
+			<include name="${web-inf}/**"/>
+		</jar>
+	</target>
+	
+	<target name="clean">
+		<delete dir="${web-inf.lib}"></delete>
+		<delete dir="${web-inf.classes}"></delete>
+		<delete dir="${src.dir}/com"></delete>
+		<delete dir="${src.dir}/org"></delete>
+		<delete file="${war}"></delete>
+	</target>
+	
+	<target name="deploy">
+	</target>
+	
+</project>
