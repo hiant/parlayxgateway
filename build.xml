@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ParlayX Gateway" default="package" basedir=".">
 
+	<property environment="env"></property>
 	<property name="src.dir" value="${basedir}/src"></property>
 	<property name="wsdl.dir" value="resources/wsdl"></property>
 	<property name="lib.dir" value="${basedir}/lib"></property>
-	<property name="jaxb_home" value="D:/Private/JavaProjects/JAXB/jaxb-ri-20090206"></property>
 	<property name="web-inf" value="WEB-INF"></property>
 	<property name="web-inf.lib" value="${web-inf}/lib"></property>
 	<property name="web-inf.classes" value="WEB-INF/classes"></property>
@@ -23,8 +23,9 @@
     </target>
 	
 	<target name="wsdl2java" depends="wsdl2java.check" unless="java.existed">
+		<echo message="${env.JAXB_HOME}" />
 		<exec executable="cmd" dir="${wsdl.dir}">
-			<arg value="/c ${jaxb_home}/bin/xjc.bat -wsdl -d ${src.dir} *.wsdl" />
+			<arg value="/c ${env.JAXB_HOME}/bin/xjc.bat -wsdl -d ${src.dir} *.wsdl" />
 		</exec>
 	</target>
 	
